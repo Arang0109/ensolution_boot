@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.mapper.CompanyMapper">
+    <sql id="select">
+        SELECT company_id, company_name, address, ceo_name, biz_number, reg_date
+        FROM company
+    </sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM company
+    </select>
+
+    <select id="selectOne" parameterType="Integer" resultType="CompanyDto">
+        <include refid="select"/>
+        WHERE company_id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="CompanyDto">
+        <include refid="select"/>
+        ORDER BY company_name
+    </select>
+
+    <insert id="insert" parameterType="CompanyDto">
+        INSERT INTO company
+            (company_name, address, ceo_name, biz_number, reg_date)
+        VALUES
+            (#{company_name}, #{address}, #{ceo_name}, #{biz_number}, #{reg_date})
+    </insert>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.mapper.StackMapper">
+    <select id="selectStack" resultMap="StackResultMap">
+        SELECT stack_id,
+               workplace_id,
+               stack_name,
+               prevention,
+               reg_date,
+               note,
+               sub_factory_id,
+               management_department_id
+        FROM stack
+        WHERE stack_id = #{id}
+    </select>
+
+    <select id="selectStackInfo" resultType="StackInformationDto">
+        SELECT stack_info_id,
+               diameter,
+               dynamic_pressure,
+               static_pressure,
+               velocity_speed,
+               quantity,
+               temperature
+        FROM stack_info
+        WHERE stack_info_id = #{id}
+    </select>
+
+    <resultMap id="StackResultMap" type="StackDto">
+        <id property="stack_id" column="stack_id"/>
+        <result property="stack_name" column="stack_name"/>
+        <association property="stack_information"
+                     column="stack_id"
+                     javaType="StackInformationDto"
+                     select="selectStackInfo"/>
+    </resultMap>
+</mapper>

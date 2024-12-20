@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="CompanyDto" type="com.ensolution.ensol.domain.CompanyDto"/>
+        <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.domain.WorkplaceDto"/>
+        <typeAlias alias="StackDto" type="com.ensolution.ensol.domain.StackDto"/>
+        <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.domain.StackInformationDto"/>
+    </typeAliases>
+</configuration>
