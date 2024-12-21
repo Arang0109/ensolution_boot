@@ -14,7 +14,7 @@
 
     <select id="selectOne" parameterType="Integer" resultType="CompanyDto">
         <include refid="select"/>
-        WHERE company_id = #{id}
+        WHERE company_id = #{company_id}
     </select>
 
     <select id="selectAll" resultType="CompanyDto">
@@ -28,4 +28,21 @@
         VALUES
             (#{company_name}, #{address}, #{ceo_name}, #{biz_number}, #{reg_date})
     </insert>
+
+    <update id="update" parameterType="CompanyDto">
+        UPDATE company
+        SET   company_name = #{company_name}
+          , address = #{address}
+          , ceo_name = #{ceo_name}
+          , biz_number = #{biz_number}
+        WHERE company_id = #{company_id}
+    </update>
+
+    <delete id="deleteItems" parameterType="list">
+        DELETE FROM company
+        WHERE company_id IN
+        <foreach item="company_id" collection="list" open="(" separator="," close=")">
+            #{company_id}
+        </foreach>
+    </delete>
 </mapper>

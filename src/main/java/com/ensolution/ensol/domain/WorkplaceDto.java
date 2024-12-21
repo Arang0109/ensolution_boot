@@ -1,20 +1,15 @@
 package com.ensolution.ensol.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.Objects;
 
-@Setter
-@Getter
 public class WorkplaceDto {
   private Integer workplace_id;
   private Integer company_id;
   private String workplace_name;
   private String address;
-  private Date reg_date;
+  private final Date reg_date;
 
   public WorkplaceDto() {
     this.reg_date = Date.valueOf(LocalDate.now());
@@ -38,6 +33,42 @@ public class WorkplaceDto {
   @Override
   public int hashCode() {
     return Objects.hash(workplace_id, workplace_name);
+  }
+
+  public Integer getWorkplace_id() {
+    return workplace_id;
+  }
+
+  public void setWorkplace_id(Integer workplace_id) {
+    this.workplace_id = workplace_id;
+  }
+
+  public Integer getCompany_id() {
+    return company_id;
+  }
+
+  public void setCompany_id(Integer company_id) {
+    this.company_id = company_id;
+  }
+
+  public String getWorkplace_name() {
+    return workplace_name;
+  }
+
+  public void setWorkplace_name(String workplace_name) {
+    this.workplace_name = workplace_name;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public Date getReg_date() {
+    return reg_date;
   }
 
   @Override

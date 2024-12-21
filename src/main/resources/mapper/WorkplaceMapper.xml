@@ -3,17 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ensolution.ensol.mapper.WorkplaceMapper">
-    <sql id="select">
-        SELECT company_id, workplace_id, workplace_name, address
-        FROM workplace
-    </sql>
+  <sql id="select">
+    SELECT company_id, workplace_id, workplace_name, address
+    FROM workplace
+  </sql>
 
-    <select id="count" resultType="int">
-        SELECT count(*) FROM workplace
-    </select>
+  <select id="count" resultType="int">
+    SELECT count(*) FROM workplace
+  </select>
 
-    <select id="selectWorkplaces" parameterType="Integer" resultType="WorkplaceDto">
-        <include refid="select"/>
-        WHERE company_id = #{id}
-    </select>
+  <select id="selectWorkplacesOfCompany" parameterType="Integer" resultType="WorkplaceDto">
+    <include refid="select"/>
+    WHERE company_id = #{id}
+  </select>
 </mapper>

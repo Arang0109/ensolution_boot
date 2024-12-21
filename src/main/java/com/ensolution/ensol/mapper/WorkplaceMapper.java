@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface WorkplaceMapper {
-  List<WorkplaceDto> selectWorkplaces(Integer id);
+  List<WorkplaceDto> selectWorkplacesOfCompany(Integer id);
 }

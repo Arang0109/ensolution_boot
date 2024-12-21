@@ -11,7 +11,7 @@ public class StackInformationDto {
   private Double quantity;
   private Double temperature;
 
-  public StackInformationDto() { }
+  public StackInformationDto() {}
 
   public StackInformationDto(Integer stack_info_id, Double diameter, Double dynamic_pressure, Double static_pressure, Double velocity_speed, Double quantity, Double temperature) {
     this.stack_info_id = stack_info_id;

@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface CompanyMapper {
   List<CompanyDto> selectAll();
-  CompanyDto selectOne(Integer id);
+  CompanyDto selectOne(Integer company_id);
   Integer insert(CompanyDto company);
+  Integer update(CompanyDto company);
+  Integer delete(List<Integer> ids);
 }
