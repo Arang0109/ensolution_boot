@@ -1,8 +1,8 @@
-package com.ensolution.ensol.service.business.impl;
+package com.ensolution.ensol.service.management.impl;
 
 import com.ensolution.ensol.domain.CompanyDto;
 import com.ensolution.ensol.mapper.CompanyMapper;
-import com.ensolution.ensol.service.business.CompanyService;
+import com.ensolution.ensol.service.management.CompanyService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
     try {
       return companyMapper.insert(companyDto);
     } catch (DuplicateKeyException e) {
-      throw new DuplicateKeyException("Failed to add company. Duplicate key for ID: " + companyDto.getCompany_id(), e);
+      throw new DuplicateKeyException("Failed to add company. Duplicate key for Name: " + companyDto.getCompany_name(), e);
     }
   }
 
@@ -42,11 +42,11 @@ public class CompanyServiceImpl implements CompanyService {
     CompanyDto existingCompany = companyMapper.selectOne(companyDto.getCompany_id());
 
     if (existingCompany == null) {
-      throw new IllegalArgumentException("Company with ID " + companyDto.getCompany_id() + " does not exist.");
+      throw new IllegalArgumentException("Company with Name " + companyDto.getCompany_name() + " does not exist.");
     }
 
     if (existingCompany.equals(companyDto)) {
-      System.out.println("No changes detected for Company ID: " + companyDto.getCompany_id());
+      System.out.println("No changes detected for Company Name: " + companyDto.getCompany_name());
       return 0;
     }
 
@@ -69,7 +69,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     try {
-      return companyMapper.delete(ids);
+      return companyMapper.deleteItems(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting companies", e);
     }

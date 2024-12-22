@@ -1,4 +1,4 @@
-package com.ensolution.ensol.service.business;
+package com.ensolution.ensol.service.management;
 
 import com.ensolution.ensol.domain.StackDto;
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="workplaceListTable">
+  <table id="table"
+         data-toggle="table"
+         data-locale="ko-KR"
+         data-search="true"
+         data-height="550"
+         data-pagination="true"
+         data-checkbox-header="true"
+         data-click-to-select="true"
+         data-show-columns="true"
+         data-buttons-class="primary"
+         data-buttons-align="left">
+    <thead>
+    <tr>
+      <th data-field="state" data-checkbox="true"></th>
+      <th data-field="workplace_name">측정 대상 사업장 <span class="badge text-bg-primary">수정시 사업장명 클릭</span></th>
+      <th data-field="address">주소</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="workplace : ${workplaces}" th:data-workplace-id="${workplace.workplace_id}">
+        <td></td>
+        <td>
+          <a class="updateLink"
+             th:href="@{/management/workplace/{id}(id=${workplace.workplace_id})}">
+            <span th:text="${workplace.workplace_name != null ? workplace.workplace_name : '-'}"></span>
+          </a>
+        </td>
+        <td>
+          <span th:text="${workplace.address != null ? workplace.address : '-'}"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</html>

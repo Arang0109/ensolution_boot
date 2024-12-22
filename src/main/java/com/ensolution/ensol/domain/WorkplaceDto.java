@@ -27,12 +27,12 @@ public class WorkplaceDto {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     WorkplaceDto that = (WorkplaceDto) o;
-    return Objects.equals(workplace_id, that.workplace_id) && Objects.equals(workplace_name, that.workplace_name);
+    return Objects.equals(workplace_id, that.workplace_id) && Objects.equals(company_id, that.company_id) && Objects.equals(workplace_name, that.workplace_name) && Objects.equals(address, that.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workplace_id, workplace_name);
+    return Objects.hash(workplace_id, company_id, workplace_name, address);
   }
 
   public Integer getWorkplace_id() {

@@ -1,8 +1,8 @@
-package com.ensolution.ensol.service.business.impl;
+package com.ensolution.ensol.service.management.impl;
 
 import com.ensolution.ensol.domain.StackDto;
 import com.ensolution.ensol.mapper.StackMapper;
-import com.ensolution.ensol.service.business.StackService;
+import com.ensolution.ensol.service.management.StackService;
 import org.springframework.stereotype.Service;
 
 @Service

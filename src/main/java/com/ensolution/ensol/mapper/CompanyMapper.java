@@ -11,5 +11,5 @@ public interface CompanyMapper {
   CompanyDto selectOne(Integer company_id);
   Integer insert(CompanyDto company);
   Integer update(CompanyDto company);
-  Integer delete(List<Integer> ids);
+  Integer deleteItems(List<Integer> ids);
 }

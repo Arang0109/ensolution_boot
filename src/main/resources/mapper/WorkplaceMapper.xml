@@ -12,8 +12,41 @@
     SELECT count(*) FROM workplace
   </select>
 
+  <select id="selectOne" parameterType="Integer" resultType="CompanyDto">
+    <include refid="select"/>
+    WHERE orkplace_id = #{workplace_id}
+  </select>
+
   <select id="selectWorkplacesOfCompany" parameterType="Integer" resultType="WorkplaceDto">
     <include refid="select"/>
     WHERE company_id = #{id}
   </select>
+
+  <select id="selectAll" resultType="WorkplaceDto">
+    <include refid="select"/>
+    ORDER BY workplace_name
+  </select>
+
+  <insert id="insert" parameterType="WorkplaceDto">
+    INSERT INTO workplace
+      (company_id, workplace_name, address, reg_date)
+    VALUES
+      (#{company_id}, #{workplace_name}, #{address}, #{reg_date})
+  </insert>
+
+  <update id="update" parameterType="WorkplaceDto">
+    UPDATE workplace
+    SET   workplace_name = #{workplace_name}
+      , address = #{address}
+      , reg_date = #{reg_date}
+    WHERE workplace_id = #{workplace_id}
+  </update>
+
+  <delete id="deleteItems" parameterType="list">
+    DELETE FROM workplace
+    WHERE workplace_id IN
+    <foreach item="workplace_id" collection="list" open="(" separator="," close=")">
+      #{workplace_id}
+    </foreach>
+  </delete>
 </mapper>

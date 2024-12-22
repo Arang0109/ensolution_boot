@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <div th:replace="~{fragments/modals/companyModal::addCompanyModal}"></div>
+  <div th:replace="~{fragments/toasts::toasts}"></div>
+  <div class="container" style="padding: 1.875rem 0 0">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <h4><span class="badge text-bg-primary">측정대행 의뢰업체 목록</span></h4>
+        <div>
+          <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#companyAdd">
+            업체 추가
+          </button>
+          <button id="removeBtn" class="btn btn-primary mx-1">업체 삭제</button>
+        </div>
+      </div>
+      <div id="tableContainer">
+        <div th:replace="~{fragments/tables/companyTable::companyListTable}"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script layout:fragment="scriptContent" th:inline="javascript">
+  $(document).ready(function(){
+    const companyAddResult = /*[[@{${result} ?: ''}]]*/ '';
+    if (companyAddResult === 'success') {
+      const msg = {
+        successMsg: /*[[@{${successMsg} ?: ''}]]*/ '',
+        failedMsg: ""
+      };
+      loadToast(companyAddResult, msg);
+    } else if (companyAddResult === 'error') {
+      const msg = {
+        successMsg: "",
+        failedMsg: /*[[@{${errorMsg} ?: ''}]]*/ ''
+      };
+      loadToast(companyAddResult, msg);
+    }
+    setupValidation('#company_form'); // business-management.js >> 유효성 검사
+    bizNumFormatter('#inputBizNum'); // business number formatter
+    $('#removeBtn').on("click", function() {
+      const options = {
+        selector: '#table tbody input[type="checkbox"]:checked',
+        closestTag: 'tr',
+        dataAttr: 'data-company-id',
+        idKey: 'company_id',
+        url: /*[[@{/management/company/delete}]]*/ '',
+      }
+
+      businessDeleteHandler(options);
+    });
+  });
+</script>
+</body>
+</html>

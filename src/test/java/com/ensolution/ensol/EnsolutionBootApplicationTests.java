@@ -1,9 +1,9 @@
 package com.ensolution.ensol;
 
 import com.ensolution.ensol.domain.CompanyDto;
-import com.ensolution.ensol.service.business.CompanyService;
-import com.ensolution.ensol.service.business.StackService;
-import com.ensolution.ensol.service.business.WorkplaceService;
+import com.ensolution.ensol.service.management.CompanyService;
+import com.ensolution.ensol.service.management.StackService;
+import com.ensolution.ensol.service.management.WorkplaceService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
