@@ -3,7 +3,7 @@ package com.ensolution.ensol.controller.schedule;
 import com.ensolution.ensol.service.management.StackMeasurementService;
 import com.ensolution.ensol.service.management.StackService;
 import com.ensolution.ensol.service.management.WorkplaceService;
-import com.ensolution.ensol.service.schedule.scheduleService;
+import com.ensolution.ensol.service.schedule.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/schedule")
-public class scheduleController {
-  private final com.ensolution.ensol.service.schedule.scheduleService scheduleService;
+public class ScheduleController {
+  ScheduleService scheduleService;
   WorkplaceService workplaceService;
   StackService stackService;
   StackMeasurementService stackMeasurementService;
 
   @Autowired
-  public scheduleController(WorkplaceService workplaceService, StackService stackService, StackMeasurementService stackMeasurementService, scheduleService scheduleService) {
+  public ScheduleController(WorkplaceService workplaceService, StackService stackService, StackMeasurementService stackMeasurementService, ScheduleService scheduleService) {
     this.workplaceService = workplaceService;
     this.stackService = stackService;
     this.stackMeasurementService = stackMeasurementService;

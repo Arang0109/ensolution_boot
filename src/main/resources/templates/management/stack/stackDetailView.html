@@ -172,6 +172,31 @@
       fail: function(){ }
     });
 
+    $('#calculateBtn').on("click", function() {
+      const selectedPollutant = [];
+
+      $('input[type=checkbox]:checked').each(function() {
+        const pollutant_id = $(this).val();
+        selectedPollutant.push({"pollutant_id": pollutant_id});
+      });
+
+      if (selectedPollutant.length === 0) return alert("항목을 선택해 주세요.");
+
+      $.ajax({
+        url: /*[[@{/document/score/calculation}]]*/ '',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(selectedPollutant),
+        success: function(response) {
+          const score = response.score;
+          $('#score').html(score);
+        },
+        error: function() {
+          alert("error");
+        }
+      });
+    });
+
     $('#selectPoll').select2({
       dropdownParent: $('#stackMeasurementAdd'),
     });

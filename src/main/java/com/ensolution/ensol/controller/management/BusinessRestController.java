@@ -15,14 +15,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/management")
-public class businessRestController {
+public class BusinessRestController {
   CompanyService companyService;
   WorkplaceService workplaceService;
   StackService stackService;
   StackMeasurementService stackMeasurementService;
 
   @Autowired
-  public businessRestController(CompanyService companyService, WorkplaceService workplaceService,
+  public BusinessRestController(CompanyService companyService, WorkplaceService workplaceService,
                                 StackService stackService, StackMeasurementService stackMeasurementService) {
     this.companyService = companyService;
     this.workplaceService = workplaceService;

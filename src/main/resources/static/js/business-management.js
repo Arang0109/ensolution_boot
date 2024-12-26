@@ -63,6 +63,31 @@ function mapView(selector, address) {
   });
 }
 
+function calculateAbilityScore(selector) {
+  const selectedPollutant = [];
+
+  selector.each(function() {
+    const pollutant_id = $(this).val();
+    selectedPollutant.push({"pollutant_id": pollutant_id});
+  });
+
+  if (selectedPollutant.length === 0) return alert("항목을 선택해 주세요.");
+
+  $.ajax({
+    url: /*[[@{/document/score/calculation}]]*/ '',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(selectedPollutant),
+    success: function(response) {
+      const score = response.score;
+      $('#score').html(score);
+    },
+    error: function() {
+      alert("error");
+    }
+  });
+}
+
 function uploadMeasurementExcelData(selector) {
   $(selector).on('change', function (e) {
     const file = e.target.files[0];

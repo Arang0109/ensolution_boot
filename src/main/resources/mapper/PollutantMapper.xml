@@ -8,7 +8,7 @@
     FROM pollutant
   </sql>
 
-  <select id="selectOne" parameterType="int" resultType="PollutantDto">
+  <select id="selectPollutant" parameterType="int" resultType="PollutantDto">
     <include refid="select"/>
     WHERE pollutant_id = #{pollutant_id}
   </select>

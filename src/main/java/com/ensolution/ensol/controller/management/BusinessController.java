@@ -19,14 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/management")
-public class businessController {
+public class BusinessController {
   CompanyService companyService;
   WorkplaceService workplaceService;
   StackService stackService;
   PollutantService pollutantService;
 
   @Autowired
-  public businessController(CompanyService companyService, WorkplaceService workplaceService,
+  public BusinessController(CompanyService companyService, WorkplaceService workplaceService,
                             StackService stackService, PollutantService pollutantService) {
     this.companyService = companyService;
     this.workplaceService = workplaceService;
