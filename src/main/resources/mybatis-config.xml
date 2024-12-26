@@ -15,5 +15,8 @@
     <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.domain.DepartmentDto"/>
     <typeAlias alias="PollutantDto" type="com.ensolution.ensol.domain.PollutantDto"/>
     <typeAlias alias="ScheduleDto" type="com.ensolution.ensol.domain.ScheduleDto"/>
+    <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.domain.ScheduleTableDto"/>
+    <typeAlias alias="TeamDto" type="com.ensolution.ensol.domain.TeamDto"/>
+    <typeAlias alias="HistoryDto" type="com.ensolution.ensol.domain.HistoryDto"/>
   </typeAliases>
 </configuration>

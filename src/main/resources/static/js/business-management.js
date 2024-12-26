@@ -33,6 +33,29 @@ function bizNumFormatter(selector) {
   });
 }
 
+function datepickerFormatter(selector) {
+  const today = new Date();
+  const formatDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + String(today.getDate()).padStart(2, '0');
+
+  selector.datepicker({
+    defaultDate: new Date(),
+    dateFormat: "yy-mm-dd",
+    closeText: "닫기",
+    currentText: "오늘",
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    weekHeader: "주",
+    yearSuffix: '년',
+  });
+
+  selector.val(formatDate);
+}
+
 function mapView(selector, address) {
   $(selector).on("click", function () {
     const url = "https://map.naver.com/p/search/" + address;
@@ -314,6 +337,8 @@ function createPollutantListView(options) {
   const parentDiv = $(parentId);
   const sortedCycle = sortCycle(pollutants);
   const methods = methodList(pollutants);
+
+  parentDiv.empty();
 
   sortedCycle.forEach(key => {
     const childDiv = `

@@ -45,4 +45,22 @@
       , is_completed = #{is_completed}
     WHERE stack_measurement_id = #{stack_measurement_id}
   </update>
+
+  <update id="updateComplete" parameterType="list">
+    UPDATE stack_measurement
+    SET is_completed = true
+    WHERE stack_measurement_id IN
+    <foreach item="stack_measurement_id" collection="list" open="(" separator="," close=")">
+      #{stack_measurement_id}
+    </foreach>
+  </update>
+
+  <update id="updateNonComplete" parameterType="list">
+    UPDATE stack_measurement
+    SET is_completed = false
+    WHERE stack_measurement_id IN
+    <foreach item="stack_measurement_id" collection="list" open="(" separator="," close=")">
+      #{stack_measurement_id}
+    </foreach>
+  </update>
 </mapper>

@@ -13,8 +13,8 @@
               <img th:src="@{/img/calendar.svg}" alt=""/><span style="margin-left: 1.25rem;">일정</span>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">일정 등록</a></li>
-              <li><a class="dropdown-item" href="">자가측정부 일정</a></li>
+              <li><a class="dropdown-item" th:href="@{/schedule/register}">일정 등록</a></li>
+              <li><a class="dropdown-item" th:href="@{/schedule/list}">자가측정부 일정</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">

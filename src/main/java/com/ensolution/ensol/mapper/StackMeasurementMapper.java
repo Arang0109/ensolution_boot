@@ -11,4 +11,6 @@ public interface StackMeasurementMapper {
   List<StackMeasurementDto> selectStackMeasurementsOfStack(Integer stack_id);
   Integer insert(StackMeasurementDto stackMeasurement);
   Integer deleteItems(List<Integer> ids);
+  void updateComplete(List<Integer> stack_measurement_ids);
+  void updateNonComplete(List<Integer> stack_measurement_ids);
 }
