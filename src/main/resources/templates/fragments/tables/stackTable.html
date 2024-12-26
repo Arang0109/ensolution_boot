@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="stackListTable">
+  <table id="table"
+         data-toggle="table"
+         data-locale="ko-KR"
+         data-search="true"
+         data-height="550"
+         data-pagination="true"
+         data-checkbox-header="true"
+         data-click-to-select="true"
+         data-show-columns="true"
+         data-buttons-class="primary"
+         data-buttons-align="left">
+    <thead>
+    <tr>
+      <th data-field="state" data-checkbox="true"></th>
+      <th data-field="stack_name">측정시설 <span class="badge text-bg-primary">수정시 시설명 클릭</span></th>
+      <th data-field="company_name">측정대행 의뢰업체</th>
+      <th data-field="workplace_name">측정 대상 사업장</th>
+      <th data-field="sub_factory_name">공장</th>
+      <th data-field="department_name">관리부서</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="stack : ${stacks}" th:data-stack-id="${stack.stack_id}">
+        <td></td>
+        <td><a class="updateLink"
+               th:href="@{/management/stack/{id}(id=${stack.stack_id})}"
+               th:text="${stack.stack_name != null ? stack.stack_name : '-'}"></a></td>
+        <td th:text="${stack.company_name}"></td>
+        <td th:text="${stack.workplace_name}"></td>
+        <td th:text="${stack.sub_factory_name != null ? stack.sub_factory_name : '-'}"></td>
+        <td th:text="${stack.department_name != null ? stack.department_name : '-'}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</html>

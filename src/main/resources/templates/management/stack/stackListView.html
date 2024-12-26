@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+  <div th:replace="~{fragments/toasts::toasts}"></div>
+  <div class="container" style="padding: 1.875rem 0 0">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-start">
+        <h4><span class="badge text-bg-primary">측정 시설 목록</span></h4>
+      </div>
+      <div th:replace="~{fragments/tables/stackTable::stackListTable}"></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

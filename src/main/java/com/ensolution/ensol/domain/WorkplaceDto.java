@@ -10,16 +10,18 @@ public class WorkplaceDto {
   private String workplace_name;
   private String address;
   private final Date reg_date;
+  private FactoryDto factory;
 
   public WorkplaceDto() {
     this.reg_date = Date.valueOf(LocalDate.now());
   }
 
-  public WorkplaceDto(Integer company_id, String workplace_name, String address) {
+  public WorkplaceDto(Integer company_id, String workplace_name, String address, FactoryDto factory) {
     this.company_id = company_id;
     this.workplace_name = workplace_name;
     this.address = address;
     this.reg_date = Date.valueOf(LocalDate.now());
+    this.factory = factory;
   }
 
   @Override
@@ -71,6 +73,14 @@ public class WorkplaceDto {
     return reg_date;
   }
 
+  public void setFactory(FactoryDto factory) {
+    this.factory = factory;
+  }
+
+  public FactoryDto getFactory() {
+    return factory;
+  }
+
   @Override
   public String toString() {
     return "WorkplaceDto{" +
@@ -79,6 +89,7 @@ public class WorkplaceDto {
         ", workplace_name='" + workplace_name + '\'' +
         ", address='" + address + '\'' +
         ", reg_date=" + reg_date +
+        ", factory=" + factory +
         '}';
   }
 }

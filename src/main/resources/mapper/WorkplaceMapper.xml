@@ -12,9 +12,22 @@
     SELECT count(*) FROM workplace
   </select>
 
-  <select id="selectOne" parameterType="Integer" resultType="CompanyDto">
+  <select id="selectWorkplace" parameterType="Integer" resultType="WorkplaceDto">
     <include refid="select"/>
-    WHERE orkplace_id = #{workplace_id}
+    WHERE workplace_id = #{workplace_id}
+  </select>
+
+  <select id="selectFactory" parameterType="Integer" resultType="SubFactoryDto">
+    SELECT s.sub_factory_id, s.factory_id, s.name FROM factory
+      INNER JOIN sub_factory s ON factory.factory_id = s.factory_id
+    WHERE factory.workplace_id = #{workplace_id}
+    ORDER BY s.name
+  </select>
+
+  <select id="selectDepartment" parameterType="Integer" resultType="DepartmentDto">
+    SELECT * FROM management_department
+    WHERE workplace_id = #{workplace_id}
+    ORDER BY name
   </select>
 
   <select id="selectWorkplacesOfCompany" parameterType="Integer" resultType="WorkplaceDto">
@@ -38,7 +51,6 @@
     UPDATE workplace
     SET   workplace_name = #{workplace_name}
       , address = #{address}
-      , reg_date = #{reg_date}
     WHERE workplace_id = #{workplace_id}
   </update>
 

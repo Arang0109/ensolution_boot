@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+  <div th:replace="~{fragments/modals/stackModal::addStackModal}"></div>
+  <div th:replace="~{fragments/toasts::toasts}"></div>
+  <div class="container">
+    <div class="profile-header">
+      <div class="profile-main d-flex justify-content-between">
+        <div class="d-flex">
+          <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
+                 th:href="@{/management/company/{id}(id=${company.company_id})}" th:text="${company.company_name}"></a> /
+            <span th:text="${workplace.workplace_name}"></span></h4>
+          <span style="margin-left: 1.25rem;" th:text="${workplace.address}"></span>
+        </div>
+        <div >
+          <button id="modifyBtn" class="btn btn-primary btn-sm" type="button">수정</button>
+          <a class="btn btn-primary btn-sm" th:href="@{/management/workplace}">목록</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="workplaceInfo" class="container">
+    <div class="border p-4" style="background-color: white;">
+      <p style="margin-left: 1.25rem;"><b>사업장 정보</b></p>
+      <hr>
+      <form id="workplaceInfoForm" class="needs-validation" novalidate>
+        <div class="container text-center">
+          <input name="workplace_id" type="text" class="form-control" th:value="${workplace.workplace_id}" readonly='readonly' hidden="hidden">
+          <div class="row p-2">
+            <div class="col">
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="workplace_name">측정대상 사업장 <small><b>(필수)</b></small></span>
+                <input name="workplace_name" type="text" class="form-control" th:value="${workplace.workplace_name}"
+                       aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly' required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="address">사업장 주소</span>
+                <input name="address" type="text" class="form-control" th:value="${workplace.address}"
+                       aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly'>
+                <span class="input-group-text" id="addon-wrapping">
+                    <a id="naverMapLink" href="" class="link-dark link-offset-2 link-underline link-underline-opacity-0">네이버 지도</a>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container" style="padding-top: 1.875rem;">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <p style="margin-left: 1.25rem;"><b>측정시설 목록</b></p>
+        <div>
+          <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#stackAdd">
+            측정시설 추가
+          </button>
+          <button id="removeBtn" class="btn btn-primary btn-sm mb-3">측정시설 삭제</button>
+          <button id="excelAddBtn" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#excelUpload">엑셀 데이터 한번에 넣기</button>
+        </div>
+      </div>
+      <hr>
+      <div th:replace="~{fragments/tables/stackTable::stackListTable}"></div>
+    </div>
+  </div>
+</main>
+
+<script layout:fragment="scriptContent" th:inline="javascript">
+  $(document).ready(function(){
+    const stackAddResult = /*[[@{${result} ?: ''}]]*/ '';
+    if (stackAddResult === 'success') {
+      const msg = {
+        successMsg: /*[[@{${successMsg} ?: ''}]]*/ '',
+        failedMsg: ""
+      };
+      loadToast(stackAddResult, msg);
+    } else if (stackAddResult === 'error') {
+      const msg = {
+        successMsg: "",
+        failedMsg: /*[[@{${errorMsg} ?: ''}]]*/ ''
+      };
+      loadToast(stackAddResult, msg);
+    }
+    setupValidation('#stack_form');
+    mapView('#naverMapLink', $('#workplaceInfo input[name=address]').val());
+    uploadMeasurementExcelData('#stack-measurement-file');
+    $('#removeBtn').on('click', function() {
+      const options = {
+        selector: '#table tbody input[type="checkbox"]:checked',
+        closestTag: 'tr',
+        dataAttr: 'data-stack-id',
+        idKey: 'stack_id',
+        url: /*[[@{/management/stack/delete}]]*/ '',
+      }
+      businessDeleteHandler(options);
+    });
+    $('#modifyBtn').on('click', function(){
+      const options = {
+        btnId: $(this),
+        selector: $('#workplaceInfoForm'),
+        url: /*[[@{/management/workplace/modify}]]*/ '',
+      }
+      businessModifyHandler(options);
+    });
+  });
+</script>
+</body>
+</html>

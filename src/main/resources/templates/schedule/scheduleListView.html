@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <div th:replace="~{fragments/toasts::toasts}"></div>
+  <div class="container">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <h4><span class="badge text-bg-primary">자가측정부 일정</span></h4>
+        <div>
+          <a th:href="@{/schedule/register}" class="btn btn-primary btn-sm mx-1">일정 추가</a>
+          <button id="deleteBtn" type="button" class="btn btn-primary btn-sm mx-1">
+            일정 삭제
+          </button>
+          <button id="completeBtn" type="button" class="btn btn-primary btn-sm mx-1">
+            일정 완료
+          </button>
+        </div>
+      </div>
+      <table
+          id="table"
+          data-toggle="table"
+          data-locale="ko-KR"
+          data-height="550"
+          data-checkbox-header="true"
+          data-click-to-select="true"
+          data-pagination="true"
+          data-toolbar="#toolbar"
+          data-buttons-class="primary"
+          data-row-style="rowStyle">
+        <thead style="font-size: 0.875rem">
+        <tr>
+          <th data-field="state" data-checkbox="true" data-width="5"></th>
+          <th data-field="measure_date" data-width="5">Date</th>
+          <th data-field="workplace_name" data-width="150">Workplace</th>
+          <th data-field="stack_name" data-width="150">Stack</th>
+          <th data-field="pollutants" data-width="300">Pollutants</th>
+          <th data-field="team" data-width="5">Team</th>
+        </tr>
+        </thead>
+        <tbody style="font-size: 0.75rem">
+          <tr th:each="schedule : ${schedules}"
+              th:data-schedule-ids="${schedule.schedule_ids}"
+              th:data-is-completed="${schedule.is_completed ? true : false}">
+            <td></td>
+            <td><a th:href="@{/schedule/modify/${schedule.stack_id}/${schedule.measure_date}}">
+              <span th:text="${#dates.format(schedule.measure_date, 'yyyy-MM-dd')}"></span></a></td>
+            <td th:text="${schedule.workplace_name}"></td>
+            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/manager/stack/${schedule.stack_id}}" th:text="${schedule.stack_name}"></a></td>
+            <td th:text="${schedule.pollutants}"></td>
+            <td th:text="${schedule.team_name}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<script layout:fragment="scriptContent" th:inline="javascript">
+  $(document).ready(function(){
+
+  });
+</script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.ensolution.ensol.service.management.impl;
 
 import com.ensolution.ensol.domain.CompanyDto;
+import com.ensolution.ensol.domain.DepartmentDto;
+import com.ensolution.ensol.domain.SubFactoryDto;
 import com.ensolution.ensol.domain.WorkplaceDto;
 import com.ensolution.ensol.mapper.WorkplaceMapper;
 import com.ensolution.ensol.service.management.WorkplaceService;
@@ -20,6 +22,11 @@ public class WorkplaceServiceImpl implements WorkplaceService {
   }
 
   @Override
+  public WorkplaceDto findWorkplaceById(Integer id) {
+    return workplaceMapper.selectWorkplace(id);
+  }
+
+  @Override
   public List<WorkplaceDto> findWorkplacesByCompanyId(Integer id) {
     return workplaceMapper.selectWorkplacesOfCompany(id);
   }
@@ -27,6 +34,16 @@ public class WorkplaceServiceImpl implements WorkplaceService {
   @Override
   public List<WorkplaceDto> findAllWorkplaces() {
     return workplaceMapper.selectAll();
+  }
+
+  @Override
+  public List<SubFactoryDto> findSubFactoriesByWorkplaceId(Integer id) {
+    return workplaceMapper.selectFactory(id);
+  }
+
+  @Override
+  public List<DepartmentDto> findDepartmentsByWorkplaceId(Integer id) {
+    return workplaceMapper.selectDepartment(id);
   }
 
   @Override
@@ -40,7 +57,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
 
   @Override
   public Integer updateWorkplace(WorkplaceDto workplaceDto) {
-    WorkplaceDto existingWorkplace = workplaceMapper.selectOne(workplaceDto.getWorkplace_id());
+    WorkplaceDto existingWorkplace = workplaceMapper.selectWorkplace(workplaceDto.getWorkplace_id());
 
     if (existingWorkplace == null) {
       throw new IllegalArgumentException("Workplace with Name " + workplaceDto.getWorkplace_name() + " does not exist.");
@@ -64,7 +81,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
 
     for (WorkplaceDto workplaceDto : workplaces) {
       if (workplaceDto == null) {
-        throw new IllegalArgumentException("CompanyDto cannot be null");
+        throw new IllegalArgumentException("WorkplaceDto cannot be null");
       }
       ids.add(workplaceDto.getWorkplace_id());
     }
@@ -72,7 +89,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
     try {
       return workplaceMapper.deleteItems(ids);
     } catch (DataAccessException e) {
-      throw new RuntimeException("Database error occurred while deleting companies", e);
+      throw new RuntimeException("Database error occurred while deleting workplaces", e);
     }
   }
 }

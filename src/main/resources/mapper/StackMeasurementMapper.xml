@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.mapper.StackMeasurementMapper">
+  <sql id="select">
+    SELECT sm.stack_measurement_id, sm.stack_id, sm.pollutant_id, sm.cycle_type, sm.is_completed, p.pollutant_name,
+           p.pollutant_name_en, p.method, sm.is_measure, sm.allow_value
+    FROM stack_measurement `sm`
+           INNER JOIN pollutant `p` on sm.pollutant_id = p.pollutant_id
+  </sql>
+
+  <select id="selectStackMeasurement" parameterType="int" resultType="StackMeasurementDto">
+    <include refid="select"/>
+    WHERE sm.stack_measurement_id = #{stack_measurement_id}
+  </select>
+
+  <select id="selectStackMeasurementsOfStack" resultType="StackMeasurementDto">
+    <include refid="select"/>
+    WHERE sm.stack_id = #{stack_id}
+  </select>
+
+  <select id="selectAll" resultType="StackMeasurementDto">
+    <include refid="select"/>
+  </select>
+
+  <insert id="insert" parameterType="StackMeasurementDto">
+    INSERT INTO stack_measurement
+    (stack_id, pollutant_id, cycle_type, is_completed, is_measure, allow_value)
+    VALUES
+      (#{stack_id}, #{pollutant_id}, #{cycle_type}, #{is_completed}, #{is_measure}, #{allow_value})
+  </insert>
+
+  <delete id="deleteItems" parameterType="list">
+    DELETE FROM stack_measurement
+    WHERE stack_measurement_id IN
+    <foreach item="stack_measurement_id" collection="list" open="(" separator="," close=")">
+      #{stack_measurement_id}
+    </foreach>
+  </delete>
+
+  <update id="update" parameterType="StackMeasurementDto">
+    UPDATE stack_measurement
+    SET   cycle_type = #{cycle_type}
+      , is_completed = #{is_completed}
+    WHERE stack_measurement_id = #{stack_measurement_id}
+  </update>
+</mapper>

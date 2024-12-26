@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="addStackModal"
+     class="modal fade" id="stackAdd"
+     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="stackAddLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="stackAddLabel">시설 추가</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/management/stack/add}" method="post" id="stack_form" class="needs-validation" novalidate>
+      <div class="modal-body m-2">
+        <div class="mb-3 row">
+          <label for="workplace_name" class="form-label">측정 대상 사업장</label>
+          <input type="text" class="form-control" id="workplace_name" th:value="${workplace.workplace_name}" disabled="disabled">
+        </div>
+        <input type="text" class="form-control" name="workplace_id" th:value="${workplace.workplace_id}" hidden="hidden">
+        <div class="mb-3 row">
+          <label for="inputStack" class="form-label">측정 시설 <small><b>(필수)</b></small></label>
+          <input type="text" name="stack_name" class="form-control" id="inputStack" required>
+          <div class="invalid-feedback">
+            시설명 입력 필수!
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="inputPrevention" class="form-label">방지 시설</label>
+          <input type="text" name="prevention" class="form-control" id="inputPrevention">
+        </div>
+        <div class="form-floating mb-3 row">
+          <select id="inputFactory" name="sub_factory_id" class="form-select">
+            <option value="">-- select factory --</option>
+            <option th:each="sub_factory : ${sub_factories}" th:value="${sub_factory.sub_factory_id}" th:text="${sub_factory.name}"></option>
+          </select>
+          <label for="inputFactory">공장</label>
+        </div>
+        <div class="form-floating mb-3 row">
+          <select id="inputDepartment" name="management_department_id" class="form-select">
+            <option value="">-- select department --</option>
+            <option th:each="department : ${departments}" th:value="${department.management_department_id}" th:text="${department.name}"></option>
+          </select>
+          <label for="inputDepartment">관리부서</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">추가</button>
+        <button id="modalCloseBtn" type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</html>

@@ -3,37 +3,106 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ensolution.ensol.mapper.StackMapper">
-    <select id="selectStack" resultMap="StackResultMap">
-        SELECT stack_id,
-               workplace_id,
-               stack_name,
-               prevention,
-               reg_date,
-               note,
-               sub_factory_id,
-               management_department_id
-        FROM stack
-        WHERE stack_id = #{id}
-    </select>
+  <sql id="select">
+    SELECT stack_id,
+           workplace_id,
+           stack_name,
+           prevention,
+           reg_date,
+           note,
+           sub_factory_id,
+           management_department_id
+    FROM stack
+  </sql>
 
-    <select id="selectStackInfo" resultType="StackInformationDto">
-        SELECT stack_info_id,
-               diameter,
-               dynamic_pressure,
-               static_pressure,
-               velocity_speed,
-               quantity,
-               temperature
-        FROM stack_info
-        WHERE stack_info_id = #{id}
-    </select>
+  <sql id="selectTable">
+    SELECT s.stack_id, c.company_name, w.workplace_name,
+           s.stack_name, sf.name AS sub_factory_name, md.name AS department_name
+    FROM stack `s`
+           INNER JOIN workplace `w` ON w.workplace_id = s.workplace_id
+           INNER JOIN company `c` ON c.company_id = w.company_id
+           LEFT JOIN sub_factory `sf` ON sf.sub_factory_id = s.sub_factory_id
+           LEFT JOIN management_department `md` ON md.management_department_id = s.management_department_id
+  </sql>
 
-    <resultMap id="StackResultMap" type="StackDto">
-        <id property="stack_id" column="stack_id"/>
-        <result property="stack_name" column="stack_name"/>
-        <association property="stack_information"
-                     column="stack_id"
-                     javaType="StackInformationDto"
-                     select="selectStackInfo"/>
-    </resultMap>
+  <select id="selectStack" resultMap="StackResultMap">
+    <include refid="select"/>
+    WHERE stack_id = #{stack_id}
+  </select>
+
+  <select id="selectAll" resultMap="StackResultMap">
+    <include refid="select"/>
+  </select>
+
+  <select id="selectAllOfTable" resultType="stackTableDto">
+    <include refid="selectTable"/>
+    ORDER BY
+    CASE
+    WHEN stack_name RLIKE '^stack [0-9]+$' THEN CAST(SUBSTRING(stack_name, 7) AS UNSIGNED)
+    END
+  </select>
+
+  <select id="selectStacksOfWorkplace" parameterType="Integer" resultType="StackTableDto">
+    <include refid="selectTable"/>
+    WHERE s.workplace_id = #{workplace_id}
+    ORDER BY
+    CASE
+    WHEN stack_name RLIKE '^stack [0-9]+$' THEN CAST(SUBSTRING(stack_name, 7) AS UNSIGNED)
+    END
+  </select>
+
+  <select id="selectStackInfo" resultType="StackInformationDto">
+    SELECT stack_info_id,
+           diameter,
+           dynamic_pressure,
+           static_pressure,
+           velocity_speed,
+           quantity,
+           temperature
+    FROM stack_info
+    WHERE stack_info_id = #{id}
+  </select>
+
+  <resultMap id="StackResultMap" type="StackDto">
+    <id property="stack_id" column="stack_id"/>
+    <result property="stack_name" column="stack_name"/>
+    <association property="stack_information"
+                 column="stack_id"
+                 javaType="StackInformationDto"
+                 select="selectStackInfo"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="StackDto">
+    INSERT INTO stack
+    (workplace_id, stack_name, prevention, reg_date, note, sub_factory_id, management_department_id)
+    VALUES
+      (#{workplace_id}, #{stack_name}, #{prevention}, #{reg_date}, #{note}, #{sub_factory_id}, #{management_department_id})
+  </insert>
+
+  <delete id="deleteItems" parameterType="list">
+    DELETE FROM stack
+    WHERE stack_id IN
+    <foreach item="stack_id" collection="list" open="(" separator="," close=")">
+      #{stack_id}
+    </foreach>
+  </delete>
+
+  <update id="update" parameterType="StackDto">
+    UPDATE stack
+    SET   stack_name = #{stack_name}
+      , prevention = #{prevention}
+      , note = #{note}
+    WHERE stack_id = #{stack_id}
+  </update>
+
+  <update id="updateStackInfo" parameterType="StackInformationDto">
+    UPDATE stack_info
+    SET diameter = #{diameter},
+        dynamic_pressure = #{dynamic_pressure},
+        static_pressure = #{static_pressure},
+        velocity_speed = #{velocity_speed},
+        quantity = #{quantity},
+        temperature = #{temperature}
+    WHERE stack_info_id = #{stack_info_id}
+  </update>
 </mapper>

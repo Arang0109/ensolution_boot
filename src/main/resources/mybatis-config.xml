@@ -3,10 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <typeAliases>
-        <typeAlias alias="CompanyDto" type="com.ensolution.ensol.domain.CompanyDto"/>
-        <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.domain.WorkplaceDto"/>
-        <typeAlias alias="StackDto" type="com.ensolution.ensol.domain.StackDto"/>
-        <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.domain.StackInformationDto"/>
-    </typeAliases>
+  <typeAliases>
+    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.domain.CompanyDto"/>
+    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.domain.WorkplaceDto"/>
+    <typeAlias alias="StackDto" type="com.ensolution.ensol.domain.StackDto"/>
+    <typeAlias alias="StackTableDto" type="com.ensolution.ensol.domain.management.StackTableDto"/>
+    <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.domain.StackInformationDto"/>
+    <typeAlias alias="StackMeasurementDto" type="com.ensolution.ensol.domain.StackMeasurementDto"/>
+    <typeAlias alias="FactoryDto" type="com.ensolution.ensol.domain.FactoryDto"/>
+    <typeAlias alias="SubFactoryDto" type="com.ensolution.ensol.domain.SubFactoryDto"/>
+    <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.domain.DepartmentDto"/>
+    <typeAlias alias="PollutantDto" type="com.ensolution.ensol.domain.PollutantDto"/>
+    <typeAlias alias="ScheduleDto" type="com.ensolution.ensol.domain.ScheduleDto"/>
+  </typeAliases>
 </configuration>
