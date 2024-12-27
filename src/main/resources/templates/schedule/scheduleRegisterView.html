@@ -128,10 +128,13 @@
 
       const note = selector.val();
       const stack_id = $('#selectStack').val();
-
       const stack = {
         'stack_id': stack_id,
         'note': note,
+      }
+      const msg = {
+        successMsg: '수정 되었습니다.',
+        failedMsg: '수정에 실패 하였습니다.'
       }
 
       $.ajax({
@@ -142,10 +145,10 @@
         success: function() {
           $('#modifyNoteBtn').html('특이사항 수정');
           $('#noteOfStack').attr('readonly', true);
-          alert('success');
+          loadToast('success', msg);
         },
         error: function() {
-          alert('failed');
+          loadToast('fail', msg);
         }
       });
     });
@@ -245,7 +248,7 @@
       const team_id = $('input[type="radio"]:checked').val();
 
       if (!team_id) {
-        alert("팀을 선택해주세요.");
+        loadToast('fail', { failedMsg : "팀을 선택해주세요!"});
         return;
       }
 
@@ -259,12 +262,12 @@
       });
 
       if (selectedMeasurement.length === 0) {
-        alert("측정 항목을 선택해주세요.");
+        loadToast('fail', { failedMsg : "측정 항목을 선택해주세요!"});
         return;
       }
 
       if (!selectedMeasurement) {
-        alert("select measurement!")
+        loadToast('fail', { failedMsg : "측정 항목을 선택해주세요!"});
         return;
       }
 
@@ -274,10 +277,10 @@
         contentType: 'application/json',
         data: JSON.stringify(selectedMeasurement),
         success: function() {
-          alert('success');
+          loadToast('success', { successMsg : "일정 등록에 성공하였습니다." })
         },
         error: function () {
-          alert('fail')
+          loadToast('fail', { failedMsg : "일정 등록에 실패했습니다."});
         }
       });
     });

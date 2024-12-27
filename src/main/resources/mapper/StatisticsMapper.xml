@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.mapper.StatisticsMapper">
+  <sql id="stackCnt">
+    SELECT sm.cycle_type, COUNT(DISTINCT(s.stack_name)) AS cnt FROM stack_measurement sm
+        INNER JOIN stack s ON sm.stack_id = s.stack_id
+  </sql>
+
+  <select id="stackCntAll" resultType="StackCountDto">
+    <include refid="stackCnt"/>
+    GROUP BY sm.cycle_type;
+  </select>
+
+  <select id="stackCntNonComplete" resultType="StackCountDto">
+    <include refid="stackCnt"/>
+    WHERE sm.is_completed = 0
+    GROUP BY sm.cycle_type;
+  </select>
+
+  <select id="stackCntAllOfWp" parameterType="list" resultType="StackCountDto">
+    <include refid="stackCnt"/>
+    WHERE s.workplace_id IN
+    <foreach item="workplace_id" collection="list" open="(" separator="," close=")">
+      #{workplace_id}
+    </foreach>
+    GROUP BY sm.cycle_type;
+  </select>
+
+  <select id="stackCntNonCompleteOfWp" parameterType="list" resultType="StackCountDto">
+    <include refid="stackCnt"/>
+    WHERE s.workplace_id IN
+    <foreach item="workplace_id" collection="list" open="(" separator="," close=")">
+      #{workplace_id}
+    </foreach>
+    AND sm.is_completed = 0
+    GROUP BY sm.cycle_type;
+  </select>
+</mapper>

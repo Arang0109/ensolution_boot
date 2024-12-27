@@ -11,6 +11,7 @@
     <typeAlias alias="StackImagesDto" type="com.ensolution.ensol.domain.management.stack.StackImagesDto"/>
     <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.domain.management.stack.StackInformationDto"/>
     <typeAlias alias="StackMeasurementDto" type="com.ensolution.ensol.domain.management.stack.StackMeasurementDto"/>
+    <typeAlias alias="StackCountDto" type="com.ensolution.ensol.domain.statistics.StackCountDto"/>
     <typeAlias alias="FactoryDto" type="com.ensolution.ensol.domain.management.company.FactoryDto"/>
     <typeAlias alias="SubFactoryDto" type="com.ensolution.ensol.domain.management.company.SubFactoryDto"/>
     <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.domain.management.company.DepartmentDto"/>

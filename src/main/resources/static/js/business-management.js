@@ -176,21 +176,19 @@ function loadToast(result, msg) {
   if (!result) return;
 
   const {
-    successMsg,
-    failedMsg
+    successMsg = "default",
+    failedMsg = "default"
   } = msg;
 
   if (result === 'success') {
     const toastElement = $('#successToast');
     toastElement.find('div.toast-body').text(successMsg);
     const toast = new bootstrap.Toast(toastElement);
-
     toast.show();
   } else if (result === 'fail') {
     const toastElement = $('#failToast');
     toastElement.find('div.toast-body').text(failedMsg);
     const toast = new bootstrap.Toast(toastElement);
-
     toast.show();
   }
 }
@@ -282,6 +280,20 @@ function businessModifyHandler(options) {
   });
 }
 
+function viewCompleteToast() {
+  const msg = {
+    successMsg: '일정이 완료 처리 되었습니다.',
+    failedMsg: '작업에 실패 하였습니다.'
+  }
+
+  const completeResult = sessionStorage.getItem('completeResult');
+
+  if (completeResult) {
+    loadToast(completeResult, msg);
+    sessionStorage.removeItem('completeResult');
+  }
+}
+
 function viewDeleteToast() {
   const msg = {
     successMsg: '삭제 되었습니다.',
@@ -315,7 +327,7 @@ function businessDeleteHandler(options) {
       selectedItems.push(item);
     }
   });
-  if (selectedItems.length === 0) return alert("selected object = 0.. retry");
+  if (selectedItems.length === 0) return loadToast('fail', { failedMsg : "선택된 항목이 없습니다."});
 
   const msg = {
     successMsg: '삭제 되었습니다.',
@@ -441,4 +453,5 @@ function createPollutantListView(options) {
 $(document).ready(function() {
   viewDeleteToast();
   viewModifyToast();
+  viewCompleteToast();
 });
