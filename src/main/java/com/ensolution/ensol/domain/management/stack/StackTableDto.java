@@ -1,4 +1,4 @@
-package com.ensolution.ensol.domain.management;
+package com.ensolution.ensol.domain.management.stack;
 
 import java.util.Objects;
 

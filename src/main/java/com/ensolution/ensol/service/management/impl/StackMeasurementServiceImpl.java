@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.management.impl;
 
-import com.ensolution.ensol.domain.StackMeasurementDto;
+import com.ensolution.ensol.domain.management.stack.StackMeasurementDto;
 import com.ensolution.ensol.mapper.StackMeasurementMapper;
 import com.ensolution.ensol.service.management.StackMeasurementService;
 import org.springframework.dao.DataAccessException;

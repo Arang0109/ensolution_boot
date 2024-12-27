@@ -1,4 +1,4 @@
-package com.ensolution.ensol.domain;
+package com.ensolution.ensol.domain.management.company;
 
 import java.util.Objects;
 

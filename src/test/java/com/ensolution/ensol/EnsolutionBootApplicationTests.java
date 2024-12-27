@@ -1,6 +1,6 @@
 package com.ensolution.ensol;
 
-import com.ensolution.ensol.domain.CompanyDto;
+import com.ensolution.ensol.domain.management.company.CompanyDto;
 import com.ensolution.ensol.service.management.CompanyService;
 import com.ensolution.ensol.service.management.StackMeasurementService;
 import com.ensolution.ensol.service.management.StackService;

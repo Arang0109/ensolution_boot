@@ -1,15 +1,21 @@
 package com.ensolution.ensol.service.management.impl;
 
-import com.ensolution.ensol.domain.StackDto;
-import com.ensolution.ensol.domain.StackInformationDto;
-import com.ensolution.ensol.domain.management.StackTableDto;
+import com.ensolution.ensol.domain.management.stack.StackDto;
+import com.ensolution.ensol.domain.management.stack.StackImagesDto;
+import com.ensolution.ensol.domain.management.stack.StackInformationDto;
+import com.ensolution.ensol.domain.management.stack.StackTableDto;
+import com.ensolution.ensol.mapper.StackImagesMapper;
 import com.ensolution.ensol.mapper.StackMapper;
 import com.ensolution.ensol.mapper.WorkplaceMapper;
 import com.ensolution.ensol.service.management.StackService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +25,39 @@ import java.util.Map;
 public class StackServiceImpl implements StackService {
   private final StackMapper stackMapper;
   private final WorkplaceMapper workplaceMapper;
+  private final StackImagesMapper stackImagesMapper;
+  @Value("${file.upload_dir}")
+  private String uploadDir;
 
-  public StackServiceImpl(StackMapper stackMapper, WorkplaceMapper workplaceMapper) {
+  public StackServiceImpl(StackMapper stackMapper, WorkplaceMapper workplaceMapper, StackImagesMapper stackImagesMapper) {
     this.stackMapper = stackMapper;
     this.workplaceMapper = workplaceMapper;
+    this.stackImagesMapper = stackImagesMapper;
+  }
+
+  @Override
+  public Integer saveFile(MultipartFile file, Integer stackId) throws IOException {
+    File directory = new File(uploadDir);
+    if (!directory.exists()) {
+      directory.mkdirs();
+    }
+
+    String filePath = uploadDir + File.separator + file.getOriginalFilename();
+
+    File destinationFile = new File(filePath);
+    file.transferTo(destinationFile);
+
+    StackImagesDto stackImagesDto = new StackImagesDto();
+    stackImagesDto.setStack_id(stackId);
+    stackImagesDto.setImage_path(filePath);
+    stackImagesDto.setImage_name(file.getOriginalFilename());
+
+    return stackImagesMapper.insert(stackImagesDto);
+  }
+
+  @Override
+  public List<StackImagesDto> findAllStackImages(Integer stackId) {
+    return stackImagesMapper.selectAllImagesByStackId(stackId);
   }
 
   @Override

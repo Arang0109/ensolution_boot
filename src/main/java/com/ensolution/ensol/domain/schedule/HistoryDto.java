@@ -1,4 +1,4 @@
-package com.ensolution.ensol.domain;
+package com.ensolution.ensol.domain.schedule;
 
 import java.sql.Date;
 

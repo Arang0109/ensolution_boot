@@ -1,9 +1,8 @@
 package com.ensolution.ensol.service.management.impl;
 
-import com.ensolution.ensol.domain.CompanyDto;
-import com.ensolution.ensol.domain.DepartmentDto;
-import com.ensolution.ensol.domain.SubFactoryDto;
-import com.ensolution.ensol.domain.WorkplaceDto;
+import com.ensolution.ensol.domain.management.company.DepartmentDto;
+import com.ensolution.ensol.domain.management.company.SubFactoryDto;
+import com.ensolution.ensol.domain.management.company.WorkplaceDto;
 import com.ensolution.ensol.mapper.WorkplaceMapper;
 import com.ensolution.ensol.service.management.WorkplaceService;
 import org.springframework.dao.DataAccessException;

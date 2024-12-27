@@ -3,13 +3,14 @@
       layout:decorate="~{layouts/mainLayout}">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>측정 시설 정보</title>
 </head>
 
 <body>
 <main layout:fragment="content">
   <div th:replace="~{fragments/modals/stackMeasurementModal::addStackMeasurementModal}"></div>
   <div th:replace="~{fragments/modals/stackMeasurementModal::addStackMeasurementModal2}"></div>
+  <div th:replace="~{fragments/modals/stackImgUploadModal::stackImageUploadModal}"></div>
   <div th:replace="~{fragments/toasts::toasts}"></div>
   <div class="container">
     <div class="profile-header">
@@ -152,12 +153,81 @@
       </div>
     </div>
   </div>
+  <div class="container" style="padding-top: 1.875rem;">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <p style="margin-left: 1.25rem;"><b>시설 사진</b></p>
+        <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#stackImageUpload">
+          사진 업로드
+        </button>
+      </div>
+      <hr>
+      <div id="image-container" class="border p-4 mx-2 d-flex flex-wrap justify-content-evenly flex-grow-1 shadow-sm rounded bg-body-tertiary">
+
+      </div>
+    </div>
+  </div>
+  <div class="container" style="padding-top: 1.875rem;">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <p style="margin-left: 1.25rem;"><b>히스토리</b></p>
+      </div>
+      <hr>
+      <div class="border p-4 mx-2 flex-grow-1 shadow-sm rounded bg-body-tertiary">
+        <table id="table" class="table table-bordered">
+          <thead>
+          <tr>
+            <th data-field="measure_date">측정일</th>
+            <th data-field="pollutant">측정 항목</th>
+            <th data-field="team_name">팀</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script layout:fragment="scriptContent" th:inline="javascript">
   $(document).ready(function(){
     const addResult = sessionStorage.getItem("addResult");
+    const id = /*[[${stack.stack_id}]]*/ '';
     viewAddMeasurementToast(addResult);
+
+    $.ajax({
+      url: '/management/images?stackId=' + id,
+      method: 'GET',
+      dataType: 'json',
+      success: function(images) {
+        let $container = $('#image-container');
+        $.each(images, function(index, image) {
+          let $img = $('<img>')
+            .attr('src', '/uploads/' + image.image_name)
+            .attr('alt', image.image_name)
+            .css('width', '300px')
+            .addClass('img-thumbnail')
+            .addClass('m-2'); // 이미지 크기 조정
+          $container.append($img);
+        });
+      },
+      error: function() {
+        alert('Failed to load images.');
+      }
+    });
+
+    $.ajax({
+      url: /*[[@{/schedule/register/getStackMeasurement(stackId=${stack.stack_id})}]]*/ ``,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function(response) {
+        getHistory(response.histories);
+      },
+      error: function() {
+        alert('failed');
+      }
+    });
 
     $.ajax({
       url: /*[[@{/management/stack/getStackMeasurement(stackId=${stack.stack_id})}]]*/ '',

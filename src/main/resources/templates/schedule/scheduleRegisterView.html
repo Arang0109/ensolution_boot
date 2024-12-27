@@ -3,7 +3,7 @@
       layout:decorate="~{layouts/mainLayout}">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>대기자가측정 일정등록</title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -11,7 +11,7 @@
   <div class="container">
     <div id="addPlanForm" class="border p-4" style="background-color: white;">
       <div class="d-flex justify-content-between">
-        <p style="margin-left: 1.25rem;"><b>자가측정부 측정 일정 등록</b></p>
+        <p style="margin-left: 1.25rem;"><b>대기자가측정 일정등록</b></p>
         <input type="text" id="datepicker" name="measure_date" placeholder="Select a date" style="text-align: center;">
         <button id="addPlan" type="button" class="btn btn-primary">등록</button>
       </div>
@@ -57,19 +57,30 @@
         <div class="col">
           <div class="border p-4 mx-2 shadow-sm rounded bg-body-tertiary h-100">
             <div class="p-2 d-flex justify-content-between">
-              <a href=""><span><b>#시설 정보</b></span></a>
+              <a id="stackDetailLink" href=""><span><b>#시설 정보</b></span></a>
               <button id="modifyNoteBtn" type="button" class="btn btn-primary btn-sm">특이사항 수정</button>
             </div>
             <div class="p-2">
               <div class="input-group">
                 <span class="input-group-text"><b>특이사항</b></span>
-                <textarea id="noteOfStack" class="form-control" aria-label="With textarea"></textarea>
+                <textarea id="noteOfStack" class="form-control" aria-label="With textarea" style="height: 150px"></textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div id="stackMeasurementList" class="d-flex justify-content-between" style="padding-top: 1.875rem;">
+
+      </div>
+    </div>
+  </div>
+  <div class="container" style="padding-top: 1.875rem;">
+    <div class="border p-4" style="background-color: white;">
+      <div class="d-flex justify-content-between">
+        <p style="margin-left: 1.25rem;"><b>시설 사진</b></p>
+      </div>
+      <hr>
+      <div id="image-container" class="border p-4 mx-2 d-flex flex-wrap justify-content-evenly flex-grow-1 shadow-sm rounded bg-body-tertiary">
 
       </div>
     </div>
@@ -84,9 +95,9 @@
         <table id="table" class="table table-bordered">
           <thead>
           <tr>
-            <th data-field="measure_date">Date</th>
-            <th data-field="pollutant">Pollutant</th>
-            <th data-field="team_name">Team</th>
+            <th data-field="measure_date">측정일</th>
+            <th data-field="pollutant">측정 항목</th>
+            <th data-field="team_name">팀</th>
           </tr>
           </thead>
           <tbody>
@@ -156,58 +167,6 @@
       });
     }
 
-    function getNoteOfStack(note) {
-      const memo = $('#noteOfStack');
-
-      memo.empty();
-      memo.prop('readonly', true);
-      memo.val(note);
-    }
-
-    function getHistory(histories) {
-      const tbody = $('#table tbody');
-      tbody.empty();
-
-      histories.forEach(history => {
-        const date = new Date(history.measure_date);
-
-        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-
-        const innerHtml = `
-          <tr>
-            <td>` + localDate.toISOString().split('T')[0] + `</td>
-            <td>${history.pollutant_ids}</td>
-            <td>${history.team_name}/td>
-          </tr>
-        `;
-        tbody.append(innerHtml);
-      });
-    }
-
-    function selectMeasurement(measurements) {
-      id.forEach(cycle => {
-        const div = $('#' + cycle);
-        div.empty();
-        measurements.forEach((item) => {
-          let color = 'red';
-          const is_completed = item.is_completed;
-          if (is_completed) {
-            color = 'green';
-          }
-          if (item.cycle_type === cycle) {
-            const checkboxHtml = `
-              <div class="form-check ms-2" data-stack-measurement-id="${item.stack_measurement_id}"><input
-                  class="form-check-input"
-                  type="checkbox"
-                  value="${item.pollutant_id}"
-                  id="${item.pollutant_id}"/><label class="form-check-label" for="${item.pollutant_id}"  style="color: ${color};">${item.pollutant_name}</label></div>
-            `;
-            div.append(checkboxHtml);
-          }
-        })
-      });
-    }
-
     $("#selectWorkplace").on('change', function() {
       const workplaceId = $(this).val();
 
@@ -227,15 +186,39 @@
 
     $("#selectStack").on('change', function() {
       const stackId = $(this).val()
+      const stackDetailLink = $('#stackDetailLink');
+
+      stackDetailLink.attr('href', '/management/stack/' + stackId);
+      stackDetailLink.attr('target', '_blank');
+
+      $.ajax({
+        url: '/management/images?stackId=' + stackId,
+        method: 'GET',
+        dataType: 'json',
+        success: function(images) {
+          let $container = $('#image-container');
+          $.each(images, function(index, image) {
+            let $img = $('<img>')
+              .attr('src', '/uploads/' + image.image_name)
+              .attr('alt', image.image_name)
+              .css('width', '300px')
+              .addClass('img-thumbnail')
+              .addClass('m-2'); // 이미지 크기 조정
+            $container.append($img);
+          });
+        },
+        error: function() {
+          alert('Failed to load images.');
+        }
+      });
 
       $.ajax({
         url: `/schedule/register/getStackMeasurement?stackId=${stackId}`,
         type: 'GET',
         contentType: 'application/json',
-        success: function(result) {
-          selectMeasurement(result.measurements);
-          getHistory(result.histories);
-          getNoteOfStack(result.note);
+        success: function(response) {
+          getHistory(response.histories);
+          getNoteOfStack(response.note);
         },
         error: function() {
           alert('failed');
@@ -261,6 +244,11 @@
       const measure_date = $("#datepicker").val();
       const team_id = $('input[type="radio"]:checked').val();
 
+      if (!team_id) {
+        alert("팀을 선택해주세요.");
+        return;
+      }
+
       $('#addPlanForm input[type="checkbox"]:checked').each(function () {
         const stack_measurement_id = $(this).closest('div').attr('data-stack-measurement-id');
         selectedMeasurement.push({
@@ -269,6 +257,11 @@
           "measure_date": measure_date,
         })
       });
+
+      if (selectedMeasurement.length === 0) {
+        alert("측정 항목을 선택해주세요.");
+        return;
+      }
 
       if (!selectedMeasurement) {
         alert("select measurement!")

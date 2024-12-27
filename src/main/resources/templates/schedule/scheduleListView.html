@@ -3,7 +3,7 @@
       layout:decorate="~{layouts/mainLayout}">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>자가측정부 일정</title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -26,6 +26,7 @@
           id="table"
           data-toggle="table"
           data-locale="ko-KR"
+          data-search="true"
           data-height="550"
           data-checkbox-header="true"
           data-click-to-select="true"
@@ -52,7 +53,7 @@
             <td><a th:href="@{/schedule/modify/${schedule.stack_id}/${schedule.measure_date}}">
               <span th:text="${#dates.format(schedule.measure_date, 'yyyy-MM-dd')}"></span></a></td>
             <td th:text="${schedule.workplace_name}"></td>
-            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/management/stack/{stackId}(stackId=${schedule.stack_id})}" th:text="${schedule.stack_name}"></a></td>
+            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/management/stack/{stackId}(stackId=${schedule.stack_id})}" th:text="${schedule.stack_name}" target="_blank"></a></td>
             <td th:text="${schedule.pollutants}"></td>
             <td th:text="${schedule.team_name}"></td>
           </tr>

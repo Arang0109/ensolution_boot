@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.document.impl;
 
-import com.ensolution.ensol.domain.PollutantDto;
+import com.ensolution.ensol.domain.management.stack.PollutantDto;
 import com.ensolution.ensol.service.document.ScoreService;
 import org.springframework.stereotype.Service;
 

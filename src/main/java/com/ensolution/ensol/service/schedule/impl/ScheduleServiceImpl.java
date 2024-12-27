@@ -1,8 +1,9 @@
 package com.ensolution.ensol.service.schedule.impl;
 
-import com.ensolution.ensol.domain.HistoryDto;
-import com.ensolution.ensol.domain.ScheduleDto;
-import com.ensolution.ensol.domain.ScheduleTableDto;
+import com.ensolution.ensol.domain.schedule.HistoryDto;
+import com.ensolution.ensol.domain.schedule.ScheduleDto;
+import com.ensolution.ensol.domain.schedule.ScheduleTableDto;
+import com.ensolution.ensol.mapper.PollutantMapper;
 import com.ensolution.ensol.mapper.ScheduleMapper;
 import com.ensolution.ensol.mapper.StackMeasurementMapper;
 import com.ensolution.ensol.service.schedule.ScheduleService;
@@ -16,10 +17,12 @@ import java.util.List;
 public class ScheduleServiceImpl implements ScheduleService {
   private final ScheduleMapper scheduleMapper;
   private final StackMeasurementMapper stackMeasurementMapper;
+  private final PollutantMapper pollutantMapper;
 
-  public ScheduleServiceImpl(ScheduleMapper scheduleMapper, StackMeasurementMapper stackMeasurementMapper) {
+  public ScheduleServiceImpl(ScheduleMapper scheduleMapper, StackMeasurementMapper stackMeasurementMapper, PollutantMapper pollutantMapper) {
     this.scheduleMapper = scheduleMapper;
     this.stackMeasurementMapper = stackMeasurementMapper;
+    this.pollutantMapper = pollutantMapper;
   }
 
   @Override
@@ -30,6 +33,26 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Override
   public List<HistoryDto> findAllHistoryOfStacks(Integer stack_id) {
     return scheduleMapper.selectStackHistory(stack_id);
+  }
+
+  @Override
+  public List<HistoryDto> historyFormater(List<HistoryDto> histories) {
+    for (HistoryDto history : histories) {
+      StringBuilder pollutants = new StringBuilder();
+      String pollutant_ids = history.getPollutant_ids();
+
+      for (String id : pollutant_ids.split(",")) {
+        String name = pollutantMapper.selectPollutant(Integer.parseInt(id)).getPollutant_name();
+        pollutants.append(name).append(", ");
+      }
+
+      if (!pollutants.isEmpty()) {
+        pollutants.setLength(pollutants.length() - 2);
+      }
+
+      history.setPollutant_ids(pollutants.toString());
+    }
+    return histories;
   }
 
   @Override

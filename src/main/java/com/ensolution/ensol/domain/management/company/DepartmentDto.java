@@ -1,4 +1,4 @@
-package com.ensolution.ensol.domain;
+package com.ensolution.ensol.domain.management.company;
 
 public class DepartmentDto {
   private Integer management_department_id;

@@ -1,6 +1,6 @@
 package com.ensolution.ensol.mapper;
 
-import com.ensolution.ensol.domain.CompanyDto;
+import com.ensolution.ensol.domain.management.company.CompanyDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

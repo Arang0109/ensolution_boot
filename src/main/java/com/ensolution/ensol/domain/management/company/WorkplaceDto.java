@@ -1,4 +1,4 @@
-package com.ensolution.ensol.domain;
+package com.ensolution.ensol.domain.management.company;
 
 import java.time.LocalDate;
 import java.sql.Date;

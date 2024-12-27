@@ -1,6 +1,6 @@
 package com.ensolution.ensol.controller.document;
 
-import com.ensolution.ensol.domain.PollutantDto;
+import com.ensolution.ensol.domain.management.stack.PollutantDto;
 import com.ensolution.ensol.service.document.ScoreService;
 import com.ensolution.ensol.service.pollutant.PollutantService;
 import org.springframework.beans.factory.annotation.Autowired;

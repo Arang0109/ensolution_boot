@@ -88,6 +88,34 @@ function calculateAbilityScore(selector) {
   });
 }
 
+function getNoteOfStack(note) {
+  const memo = $('#noteOfStack');
+
+  memo.empty();
+  memo.prop('readonly', true);
+  memo.val(note);
+}
+
+function getHistory(histories) {
+  const tbody = $('#table tbody');
+  tbody.empty();
+
+  histories.forEach(history => {
+    const date = new Date(history.measure_date);
+
+    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+
+    const innerHtml = `
+          <tr>
+            <td>` + localDate.toISOString().split('T')[0] + `</td>
+            <td>${history.pollutant_ids}</td>
+            <td>${history.team_name}</td>
+          </tr>
+        `;
+    tbody.append(innerHtml);
+  });
+}
+
 function uploadMeasurementExcelData(selector) {
   $(selector).on('change', function (e) {
     const file = e.target.files[0];
@@ -396,19 +424,16 @@ function createPollutantListView(options) {
     const id = '#' + cycle;
     const value = item.method;
     const tag = $(id);
-    const aValue = item.allow_value == null ? "" : item.allow_value;
+    const aValue = item.allow_value != null ? item.allow_value + ' ppm' : '';
+    const color = item.is_completed ? 'green' : 'red';
 
-    const childDiv = `
-                <div class="form-check form-check-inline m-1" style="width: 300px;" data-stack-measurement-id="` + item.stack_measurement_id + `">
-                  <input class="form-check-input" type="checkbox" value="` + item.pollutant_id + `" id="` + item.pollutant_id + `">
-                  <label class="form-check-label" for="` + item.pollutant_id + `">
-                      ` + item.pollutant_name + ` / ` + `<small>` +
-                        aValue  + `ppm</small>
-                  </label>
-                </div>
-          `;
+    const childDiv =
+               `<div class="form-check form-check-inline m-1" style="width: 300px;" data-stack-measurement-id="${item.stack_measurement_id}">
+                  <input class="form-check-input" type="checkbox" value="${item.pollutant_id}" id="${item.pollutant_id}">
+                  <label class="form-check-label" for="${item.pollutant_id}"><span style="color: ${color}">${item.pollutant_name}</span> <small style="color: saddlebrown">${aValue}</small></label>
+                </div>`;
 
-    tag.find(`div[data-method="` + value + `"]`).append(childDiv)
+    tag.find(`div[data-method="${value}"]`).append(childDiv)
   })
 }
 

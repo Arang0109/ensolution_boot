@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.management.impl;
 
-import com.ensolution.ensol.domain.CompanyDto;
+import com.ensolution.ensol.domain.management.company.CompanyDto;
 import com.ensolution.ensol.mapper.CompanyMapper;
 import com.ensolution.ensol.service.management.CompanyService;
 import org.springframework.dao.DataAccessException;

@@ -1,8 +1,8 @@
 package com.ensolution.ensol.mapper;
 
-import com.ensolution.ensol.domain.StackDto;
-import com.ensolution.ensol.domain.StackInformationDto;
-import com.ensolution.ensol.domain.management.StackTableDto;
+import com.ensolution.ensol.domain.management.stack.StackDto;
+import com.ensolution.ensol.domain.management.stack.StackInformationDto;
+import com.ensolution.ensol.domain.management.stack.StackTableDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

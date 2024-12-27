@@ -1,8 +1,8 @@
 package com.ensolution.ensol.mapper;
 
-import com.ensolution.ensol.domain.HistoryDto;
-import com.ensolution.ensol.domain.ScheduleDto;
-import com.ensolution.ensol.domain.ScheduleTableDto;
+import com.ensolution.ensol.domain.schedule.HistoryDto;
+import com.ensolution.ensol.domain.schedule.ScheduleDto;
+import com.ensolution.ensol.domain.schedule.ScheduleTableDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

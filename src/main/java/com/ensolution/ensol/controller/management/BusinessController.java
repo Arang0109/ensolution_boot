@@ -1,8 +1,8 @@
 package com.ensolution.ensol.controller.management;
 
-import com.ensolution.ensol.domain.CompanyDto;
-import com.ensolution.ensol.domain.StackDto;
-import com.ensolution.ensol.domain.WorkplaceDto;
+import com.ensolution.ensol.domain.management.company.CompanyDto;
+import com.ensolution.ensol.domain.management.stack.StackDto;
+import com.ensolution.ensol.domain.management.company.WorkplaceDto;
 import com.ensolution.ensol.service.management.CompanyService;
 import com.ensolution.ensol.service.management.StackService;
 import com.ensolution.ensol.service.management.WorkplaceService;

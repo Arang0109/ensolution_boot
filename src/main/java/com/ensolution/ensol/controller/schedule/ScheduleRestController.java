@@ -1,7 +1,10 @@
 package com.ensolution.ensol.controller.schedule;
 
-import com.ensolution.ensol.domain.*;
-import com.ensolution.ensol.domain.management.StackTableDto;
+import com.ensolution.ensol.domain.management.stack.StackDto;
+import com.ensolution.ensol.domain.management.stack.StackMeasurementDto;
+import com.ensolution.ensol.domain.management.stack.StackTableDto;
+import com.ensolution.ensol.domain.schedule.HistoryDto;
+import com.ensolution.ensol.domain.schedule.ScheduleDto;
 import com.ensolution.ensol.service.management.StackMeasurementService;
 import com.ensolution.ensol.service.management.StackService;
 import com.ensolution.ensol.service.management.WorkplaceService;
@@ -49,7 +52,7 @@ public class ScheduleRestController {
     List<HistoryDto> histories = scheduleService.findAllHistoryOfStacks(stackId);
 
     response.put("measurements", stackMeasurements);
-    response.put("histories", histories);
+    response.put("histories", scheduleService.historyFormater(histories));
     response.put("note", note);
 
     return ResponseEntity.ok(response);
@@ -62,6 +65,13 @@ public class ScheduleRestController {
     for (ScheduleDto schedule : scheduleDto) {
       scheduleService.addNewSchedule(schedule);
     }
+  }
+
+  @PatchMapping("/modify/stack/note")
+  public void modifyStackNote(@RequestBody StackDto stack) {
+    StackDto stackDto = stackService.findStackById(stack.getStack_id());
+    stackDto.setNote(stack.getNote());
+    stackService.updateStack(stackDto);
   }
 
   @DeleteMapping("/delete")

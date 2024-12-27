@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.pollutant.impl;
 
-import com.ensolution.ensol.domain.PollutantDto;
+import com.ensolution.ensol.domain.management.stack.PollutantDto;
 import com.ensolution.ensol.mapper.PollutantMapper;
 import com.ensolution.ensol.service.pollutant.PollutantService;
 import org.springframework.stereotype.Service;
