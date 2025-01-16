@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.domain.stack;
 
+
 import java.util.Objects;
 
 public class PollutantDto {

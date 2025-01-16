@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.controller;
 
+import com.ensolution.ensol.common.util.MsgGenerator;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.domain.stack.StackDto;
 import com.ensolution.ensol.management.domain.company.WorkplaceDto;
@@ -8,7 +9,6 @@ import com.ensolution.ensol.management.service.StackService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import com.ensolution.ensol.management.service.PollutantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,9 +69,9 @@ public class BusinessController {
     if (workplace == null) {
       return "redirect:/management/workplace";
     }
-    Integer company_id = workplace.getCompany_id();
+
     m.addAttribute("stacks", stackService.findStacksByWorkplaceId(workplaceId));
-    m.addAttribute("company", companyService.findCompanyById(company_id));
+    m.addAttribute("company", companyService.findCompanyById(workplace.getCompany_id()));
     m.addAttribute("workplace", workplace);
     m.addAttribute("sub_factories", workplaceService.findSubFactoriesByWorkplaceId(workplaceId));
     m.addAttribute("departments", workplaceService.findDepartmentsByWorkplaceId(workplaceId));
@@ -93,48 +93,34 @@ public class BusinessController {
 
   @PostMapping("/company/add")
   public String addCompany(CompanyDto companyDto, RedirectAttributes rattr) {
-    try {
-      companyService.addNewCompany(companyDto);
-      setFlashAttributes(rattr, "success",
-          companyDto.getCompany_name() + " added successfully", null);
-    } catch (DuplicateKeyException e) {
-      setFlashAttributes(rattr, "error", null, "already exist");
-    }
+    MsgGenerator.addOperationHandler(
+        companyDto,
+        companyService::addNewCompany,
+        rattr,
+        companyDto.getCompany_name()
+    );
     return "redirect:/management/company";
   }
 
   @PostMapping("/workplace/add")
   public String addWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
-    try {
-      workplaceService.addNewWorkplace(workplaceDto);
-      setFlashAttributes(rattr, "success",
-          workplaceDto.getWorkplace_name() + " added successfully", null);
-    } catch (DuplicateKeyException e) {
-      setFlashAttributes(rattr, "error", null, "already exist");
-    }
+    MsgGenerator.addOperationHandler(
+      workplaceDto,
+      workplaceService::addNewWorkplace,
+      rattr,
+      workplaceDto.getWorkplace_name()
+    );
     return "redirect:/management/company/" + workplaceDto.getCompany_id();
   }
 
   @PostMapping("/stack/add")
   public String addStack(StackDto stackDto, RedirectAttributes rattr) {
-    try {
-      stackService.addNewStack(stackDto);
-      setFlashAttributes(rattr, "success",
-          stackDto.getStack_name() + " added successfully", null);
-    } catch (DuplicateKeyException e) {
-      setFlashAttributes(rattr, "error", null, "already exist");
-    }
+    MsgGenerator.addOperationHandler(
+      stackDto,
+      stackService::addNewStack,
+      rattr,
+      stackDto.getStack_name()
+    );
     return "redirect:/management/workplace/" + stackDto.getWorkplace_id();
-  }
-
-  private void setFlashAttributes(RedirectAttributes rattr,
-                                  String result, String successMsg, String errorMsg) {
-    rattr.addFlashAttribute("result", result);
-    if (successMsg != null) {
-      rattr.addFlashAttribute("successMsg", successMsg);
-    }
-    if (errorMsg != null) {
-      rattr.addFlashAttribute("errorMsg", errorMsg);
-    }
   }
 }

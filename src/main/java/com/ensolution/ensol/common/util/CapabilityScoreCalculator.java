@@ -8,29 +8,27 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class CapabilityScoreCalculator {
-  private List<PollutantDto> pollutants;
+  private final List<PollutantDto> POLLUTANTS;
 
   private int gasCnt = 0;
-  private boolean existDust;
-  private boolean existMetal;
-  private boolean existAs;
-  private boolean existHg;
-  private boolean existEtc;
-  private boolean existG3;
+  private final boolean existDust;
+  private final boolean existMetal;
+  private final boolean existAs;
+  private final boolean existHg;
+  private final boolean existEtc;
+  private final boolean existG3;
   private double result;
 
-  public CapabilityScoreCalculator() {}
-
   public CapabilityScoreCalculator(List<PollutantDto> pollutants) {
-    this.pollutants = pollutants;
+    this.POLLUTANTS = pollutants;
 
-    this.existDust = existPollutant(pollutants, "먼지");
-    this.existMetal = existPollutant(pollutants, "중금속");
-    this.existAs = existPollutant(pollutants, "비소");
-    this.existHg = existPollutant(pollutants, "수은");
-    this.existEtc = existPollutant(pollutants, "기타");
-    this.existG3 = existPollutant(pollutants);
-    this.gasCnt = gasPollutantCnt(pollutants);
+    this.existDust = existPollutant("먼지");
+    this.existMetal = existPollutant("중금속");
+    this.existAs = existPollutant("비소");
+    this.existHg = existPollutant("수은");
+    this.existEtc = existPollutant("기타");
+    this.existG3 = existPollutant();
+    this.gasCnt = gasPollutantCnt();
   }
 
   public Map<String, String> getScore() {
@@ -89,20 +87,20 @@ public class CapabilityScoreCalculator {
     return !this.existDust && gasCnt == 0 && !this.existMetal && !this.existAs && !this.existHg && this.existG3;
   }
 
-  private boolean existPollutant(List<PollutantDto> pollutants, String method) {
-    return pollutants.stream()
+  private boolean existPollutant(String method) {
+    return POLLUTANTS.stream()
         .anyMatch(p -> p.getMethod().equals(method));
   }
 
-  private boolean existPollutant(List<PollutantDto> pollutants) {
-    return pollutants.stream()
+  private boolean existPollutant() {
+    return POLLUTANTS.stream()
         .anyMatch(p -> PollutantScoreConstants.G3_LIST.contains(p.getMethod()));
   }
 
-  private Integer gasPollutantCnt(List<PollutantDto> pollutants) {
-    return (int) IntStream.range(0, pollutants.size())
+  private Integer gasPollutantCnt() {
+    return (int) IntStream.range(0, POLLUTANTS.size())
         .filter(i -> {
-          String method = pollutants.get(i).getMethod();
+          String method = POLLUTANTS.get(i).getMethod();
           return method.equals("흡수액");
         })
         .count();
@@ -113,7 +111,7 @@ public class CapabilityScoreCalculator {
   }
 
   public List<PollutantDto> getPollutants() {
-    return pollutants;
+    return POLLUTANTS;
   }
 
   public int getGasCnt() {
@@ -159,7 +157,7 @@ public class CapabilityScoreCalculator {
         ", existEtc=" + existEtc +
         ", existG3=" + existG3 +
         ", result=" + result +
-        ", pollutants=" + pollutants +
+        ", pollutants=" + POLLUTANTS +
         '}';
   }
 }

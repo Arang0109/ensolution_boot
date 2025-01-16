@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class ScoreServiceImpl implements ScoreService {
   @Override
-  public Map<String, String> abilityScoreCal(List<PollutantDto> pollutants) {
+  public Map<String, String> CapabilityScorer(List<PollutantDto> pollutants) {
    CapabilityScoreCalculator calculator = new CapabilityScoreCalculator(pollutants);
    return calculator.getScore();
   }
