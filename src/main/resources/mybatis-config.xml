@@ -4,21 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.domain.management.company.CompanyDto"/>
-    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.domain.management.company.WorkplaceDto"/>
-    <typeAlias alias="StackDto" type="com.ensolution.ensol.domain.management.stack.StackDto"/>
-    <typeAlias alias="StackTableDto" type="com.ensolution.ensol.domain.management.stack.StackTableDto"/>
-    <typeAlias alias="StackImagesDto" type="com.ensolution.ensol.domain.management.stack.StackImagesDto"/>
-    <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.domain.management.stack.StackInformationDto"/>
-    <typeAlias alias="StackMeasurementDto" type="com.ensolution.ensol.domain.management.stack.StackMeasurementDto"/>
-    <typeAlias alias="StackCountDto" type="com.ensolution.ensol.domain.statistics.StackCountDto"/>
-    <typeAlias alias="FactoryDto" type="com.ensolution.ensol.domain.management.company.FactoryDto"/>
-    <typeAlias alias="SubFactoryDto" type="com.ensolution.ensol.domain.management.company.SubFactoryDto"/>
-    <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.domain.management.company.DepartmentDto"/>
-    <typeAlias alias="PollutantDto" type="com.ensolution.ensol.domain.management.stack.PollutantDto"/>
-    <typeAlias alias="ScheduleDto" type="com.ensolution.ensol.domain.schedule.ScheduleDto"/>
-    <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.domain.schedule.ScheduleTableDto"/>
-    <typeAlias alias="TeamDto" type="com.ensolution.ensol.domain.management.TeamDto"/>
-    <typeAlias alias="HistoryDto" type="com.ensolution.ensol.domain.schedule.HistoryDto"/>
+    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.management.domain.company.CompanyDto"/>
+    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.management.domain.company.WorkplaceDto"/>
+    <typeAlias alias="StackDto" type="com.ensolution.ensol.management.domain.stack.StackDto"/>
+    <typeAlias alias="StackTableDto" type="com.ensolution.ensol.management.domain.stack.StackTableDto"/>
+    <typeAlias alias="StackImagesDto" type="com.ensolution.ensol.management.domain.stack.StackImagesDto"/>
+    <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.management.domain.stack.StackInformationDto"/>
+    <typeAlias alias="StackMeasurementDto" type="com.ensolution.ensol.management.domain.stack.StackMeasurementDto"/>
+    <typeAlias alias="StackCountDto" type="com.ensolution.ensol.statistic.domain.StackCountDto"/>
+    <typeAlias alias="FactoryDto" type="com.ensolution.ensol.management.domain.company.FactoryDto"/>
+    <typeAlias alias="SubFactoryDto" type="com.ensolution.ensol.management.domain.company.SubFactoryDto"/>
+    <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.management.domain.company.DepartmentDto"/>
+    <typeAlias alias="PollutantDto" type="com.ensolution.ensol.management.domain.stack.PollutantDto"/>
+    <typeAlias alias="ScheduleDto" type="com.ensolution.ensol.schedule.domain.ScheduleDto"/>
+    <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.schedule.domain.ScheduleTableDto"/>
+    <typeAlias alias="TeamDto" type="com.ensolution.ensol.management.domain.TeamDto"/>
+    <typeAlias alias="HistoryDto" type="com.ensolution.ensol.schedule.domain.HistoryDto"/>
   </typeAliases>
 </configuration>

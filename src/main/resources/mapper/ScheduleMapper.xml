@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.mapper.ScheduleMapper">
+<mapper namespace="com.ensolution.ensol.schedule.mapper.ScheduleMapper">
   <select id="selectSchedule" parameterType="int" resultType="ScheduleDto">
     SELECT schedule_id, team_id, stack_measurement_id, measure_date, is_completed
     FROM schedule

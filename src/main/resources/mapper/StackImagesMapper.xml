@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.mapper.StackImagesMapper">
+<mapper namespace="com.ensolution.ensol.management.mapper.StackImagesMapper">
     <insert id="insert" parameterType="StackImagesDto">
         INSERT INTO stack_images (stack_id, image_path, image_name)
         VALUES (#{stack_id}, #{image_path}, #{image_name})
