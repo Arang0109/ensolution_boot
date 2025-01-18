@@ -20,5 +20,6 @@
     <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.schedule.domain.ScheduleTableDto"/>
     <typeAlias alias="TeamDto" type="com.ensolution.ensol.management.domain.TeamDto"/>
     <typeAlias alias="HistoryDto" type="com.ensolution.ensol.schedule.domain.HistoryDto"/>
+    <typeAlias alias="StatisticsDto" type="com.ensolution.ensol.statistic.domain.StatisticsDto"/>
   </typeAliases>
 </configuration>

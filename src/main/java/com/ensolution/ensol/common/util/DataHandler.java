@@ -5,7 +5,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.function.Consumer;
 
-public class MsgGenerator {
+public class DataHandler {
   public static <T> void addOperationHandler(
       T dto,
       Consumer<T> service,

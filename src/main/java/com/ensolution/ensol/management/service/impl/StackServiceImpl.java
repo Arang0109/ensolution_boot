@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.domain.stack.StackDto;
 import com.ensolution.ensol.management.domain.stack.StackImagesDto;
 import com.ensolution.ensol.management.domain.stack.StackInformationDto;
@@ -97,7 +98,7 @@ public class StackServiceImpl implements StackService {
     try {
       return stackMapper.insert(stackDto);
     } catch (DuplicateKeyException e) {
-      throw new DuplicateKeyException("Failed to add stack. Duplicate key for Name: " + stackDto.getStack_name(), e);
+      throw new CustomDKException("stack", "Name", stackDto.getStack_name(), e);
     }
   }
 

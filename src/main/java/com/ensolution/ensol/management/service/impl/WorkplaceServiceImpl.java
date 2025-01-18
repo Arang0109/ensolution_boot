@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.domain.company.DepartmentDto;
 import com.ensolution.ensol.management.domain.company.SubFactoryDto;
 import com.ensolution.ensol.management.domain.company.WorkplaceDto;
@@ -50,7 +51,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
     try {
       return workplaceMapper.insert(workplaceDto);
     } catch (DuplicateKeyException e) {
-      throw new DuplicateKeyException("Failed to add workplace. Duplicate key for Name: " + workplaceDto.getWorkplace_name(), e);
+      throw new CustomDKException("workplace", "Name", workplaceDto.getWorkplace_name(), e);
     }
   }
 

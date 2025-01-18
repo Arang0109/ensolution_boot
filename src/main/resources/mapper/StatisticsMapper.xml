@@ -5,8 +5,29 @@
 <mapper namespace="com.ensolution.ensol.statistic.mapper.StatisticsMapper">
   <sql id="stackCnt">
     SELECT sm.cycle_type, COUNT(DISTINCT(s.stack_name)) AS cnt FROM stack_measurement sm
-        INNER JOIN stack s ON sm.stack_id = s.stack_id
+        LEFT JOIN stack s ON sm.stack_id = s.stack_id
   </sql>
+
+  <sql id="select">
+    SELECT GROUP_CONCAT(stack_measurement_id) AS stack_measurement_ids,
+           s.stack_id, GROUP_CONCAT(pollutant_id) AS pollutant_ids,
+           s.workplace_id, stack_name, cycle_type,
+           MIN(sm.is_completed) AS is_completed
+    FROM stack_measurement sm
+        LEFT JOIN stack s ON sm.stack_id = s.stack_id
+  </sql>
+
+  <select id="selectAll" parameterType="statisticsDto" resultType="statisticsDto">
+    <include refid="select"/>
+    WHERE cycle_type = #{cycle_type}
+    GROUP BY s.stack_id, cycle_type
+  </select>
+
+  <select id="selectByWorkplace" parameterType="statisticsDto" resultType="statisticsDto">
+    <include refid="select"/>
+    WHERE workplace_id = #{workplace_id} AND cycle_type = #{cycle_type}
+    GROUP BY s.stack_id, cycle_type
+  </select>
 
   <select id="stackCntAll" resultType="StackCountDto">
     <include refid="stackCnt"/>

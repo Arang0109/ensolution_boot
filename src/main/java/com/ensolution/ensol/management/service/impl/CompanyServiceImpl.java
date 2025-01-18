@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.mapper.CompanyMapper;
 import com.ensolution.ensol.management.service.CompanyService;
@@ -33,7 +34,7 @@ public class CompanyServiceImpl implements CompanyService {
     try {
       return companyMapper.insert(companyDto);
     } catch (DuplicateKeyException e) {
-      throw new DuplicateKeyException("Failed to add company. Duplicate key for Name: " + companyDto.getCompany_name(), e);
+      throw new CustomDKException("company", "Name", companyDto.getCompany_name(), e);
     }
   }
 

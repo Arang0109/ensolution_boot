@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.domain.stack.StackMeasurementDto;
 import com.ensolution.ensol.management.mapper.StackMeasurementMapper;
 import com.ensolution.ensol.management.service.StackMeasurementService;
@@ -33,7 +34,7 @@ public class StackMeasurementServiceImpl implements StackMeasurementService {
     try {
       return stackMeasurementMapper.insert(stackMeasurementDto);
     } catch (DuplicateKeyException e) {
-      throw new DuplicateKeyException("Failed to add stackMeasurement. Duplicate key for Id: " + stackMeasurementDto.getStack_measurement_id(), e);
+      throw new CustomDKException("StackMeasurement", "ID", stackMeasurementDto.getStack_id().toString(), e);
     }
   }
 

@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.controller;
 
-import com.ensolution.ensol.common.util.MsgGenerator;
+import com.ensolution.ensol.common.util.DataHandler;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.domain.stack.StackDto;
 import com.ensolution.ensol.management.domain.company.WorkplaceDto;
@@ -93,7 +93,7 @@ public class BusinessController {
 
   @PostMapping("/company/add")
   public String addCompany(CompanyDto companyDto, RedirectAttributes rattr) {
-    MsgGenerator.addOperationHandler(
+    DataHandler.addOperationHandler(
         companyDto,
         companyService::addNewCompany,
         rattr,
@@ -104,7 +104,7 @@ public class BusinessController {
 
   @PostMapping("/workplace/add")
   public String addWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
-    MsgGenerator.addOperationHandler(
+    DataHandler.addOperationHandler(
       workplaceDto,
       workplaceService::addNewWorkplace,
       rattr,
@@ -115,7 +115,7 @@ public class BusinessController {
 
   @PostMapping("/stack/add")
   public String addStack(StackDto stackDto, RedirectAttributes rattr) {
-    MsgGenerator.addOperationHandler(
+    DataHandler.addOperationHandler(
       stackDto,
       stackService::addNewStack,
       rattr,

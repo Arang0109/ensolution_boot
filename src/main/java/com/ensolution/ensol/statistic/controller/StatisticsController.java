@@ -23,8 +23,8 @@ public class StatisticsController {
   @GetMapping
   public String statisticsMainView(Model m) {
     m.addAttribute("workplaces", workplaceService.findAllWorkplaces());
-    m.addAttribute("completeCnt", statisticsService.getCompleteStackCnt());
-    m.addAttribute("nonCompleteCnt", statisticsService.getNonCompleteStackCnt());
+    m.addAttribute("completeCnt", );
+    m.addAttribute("nonCompleteCnt", );
     return "statistics/statisticsMainView";
   }
 }
