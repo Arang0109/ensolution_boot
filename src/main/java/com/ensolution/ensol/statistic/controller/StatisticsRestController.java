@@ -25,15 +25,18 @@ public class StatisticsRestController {
 
   @GetMapping("/chart/workplace")
   public ChartDataResponse getChartStats(@RequestParam List<Integer> workplaceIds) {
-
-    return response;
+    System.out.println("get 매핑 시작");
+    return new ChartDataResponse(
+        statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCompleteCnt"),
+        statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCnt"));
   }
 
   @GetMapping("/chart/all")
   public ChartDataResponse getChartStatsAll() {
-//    ChartDataResponse response = new ChartDataResponse();
-//    response.setCompleteStats(statisticsService.getCompleteStackCnt());
-//    response.setNonCompleteStats(statisticsService.getNonCompleteStackCnt());
-    return response;
+    System.out.println("get 매핑 시작");
+    return new ChartDataResponse(
+        statisticsService.getChartStackCount().get("allCompleteCnt"),
+        statisticsService.getChartStackCount().get("allCnt")
+    );
   }
 }

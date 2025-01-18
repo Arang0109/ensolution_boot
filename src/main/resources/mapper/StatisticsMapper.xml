@@ -3,11 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ensolution.ensol.statistic.mapper.StatisticsMapper">
-  <sql id="stackCnt">
-    SELECT sm.cycle_type, COUNT(DISTINCT(s.stack_name)) AS cnt FROM stack_measurement sm
-        LEFT JOIN stack s ON sm.stack_id = s.stack_id
-  </sql>
-
   <sql id="select">
     SELECT GROUP_CONCAT(stack_measurement_id) AS stack_measurement_ids,
            s.stack_id, GROUP_CONCAT(pollutant_id) AS pollutant_ids,
@@ -17,45 +12,17 @@
         LEFT JOIN stack s ON sm.stack_id = s.stack_id
   </sql>
 
-  <select id="selectAll" parameterType="statisticsDto" resultType="statisticsDto">
+  <select id="selectAll" resultType="statisticsDto">
     <include refid="select"/>
-    WHERE cycle_type = #{cycle_type}
     GROUP BY s.stack_id, cycle_type
   </select>
 
-  <select id="selectByWorkplace" parameterType="statisticsDto" resultType="statisticsDto">
+  <select id="selectByWorkplace" parameterType="List" resultType="statisticsDto">
     <include refid="select"/>
-    WHERE workplace_id = #{workplace_id} AND cycle_type = #{cycle_type}
-    GROUP BY s.stack_id, cycle_type
-  </select>
-
-  <select id="stackCntAll" resultType="StackCountDto">
-    <include refid="stackCnt"/>
-    GROUP BY sm.cycle_type;
-  </select>
-
-  <select id="stackCntNonComplete" resultType="StackCountDto">
-    <include refid="stackCnt"/>
-    WHERE sm.is_completed = 0
-    GROUP BY sm.cycle_type;
-  </select>
-
-  <select id="stackCntAllOfWp" parameterType="list" resultType="StackCountDto">
-    <include refid="stackCnt"/>
     WHERE s.workplace_id IN
     <foreach item="workplace_id" collection="list" open="(" separator="," close=")">
       #{workplace_id}
     </foreach>
-    GROUP BY sm.cycle_type;
-  </select>
-
-  <select id="stackCntNonCompleteOfWp" parameterType="list" resultType="StackCountDto">
-    <include refid="stackCnt"/>
-    WHERE s.workplace_id IN
-    <foreach item="workplace_id" collection="list" open="(" separator="," close=")">
-      #{workplace_id}
-    </foreach>
-    AND sm.is_completed = 0
-    GROUP BY sm.cycle_type;
+    GROUP BY s.stack_id, cycle_type
   </select>
 </mapper>

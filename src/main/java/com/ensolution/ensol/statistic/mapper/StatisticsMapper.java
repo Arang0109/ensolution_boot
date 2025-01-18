@@ -8,11 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface StatisticsMapper {
-  List<StackCountDto> stackCntAll();
-  List<StackCountDto> stackCntNonComplete();
-  List<StackCountDto> stackCntAllOfWp(List<Integer> workplace_ids);
-  List<StackCountDto> stackCntNonCompleteOfWp(List<Integer> workplace_ids);
-
-  List<StatisticsDto> selectAll(StatisticsDto statisticsDto);
-  List<StatisticsDto> selectByWorkplace(StatisticsDto statisticsDto);
+  List<StatisticsDto> selectAll();
+  List<StatisticsDto> selectByWorkplace(List<Integer> workplace_ids);
 }
