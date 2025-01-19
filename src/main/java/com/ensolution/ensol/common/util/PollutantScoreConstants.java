@@ -15,6 +15,7 @@ public class PollutantScoreConstants {
   public static final double G3_SCORE = 0.3;
 
   public static final double PARTICLE_DELTA = 0.4;
+  public static final double AS_METAL_DELTA = 0.6; // 중금속, 비소가 동시에 존재하는 경우
   public static final double HG_DELTA = 0.2;
   public static final double G1_DELTA = 0.5;
   public static final double G2_DELTA = 0.2;

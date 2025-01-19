@@ -61,6 +61,10 @@ public class CapabilityScoreCalculator {
       if ((existDust && existMetal) || (existDust || existMetal)) {
         this.result -= PollutantScoreConstants.PARTICLE_DELTA;
       }
+
+      if (existMetal) {
+        this.result -= PollutantScoreConstants.AS_METAL_DELTA;
+      }
     }
     if (existHg) { // Check existed Hg
       this.result += PollutantScoreConstants.HG_SCORE;

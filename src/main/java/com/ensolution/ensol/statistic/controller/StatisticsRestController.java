@@ -25,7 +25,6 @@ public class StatisticsRestController {
 
   @GetMapping("/chart/workplace")
   public ChartDataResponse getChartStats(@RequestParam List<Integer> workplaceIds) {
-    System.out.println("get 매핑 시작");
     return new ChartDataResponse(
         statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCompleteCnt"),
         statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCnt"));
@@ -33,7 +32,6 @@ public class StatisticsRestController {
 
   @GetMapping("/chart/all")
   public ChartDataResponse getChartStatsAll() {
-    System.out.println("get 매핑 시작");
     return new ChartDataResponse(
         statisticsService.getChartStackCount().get("allCompleteCnt"),
         statisticsService.getChartStackCount().get("allCnt")
