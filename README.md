@@ -1,47 +1,58 @@
 # ENSolution
 환경 측정 대행 업체를 위한 대기, 수질, 악취 등 환경 측정 업무의 자동화 및 문서 관리 솔루션
-
-## 기능
-- 업체 및 시설 등록, 관리
-- 일정 관리 (업데이트 예정)
-- 측정 오염 물질 주기 관리
-- 용역 이행 능력 평가 점수 계산
-- 측정 업체 전반의 통계 분석 및 보고서 관리 시스템 (업데이트 예정)
-- 사내 문서 관리 시스템 (추가 예정)
-- 품질 문서 관리 시스템 (추가 예정)
-
-## 설치 방법
-ensolution_boot 프로젝트를 로컬 환경에 설정하고 실행하려면 아래 단계를 따르세요.
+## 주요 기능 *(개발 예정 기능 포함)*
+1. 업체 데이터 관리
+   1. 측정대행 의뢰업체 관리 (Company)
+   2. 측정대상 사업장 관리 (Workplace)
+   3. 측정시설 관리 (Stack)
+   ![link](project-image/img1.PNG)
+   ![link](project-image/img2.PNG)
+   4. 측정항목 관리 (Stack_Measurement)
+      1. 엑셀 데이터 업로드 기능
+      ![link](project-image/img3.PNG)
+   5. 측정 오염물질 주기 관리 (Pollutant)
+2. 측정 일정 관리
+   1. 일정 등록 기능
+   2. 측정시설 및 측정항목의 주기별 완료 현황 확인
+   3. 주기별 일정 초기화
+3. 측정 데이터 통계 및 시각화
+   1. 사업장 별 측정 완료 지점 수 시각화 차트
+   ![link](project-image/img4.PNG)
+   2. 매출 보고서 (**개발 예정**)
+4. 용역이행능력평가 점수 계산
+5. 문서 관리 (**개발 예정**)
+   1. 품질 문서 관리
+      1. 내부 장비 교정서
+      2. 성적서
+      3. 그 외 모든 문서
+   2. 사내 문서 관리
+      1. 차량운행일지
+      2. 인수인계서
+      3. 장비관리대장
+      4. 여지관리대장
+      5. 차량관리대장
+      6. 그 외 모든 문서
+### 기술 스택
+- **프론트엔드:** HTML, CSS, JavaScript
+- **백엔드:** Java, Spring Boot
+- **데이터베이스:** MySQL
+### 데이터베이스
+| Table                 | Field                                                 | Foreign Key                              |
+|-----------------------|-------------------------------------------------------|------------------------------------------|
+| company               | id, name, address, ceo, biz_number, reg_date          |                                          |
+| workplace             | id, name, address, reg_date                           | company_id                               |
+| factory               | id, name                                              | workplace_id                             |
+| sub_factory           | id, name                                              | factory_id                               |
+| stack                 | id, name, prevention, note, reg_date                  | sub_factory_id, management_department_id |
+| stack_info            | id, 필요 재원들                                            | stack_id                                 |
+| stack_images          | id, name, image_data                                  | stack_id                                 |
+| pollutant             | id, name, name_en, method                             |                                          |
+| stack_measurement     | id, cycle_type, is_completed, is_measure, allow_value | stack_id, pollutant_id                   |
+| schedule              | id, measure_date, is_completed                        | team_id, stack_measurement_id            |
+| team                  | id, name                                              |                                          |
+| management_department | id, name, tel                                         | workplace_id                             |
 ### 준비 사항
-1. Java Development Kit (JDK) 21 사용
+1. Java Development Kit (JDK) 21
 2. MySQL Database
 - 기본 데이터베이스 이름 : ensolution
-- git 프로젝트에 ensolution.sql 다운로드
-
-- src/main/resources/application.properties 파일을 열어
-아래와 같이 MySQL 데이터 정보를 입력하세요.
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/ensolution
-spring.datasource.username=USER_NAME
-spring.datasource.password=USER_PASSWORD
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```
-3. Maven
-```
-<dependency>
-  <groupId>org.mybatis.spring.boot</groupId>
-  <artifactId>mybatis-spring-boot-starter</artifactId>
-  <version>3.0.3</version>
-</dependency>
-```
-- src/main/resources/application.properties 파일을 열어 아래와 같이 입력하세요.
-```
-mybatis.mapper-locations=classpath:mapper/*.xml
-mybatis.config-location=classpath:mybatis-config.xml
-```
-4. 실행
-- 레포지토리 클론
-```
->> git clone https://github.com/Arang0109/ensolution_boot.git
->> cd ensolution_boot
-```
+- git 프로젝트 > ensolution.sql 다운로드
