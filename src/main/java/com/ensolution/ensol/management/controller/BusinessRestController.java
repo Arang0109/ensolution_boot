@@ -1,11 +1,9 @@
 package com.ensolution.ensol.management.controller;
 
+import com.ensolution.ensol.common.util.ExcelDataUpload;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.domain.company.WorkplaceDto;
-import com.ensolution.ensol.management.domain.stack.StackDto;
-import com.ensolution.ensol.management.domain.stack.StackImagesDto;
-import com.ensolution.ensol.management.domain.stack.StackInformationDto;
-import com.ensolution.ensol.management.domain.stack.StackMeasurementDto;
+import com.ensolution.ensol.management.domain.stack.*;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackMeasurementService;
 import com.ensolution.ensol.management.service.StackService;
@@ -27,14 +25,17 @@ public class BusinessRestController {
   WorkplaceService workplaceService;
   StackService stackService;
   StackMeasurementService stackMeasurementService;
+  ExcelDataUpload excelDataUpload;
 
   @Autowired
   public BusinessRestController(CompanyService companyService, WorkplaceService workplaceService,
-                                StackService stackService, StackMeasurementService stackMeasurementService) {
+                                StackService stackService, StackMeasurementService stackMeasurementService,
+                                ExcelDataUpload excelDataUpload) {
     this.companyService = companyService;
     this.workplaceService = workplaceService;
     this.stackService = stackService;
     this.stackMeasurementService = stackMeasurementService;
+    this.excelDataUpload = excelDataUpload;
   }
 
   @GetMapping("/stack/getStackMeasurement")
@@ -88,6 +89,11 @@ public class BusinessRestController {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
       stackMeasurementService.addNewStackMeasurement(stackMeasurementDto);
     }
+  }
+
+  @PostMapping("/stack-measurement/add/excel_data")
+  public void addExcelDataMeasurement(@RequestBody List<ExcelStackMeasurementDto> exDataDto) {
+    excelDataUpload.addStackMeasurement(exDataDto);
   }
 
   @PostMapping("/upload")

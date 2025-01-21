@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.mapper;
 
+import com.ensolution.ensol.management.domain.stack.ExcelStackMeasurementDto;
 import com.ensolution.ensol.management.domain.stack.StackDto;
 import com.ensolution.ensol.management.domain.stack.StackInformationDto;
 import com.ensolution.ensol.management.domain.stack.StackTableDto;
@@ -17,4 +18,6 @@ public interface StackMapper {
   Integer update(StackDto stack);
   Integer updateStackInfo(StackInformationDto stackInformation);
   Integer deleteItems(List<Integer> ids);
+
+  Integer selectStackIdByName(ExcelStackMeasurementDto excelData);
 }

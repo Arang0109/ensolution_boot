@@ -17,4 +17,10 @@
     <include refid="select"/>
     ORDER BY method
   </select>
+
+  <select id="selectPollutantIdByName" parameterType="String" resultType="Integer">
+    SELECT pollutant_id
+    FROM pollutant
+    WHERE pollutant_name = #{pollutant_name}
+  </select>
 </mapper>

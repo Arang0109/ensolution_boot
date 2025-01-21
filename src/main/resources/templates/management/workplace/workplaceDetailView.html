@@ -9,6 +9,7 @@
 <body>
 <main layout:fragment="content">
   <div th:replace="~{fragments/modals/stackModal::addStackModal}"></div>
+  <div th:replace="~{fragments/modals/excelUploadModal::excelUploadModal}"></div>
   <div th:replace="~{fragments/toasts::toasts}"></div>
   <div class="container">
     <div class="profile-header">
@@ -92,6 +93,7 @@
     }
     setupValidation('#stack_form');
     mapView('#naverMapLink', $('#workplaceInfo input[name=address]').val());
+
     uploadMeasurementExcelData('#stack-measurement-file');
     $('#removeBtn').on('click', function() {
       const options = {
@@ -110,6 +112,46 @@
         url: /*[[@{/management/workplace/modify}]]*/ '',
       }
       businessModifyHandler(options);
+    });
+    $("#excelUploadBtn").on("click", function () {
+      const convertCycleNameForDatabase = {
+        "미측정": "nomeasure",
+        "1회/월": "monthly",
+        "1회/분기": "quarterly",
+        "1회/반기": "semiannual",
+        "1회/년": "annual",
+        "2회/2월": "twiceamonth",
+        "1회/2월": "onceinfebruary",
+        "추가 측정": "additional",
+      }
+
+      const stack_measurements = [];
+      const workplace_id = /*[[${workplace.workplace_id}]]*/ '';
+
+      $('#tbody tr').each(function() {
+        const stack_measurement = {};
+        stack_measurement.workplace_id = workplace_id;
+        stack_measurement.stack_name = $(this).find('td[data-role="stack_name"]').text();
+        stack_measurement.pollutant_name = $(this).find('td[data-role="pollutant_name"]').text();
+        stack_measurement.allow_value = $(this).find('td[data-role="allow_value"]').text();
+        stack_measurement.cycle_type = convertCycleNameForDatabase[$(this).find('td[data-role="cycle_type"]').text()];
+
+        stack_measurements.push(stack_measurement);
+      })
+
+      $.ajax({
+        url: /*[[@{/management/stack-measurement/add/excel_data}]]*/ '',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(stack_measurements),
+        success: function() {
+          alert('완료');
+          location.reload();
+        },
+        error: function() {
+          alert('실패 하였습니다.');
+        }
+      });
     });
   });
 </script>

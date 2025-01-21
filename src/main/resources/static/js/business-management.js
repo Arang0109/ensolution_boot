@@ -117,58 +117,96 @@ function getHistory(histories) {
 }
 
 function uploadMeasurementExcelData(selector) {
+  const isValidAValue = (value) => {
+    return value === "" || !isNaN(value);
+  };
+
+  const validCycles = ["1회/월", "2회/월", "1회/분기", "1회/반기", "1회/년", "미측정"];
+
+  const isValidCycle = (value) => {
+    return validCycles.includes(value);
+  };
+
   $(selector).on('change', function (e) {
     const file = e.target.files[0];
 
     if (!file) {
-      console.error("파일이 선택 되지 않았습니다.");
+      console.error("파일을 선택해주세요.");
       return;
     }
 
     const reader = new FileReader();
 
+    reader.readAsArrayBuffer(file);
+
     reader.onload = function (e) {
       const data = new Uint8Array(e.target.result);
-
       const workbook = XLSX.read(data, {type: "array"});
 
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      let stackData = XLSX.utils.sheet_to_json(sheet);
 
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+      const tbody = $('#tbody');
 
-      const processedData = jsonData.map(row => {
-        const processedRow = {};
-        for (let key in row) {
-          processedRow[key] = row[key] === undefined || row[key] === null ? "" : row[key];
-        }
-        return processedRow;
-      });
+      const renderTable = () => {
+        tbody.empty();
+        const duplicateMap = new Map();
 
-      processedData.forEach(item => {
-        const stack = item["stack"] || "";
-        const pollutant = item["pollutant"] || "";
-        const aValue = item["aValue"] || "";
-        const cycle = item["cycle"] || "";
+        stackData.forEach((row, index) => {
+          const tr = $('<tr class="table-primary"></tr>');
 
-        const text = `
-            <tr>
-              <td class="stack_name">` + stack +  `</td>
-              <td class="pollutant_name">` + pollutant + `</td>
-              <td class="allow_value">` + aValue +  `</td>
-              <td class="cycle_type">` + cycle +  `</td>
-            </tr>
-          `;
+          const stack = row.stack ?? "";
+          const pollutant = row.pollutant ?? "";
+          const aValue = row.aValue ?? "";
+          const cycle = row.cycle ?? "";
 
-        $('#tbody').append(text);
-      });
+          const key = `${stack}--${pollutant}`;
+
+          if (duplicateMap.has(key)) {
+            duplicateMap.get(key).push(index);
+          } else {
+            duplicateMap.set(key, [index]);
+          }
+
+          let aValueClass = "";
+          if (!isValidAValue(aValue)) {
+            aValueClass = "table-danger";
+          }
+
+          let cycleClass = "";
+          if (!isValidCycle(cycle)) {
+            cycleClass = "table-danger";
+          }
+
+          tr.append(`<td data-role="stack_name">${stack}</td>`);
+          tr.append(`<td data-role="pollutant_name">${pollutant}</td>`);
+          tr.append(`<td class="${aValueClass}" data-role="allow_value">${aValue}</td>`);
+          tr.append(`<td class="${cycleClass}" data-role="cycle_type">${cycle}</td>`);
+          tr.append(`<td>
+                        <button class="btn btn-danger btn-sm delete-btn" data-role="delete" data-index="${index}">삭제</button>
+                      </td>`);
+
+          tbody.append(tr);
+        });
+
+        duplicateMap.forEach((indices) => {
+          if (indices.length > 1) {
+            indices.forEach((i) => {
+              tbody.find("tr").eq(i).removeClass("table-primary");
+              tbody.find("tr").eq(i).addClass("table-danger");
+            });
+          }
+        });
+
+        $('[data-role="delete"]').on('click', function () {
+          const index = $(this).data('index');
+          stackData.splice(index, 1);
+          renderTable();
+        });
+      }
+
+      renderTable();
     };
-
-    reader.onerror = function (e) {
-      console.error("FileReader 에러 발생:", e);
-    };
-
-    reader.readAsArrayBuffer(file);
   });
 }
 

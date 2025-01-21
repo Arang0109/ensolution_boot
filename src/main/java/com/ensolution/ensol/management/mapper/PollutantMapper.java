@@ -9,4 +9,6 @@ import java.util.List;
 public interface PollutantMapper {
   PollutantDto selectPollutant(Integer stack_id);
   List<PollutantDto> selectAll();
+
+  Integer selectPollutantIdByName(String pollutant_name);
 }

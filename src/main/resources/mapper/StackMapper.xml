@@ -25,6 +25,12 @@
            LEFT JOIN management_department `md` ON md.management_department_id = s.management_department_id
   </sql>
 
+  <select id="selectStackIdByName" parameterType="ExcelStackMeasurementDto" resultType="Integer">
+    SELECT stack_id
+    FROM stack
+    WHERE workplace_id = #{workplace_id} AND stack_name = #{stack_name}
+  </select>
+
   <select id="selectStack" resultMap="StackResultMap">
     <include refid="select"/>
     WHERE stack_id = #{stack_id}
