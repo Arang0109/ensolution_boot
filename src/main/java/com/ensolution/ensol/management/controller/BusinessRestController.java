@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.controller;
 
-import com.ensolution.ensol.common.util.ExcelDataUpload;
+import com.ensolution.ensol.common.service.ExcelDataUploadService;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.domain.company.WorkplaceDto;
 import com.ensolution.ensol.management.domain.stack.*;
@@ -25,17 +25,17 @@ public class BusinessRestController {
   WorkplaceService workplaceService;
   StackService stackService;
   StackMeasurementService stackMeasurementService;
-  ExcelDataUpload excelDataUpload;
+  ExcelDataUploadService excelDataUploadService;
 
   @Autowired
   public BusinessRestController(CompanyService companyService, WorkplaceService workplaceService,
                                 StackService stackService, StackMeasurementService stackMeasurementService,
-                                ExcelDataUpload excelDataUpload) {
+                                ExcelDataUploadService excelDataUploadService) {
     this.companyService = companyService;
     this.workplaceService = workplaceService;
     this.stackService = stackService;
     this.stackMeasurementService = stackMeasurementService;
-    this.excelDataUpload = excelDataUpload;
+    this.excelDataUploadService = excelDataUploadService;
   }
 
   @GetMapping("/stack/getStackMeasurement")
@@ -93,7 +93,7 @@ public class BusinessRestController {
 
   @PostMapping("/stack-measurement/add/excel_data")
   public void addExcelDataMeasurement(@RequestBody List<ExcelStackMeasurementDto> exDataDto) {
-    excelDataUpload.addStackMeasurement(exDataDto);
+    excelDataUploadService.addStackMeasurement(exDataDto);
   }
 
   @PostMapping("/upload")

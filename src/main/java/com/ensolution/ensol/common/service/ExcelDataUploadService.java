@@ -1,4 +1,4 @@
-package com.ensolution.ensol.common.util;
+package com.ensolution.ensol.common.service;
 
 import com.ensolution.ensol.management.domain.stack.ExcelStackMeasurementDto;
 import com.ensolution.ensol.management.mapper.PollutantMapper;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ExcelDataUpload {
+public class ExcelDataUploadService {
   StackMapper stackMapper;
   PollutantMapper pollutantMapper;
 
   @Autowired
-  public ExcelDataUpload(StackMapper stackMapper, PollutantMapper pollutantMapper) {
+  public ExcelDataUploadService(StackMapper stackMapper, PollutantMapper pollutantMapper) {
     this.stackMapper = stackMapper;
     this.pollutantMapper = pollutantMapper;
   }

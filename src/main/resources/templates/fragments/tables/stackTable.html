@@ -26,7 +26,7 @@
       <tr th:each="stack : ${stacks}" th:data-stack-id="${stack.stack_id}">
         <td></td>
         <td><a class="updateLink"
-               th:href="@{/management/stack/{id}(id=${stack.stack_id})}"
+               th:href="@{/management/stacks/{id}(id=${stack.stack_id})}"
                th:text="${stack.stack_name != null ? stack.stack_name : '-'}"></a></td>
         <td th:text="${stack.company_name}"></td>
         <td th:text="${stack.workplace_name}"></td>
