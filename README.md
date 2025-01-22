@@ -51,11 +51,112 @@
 | schedule              | id, measure_date, is_completed                        | team_id, stack_measurement_id            |
 | team                  | id, name                                              |                                          |
 | management_department | id, name, tel                                         | workplace_id                             |
+### RESTful API 설계
+<table>
+  <tr>
+    <th>대상</th>
+    <th>동작</th>
+    <th>URL</th>
+    <th>HTTP method</th>
+  </tr>
+  <tr>
+    <td rowspan="5">company</td>
+    <td>List all companies</td>
+    <td rowspan="4">/companies</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Create a company</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>Modify a company</td>
+    <td>PATCH</td>
+  </tr>
+  <tr>
+    <td>Delete companies</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>Get a specific company</td>
+    <td>/companies/{company_id}</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td rowspan="6">workplace</td>
+    <td>List all workplaces</td>
+    <td rowspan="4">/workplaces</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Create a workplace</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>Modify a workplace</td>
+    <td>PATCH</td>
+  </tr>
+  <tr>
+    <td>Delete workplaces</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>Get a specific workplace</td>
+    <td>/workplaces/{workplace_id}</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Create stack measurement By excel form</td>
+    <td>/workplaces/{workplace_id}/upload/excel</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td rowspan="5">stack</td>
+    <td>List all stacks</td>
+    <td rowspan="4">/stacks</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Create a stack</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>Modify a stack</td>
+    <td>PATCH</td>
+  </tr>
+  <tr>
+    <td>Delete stacks</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>Get a specific stack</td>
+    <td>/stacks/{stack_id}</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>stack information</td>
+    <td>Modify a stackInformation</td>
+    <td>/stacks/{stack_id}/info</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td rowspan="3">stack measurement</td>
+    <td>Get measurements of a specific stack</td>
+    <td rowspan="3">/stacks/{stack_id}/measurements</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Create stack measurements</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>Delete measurements of a specific stack</td>
+    <td>DELETE</td>
+  </tr>
+</table>
+
 ### 준비 사항
 1. Java Development Kit (JDK) 21
 2. MySQL Database
 - 기본 데이터베이스 이름 : ensolution
 - git 프로젝트 > ensolution.sql 다운로드
-### 개선 사항
-1. DTO 검증
-2. RESTful API 
