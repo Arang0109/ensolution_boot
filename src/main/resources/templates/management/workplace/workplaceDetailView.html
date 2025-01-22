@@ -140,7 +140,7 @@
       })
 
       $.ajax({
-        url: /*[[@{/management/workplaces/{workplaceId}/upload/excel}(workplaceId=${workplace.workplace_id})]]*/ '',
+        url: /*[[@{/management/workplaces/{workplaceId}/upload/excel(workplaceId=${workplace.workplace_id})}]]*/ '',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(stack_measurements),
