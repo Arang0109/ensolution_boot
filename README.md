@@ -56,3 +56,6 @@
 2. MySQL Database
 - 기본 데이터베이스 이름 : ensolution
 - git 프로젝트 > ensolution.sql 다운로드
+### 개선 사항
+1. DTO 검증
+2. RESTful API 

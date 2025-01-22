@@ -114,7 +114,8 @@ public class StackServiceImpl implements StackService {
   }
 
   @Override
-  public Integer updateStackInfo(StackInformationDto stackInformationDto) {
+  public Integer updateStackInfo(StackInformationDto stackInformationDto, Integer stackId) {
+    stackInformationDto.setStack_info_id(stackId);
     return stackMapper.updateStackInfo(stackInformationDto);
   }
 

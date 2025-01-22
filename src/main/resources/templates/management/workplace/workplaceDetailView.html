@@ -101,7 +101,7 @@
         closestTag: 'tr',
         dataAttr: 'data-stack-id',
         idKey: 'stack_id',
-        url: /*[[@{/management/stack/delete}]]*/ '',
+        url: /*[[@{/management/stacks}]]*/ '',
       }
       businessDeleteHandler(options);
     });
@@ -109,7 +109,7 @@
       const options = {
         btnId: $(this),
         selector: $('#workplaceInfoForm'),
-        url: /*[[@{/management/workplace/modify}]]*/ '',
+        url: /*[[@{/management/workplaces}]]*/ '',
       }
       businessModifyHandler(options);
     });
@@ -140,7 +140,7 @@
       })
 
       $.ajax({
-        url: /*[[@{/management/stack-measurement/add/excel_data}]]*/ '',
+        url: /*[[@{/management/workplaces/{workplaceId}/upload/excel}(workplaceId=${workplace.workplace_id})]]*/ '',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(stack_measurements),

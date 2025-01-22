@@ -18,7 +18,7 @@
         </div>
         <div >
           <button id="modifyBtn" class="btn btn-primary btn-sm" type="button">수정</button>
-          <a class="btn btn-primary btn-sm" th:href="@{/management/company}">목록</a>
+          <a class="btn btn-primary btn-sm" th:href="@{/management/companies}">목록</a>
         </div>
       </div>
     </div>
@@ -124,7 +124,7 @@
         closestTag: 'tr',
         dataAttr: 'data-workplace-id',
         idKey: 'workplace_id',
-        url: /*[[@{/management/workplace/delete}]]*/ '',
+        url: /*[[@{/management/workplaces}]]*/ '',
       }
       businessDeleteHandler(options);
     });
@@ -132,7 +132,7 @@
       const options = {
         btnId: $(this),
         selector: $('#companyInfoForm'),
-        url: /*[[@{/management/company/modify}]]*/ '',
+        url: /*[[@{/management/companies}]]*/ '',
       }
       businessModifyHandler(options);
     });

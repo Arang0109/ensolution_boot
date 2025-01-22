@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.controller;
 
+import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.common.util.DataHandler;
 import com.ensolution.ensol.management.domain.company.CompanyDto;
 import com.ensolution.ensol.management.domain.stack.StackDto;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.MessageFormat;
+
 /**
- * <h1>BusinessController</h1>
+ * <h2>BusinessController</h2>
  * 측정대행 의뢰업체, 측정대상 사업장, 측정 시설의 관리를 담당
  *
  * <h2>주요 URL</h2>
@@ -34,20 +37,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @since 2025-01-22
  */
 @Controller
-@RequestMapping("/management")
+@RequestMapping("${management.base}")
 public class BusinessController {
   CompanyService companyService; // 측정대행 의뢰업체 관련 로직 처리
   WorkplaceService workplaceService; // 측정대상 사업장 관련 로직 처리
   StackService stackService; // 측정 시설과 관련 로직 처리
   PollutantService pollutantService; // 측정 오염물질 관련 로직 처리
+  UrlConstants urlConstants;
 
   @Autowired
   public BusinessController(CompanyService companyService, WorkplaceService workplaceService,
-                            StackService stackService, PollutantService pollutantService) {
+                            StackService stackService, PollutantService pollutantService,
+                            UrlConstants urlConstants) {
     this.companyService = companyService;
     this.workplaceService = workplaceService;
     this.stackService = stackService;
     this.pollutantService = pollutantService;
+    this.urlConstants = urlConstants;
   }
 
   /**
@@ -59,7 +65,7 @@ public class BusinessController {
    * - "companies" : 회사 목록 데이터 companyService.findAllCompanies()
    * @return 측정대행 의뢰업체 목록 페이지
    */
-  @GetMapping("/companies")
+  @GetMapping("${management.companies}")
   public String companyListView(Model m) {
     m.addAttribute("companies", companyService.findAllCompanies());
     return "management/company/companyListView";
@@ -73,7 +79,7 @@ public class BusinessController {
    * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
    * @return 업체 목록 페이지로 리다이렉트
    */
-  @PostMapping("/companies")
+  @PostMapping("${management.companies}")
   public String addCompany(CompanyDto companyDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         companyDto,
@@ -81,7 +87,9 @@ public class BusinessController {
         rattr,
         companyDto.getCompany_name()
     );
-    return "redirect:/management/company";
+    return MessageFormat.format("redirect:{0}{1}",
+        urlConstants.getMANAGEMENT_BASE(),
+        urlConstants.getMANAGEMENT_COMPANIES());
   }
 
   /** 업체 상세페이지
@@ -95,11 +103,11 @@ public class BusinessController {
    * - "workplaces" : 사업장 목록 데이터 workplaceService.findWorkplacesByCompanyId(companyId)
    * @return 측정대행 의뢰업체 상세페이지
    */
-  @GetMapping("/companies/{companyId}")
+  @GetMapping("${management.companies}" + "/{companyId}")
   public String companyDetailView(@PathVariable Integer companyId, Model m) {
     CompanyDto company = companyService.findCompanyById(companyId);
     if (company == null) {
-      return "redirect:/management/company";
+      return "redirect:" + urlConstants.getMANAGEMENT_BASE() + urlConstants.getMANAGEMENT_COMPANIES();
     }
     m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
     m.addAttribute("company", company);
@@ -114,7 +122,7 @@ public class BusinessController {
    * - "workplaces" : 사업장 목록 데이터 (workplaceService.findAllWorkplaces())
    * @return 측정대상 사업장 목록 페이지
    */
-  @GetMapping("/workplaces")
+  @GetMapping("${management.workplaces}")
   public String workplaceListView(Model m) {
     m.addAttribute("workplaces", workplaceService.findAllWorkplaces());
     return "management/workplace/workplaceListView";
@@ -128,7 +136,7 @@ public class BusinessController {
    * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
    * @return 사업장 목록 페이지로 리다이렉트
    */
-  @PostMapping("/workplaces")
+  @PostMapping("${management.workplaces}")
   public String addWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         workplaceDto,
@@ -136,7 +144,10 @@ public class BusinessController {
         rattr,
         workplaceDto.getWorkplace_name()
     );
-    return "redirect:/management/company/" + workplaceDto.getCompany_id();
+    return MessageFormat.format("redirect:{0}{1}/{2}",
+        urlConstants.getMANAGEMENT_BASE(),
+        urlConstants.getMANAGEMENT_COMPANIES(),
+        workplaceDto.getCompany_id());
   }
 
   /**
@@ -152,11 +163,13 @@ public class BusinessController {
    * - "company" : 업체 정보 데이터 (companyService.findCompanyById(workplace.getCompany_id()))
    * @return 측정대상 사업장 상세페이지
    */
-  @GetMapping("/workplaces/{workplaceId}")
+  @GetMapping("${management.workplaces}" + "/{workplaceId}")
   public String workplaceDetailView(@PathVariable Integer workplaceId, Model m) {
     WorkplaceDto workplace = workplaceService.findWorkplaceById(workplaceId);
     if (workplace == null) {
-      return "redirect:/management/workplace";
+      return MessageFormat.format("redirect:{0}{1}",
+          urlConstants.getMANAGEMENT_BASE(),
+          urlConstants.getMANAGEMENT_WORKPLACES());
     }
 
     m.addAttribute("workplace", workplace);
@@ -173,7 +186,7 @@ public class BusinessController {
    * - "stacks" : 시설 목록 데이터 (stackService.findStacksOfTable())
    * @return 측정 시설 목록 페이지
    */
-  @GetMapping("/stacks")
+  @GetMapping("${management.stacks}")
   public String stackListView(Model m) {
     m.addAttribute("stacks", stackService.findStacksOfTable());
     return "management/stack/stackListView";
@@ -187,7 +200,7 @@ public class BusinessController {
    * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
    * @return 시설 목록 페이지로 리다이렉트
    */
-  @PostMapping("/stacks")
+  @PostMapping("${management.stacks}")
   public String addStack(StackDto stackDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         stackDto,
@@ -195,7 +208,10 @@ public class BusinessController {
         rattr,
         stackDto.getStack_name()
     );
-    return "redirect:/management/workplace/" + stackDto.getWorkplace_id();
+    return MessageFormat.format("redirect:{0}{1}/{2}",
+        urlConstants.getMANAGEMENT_BASE(),
+        urlConstants.getMANAGEMENT_WORKPLACES(),
+        stackDto.getWorkplace_id());
   }
 
   /**
@@ -206,17 +222,19 @@ public class BusinessController {
    * @param stackId 측정 시설 ID
    * @param m Model 객체
    * 모델 데이터
-   * - "stack" : 시설 정보 데이터 stackService.findStackById(stackId))
+   * - "stack" : 시설 정보 데이터 (stackService.findStackById(stackId))
    * - "company" : 업체 정보 데이터 (companyService.findCompanyById(stackService.getCompanyWorkplaceId(stackId).get("company_id")))
    * - "workplace" : 사업장 정보 데이터 (workplaceService.findWorkplaceById(stackService.getCompanyWorkplaceId(stackId).get("workplace_id")))
    * - "pollutants" : 오염물질 목록 데이터 (pollutantService.findAllPollutants())
    * @return 측정 시설 상세페이지
    */
-  @GetMapping("/stacks/{stackId}")
+  @GetMapping("${management.stacks}" + "/{stackId}")
   public String stackDetailView(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
     if (stack == null) {
-      return "redirect:/management/stack";
+      return MessageFormat.format("redirect:{0}{1}",
+          urlConstants.getMANAGEMENT_BASE(),
+          urlConstants.getMANAGEMENT_STACKS());
     }
 
     m.addAttribute("stack", stack);

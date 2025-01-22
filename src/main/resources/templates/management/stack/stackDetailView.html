@@ -17,15 +17,15 @@
       <div class="profile-main">
         <div class="d-flex justify-content-between">
           <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-                 th:href="@{/management/company/{id}(id=${company.company_id})}"
+                 th:href="@{/management/companies/{id}(id=${company.company_id})}"
                  th:text="${company.company_name}"></a> /
             <a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-               th:href="@{/management/workplace/{id}(id=${workplace.workplace_id})}"
+               th:href="@{/management/workplaces/{id}(id=${workplace.workplace_id})}"
                th:text="${workplace.workplace_name}"></a> /
             <span th:text="${stack.stack_name}"></span></h4>
           <div>
             <a class="btn btn-primary btn-sm"
-               th:href="@{/management/stack}">목록</a>
+               th:href="@{/management/stacks}">목록</a>
           </div>
         </div>
       </div>
@@ -230,7 +230,7 @@
     });
 
     $.ajax({
-      url: /*[[@{/management/stack/getStackMeasurement(stackId=${stack.stack_id})}]]*/ '',
+      url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
       method: 'GET',
       success: function(response){
         const options = {
@@ -335,7 +335,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackInfoForm'),
-        url: /*[[@{/management/stack/modify}]]*/ '',
+        url: /*[[@{/management/stacks}]]*/ '',
       }
 
       businessModifyHandler(options);
@@ -345,7 +345,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackSpecificationInfoForm'),
-        url: /*[[@{/management/stack/modify/specification}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/info}(stackId=${stack.stack_id})]]*/ '',
       }
 
       businessModifyHandler(options);
@@ -372,7 +372,7 @@
 
       $.ajax({
         type:'POST',
-        url: /*[[@{/management/stack-measurement/add}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
         headers : { "Content-Type": "application/json"},
         dataType : 'text',
         data: JSON.stringify(pollutantList),
@@ -392,7 +392,7 @@
         closestTag: 'div',
         dataAttr: 'data-stack-measurement-id',
         idKey: 'stack_measurement_id',
-        url: /*[[@{/management/stack-measurement/delete}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
       }
 
       businessDeleteHandler(options);

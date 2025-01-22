@@ -19,7 +19,7 @@ public interface StackService {
   Map<String, Integer> getCompanyWorkplaceId(Integer id);
   Integer addNewStack(StackDto stack);
   Integer updateStack(StackDto stack);
-  Integer updateStackInfo(StackInformationDto stackInformation);
+  Integer updateStackInfo(StackInformationDto stackInformation, Integer stackId);
   Integer removeStacks(List<StackDto> stacks);
   Integer saveFile(MultipartFile file, Integer stackId) throws IOException;
 }
