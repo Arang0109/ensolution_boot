@@ -345,7 +345,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackSpecificationInfoForm'),
-        url: /*[[@{/management/stacks/{stackId}/info}(stackId=${stack.stack_id})]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/info(stackId=${stack.stack_id})}]]*/ '',
       }
 
       businessModifyHandler(options);

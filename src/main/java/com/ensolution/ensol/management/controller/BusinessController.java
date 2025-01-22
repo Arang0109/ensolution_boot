@@ -103,7 +103,9 @@ public class BusinessController {
    * - "workplaces" : 사업장 목록 데이터 workplaceService.findWorkplacesByCompanyId(companyId)
    * @return 측정대행 의뢰업체 상세페이지
    */
-  @GetMapping("${management.companies}" + "/{companyId}")
+  @GetMapping
+      ("${management.companies}" +
+          "/{companyId}")
   public String companyDetailView(@PathVariable Integer companyId, Model m) {
     CompanyDto company = companyService.findCompanyById(companyId);
     if (company == null) {
@@ -163,7 +165,9 @@ public class BusinessController {
    * - "company" : 업체 정보 데이터 (companyService.findCompanyById(workplace.getCompany_id()))
    * @return 측정대상 사업장 상세페이지
    */
-  @GetMapping("${management.workplaces}" + "/{workplaceId}")
+  @GetMapping
+      ("${management.workplaces}" +
+          "/{workplaceId}")
   public String workplaceDetailView(@PathVariable Integer workplaceId, Model m) {
     WorkplaceDto workplace = workplaceService.findWorkplaceById(workplaceId);
     if (workplace == null) {
@@ -228,7 +232,9 @@ public class BusinessController {
    * - "pollutants" : 오염물질 목록 데이터 (pollutantService.findAllPollutants())
    * @return 측정 시설 상세페이지
    */
-  @GetMapping("${management.stacks}" + "/{stackId}")
+  @GetMapping
+      ("${management.stacks}" +
+          "/{stackId}")
   public String stackDetailView(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
     if (stack == null) {
