@@ -117,8 +117,8 @@
       const queryString = workplaceIds.map(id => `workplaceIds=` + id).join('&');
 
       const url = workplaceIds.length === 0
-        ? /*[[@{/statistics/chart/all}]]*/ ''
-        : "http://localhost:8080/statistics/chart/workplace?" + queryString;
+        ? `dashboard/chart/global`
+        : `dashboard/chart/workplaces?` + queryString;
 
       $.ajax({
         url: url,

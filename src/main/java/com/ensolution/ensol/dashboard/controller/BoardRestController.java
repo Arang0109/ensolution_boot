@@ -1,8 +1,8 @@
-package com.ensolution.ensol.statistic.controller;
+package com.ensolution.ensol.dashboard.controller;
 
 import com.ensolution.ensol.common.util.ChartDataResponse;
 import com.ensolution.ensol.management.service.WorkplaceService;
-import com.ensolution.ensol.statistic.service.StatisticsService;
+import com.ensolution.ensol.dashboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statistics")
-public class StatisticsRestController {
+@RequestMapping("/dashboard")
+public class BoardRestController {
   WorkplaceService workplaceService;
-  StatisticsService statisticsService;
+  BoardService boardService;
 
   @Autowired
-  public StatisticsRestController(WorkplaceService workplaceService, StatisticsService statisticsService) {
+  public BoardRestController(WorkplaceService workplaceService, BoardService boardService) {
     this.workplaceService = workplaceService;
-    this.statisticsService = statisticsService;
+    this.boardService = boardService;
   }
 
-  @GetMapping("/chart/workplace")
+  @GetMapping("/chart/workplaces")
   public ChartDataResponse getChartStats(@RequestParam List<Integer> workplaceIds) {
     return new ChartDataResponse(
-        statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCompleteCnt"),
-        statisticsService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCnt"));
+        boardService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCompleteCnt"),
+        boardService.getChartStackCountByWorkplace(workplaceIds).get("workplaceCnt"));
   }
 
-  @GetMapping("/chart/all")
+  @GetMapping("/chart/global")
   public ChartDataResponse getChartStatsAll() {
     return new ChartDataResponse(
-        statisticsService.getChartStackCount().get("allCompleteCnt"),
-        statisticsService.getChartStackCount().get("allCnt")
+        boardService.getChartStackCount().get("allCompleteCnt"),
+        boardService.getChartStackCount().get("allCnt")
     );
   }
 }

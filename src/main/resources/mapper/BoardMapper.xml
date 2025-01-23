@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.statistic.mapper.StatisticsMapper">
+<mapper namespace="com.ensolution.ensol.dashboard.mapper.BoardMapper">
   <sql id="select">
     SELECT GROUP_CONCAT(stack_measurement_id) AS stack_measurement_ids,
            s.stack_id, GROUP_CONCAT(pollutant_id) AS pollutant_ids,
@@ -12,12 +12,12 @@
         LEFT JOIN stack s ON sm.stack_id = s.stack_id
   </sql>
 
-  <select id="selectAll" resultType="statisticsDto">
+  <select id="selectAll" resultType="boardDto">
     <include refid="select"/>
     GROUP BY s.stack_id, cycle_type
   </select>
 
-  <select id="selectByWorkplace" parameterType="List" resultType="statisticsDto">
+  <select id="selectByWorkplace" parameterType="List" resultType="boardDto">
     <include refid="select"/>
     WHERE s.workplace_id IN
     <foreach item="workplace_id" collection="list" open="(" separator="," close=")">

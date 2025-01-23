@@ -1,8 +1,8 @@
-package com.ensolution.ensol.statistic.domain;
+package com.ensolution.ensol.dashboard.domain;
 
 import java.util.Objects;
 
-public class StatisticsDto {
+public class BoardDto {
   private String stack_measurement_ids;
   private Integer stack_id;
   private String pollutant_ids;
@@ -11,9 +11,9 @@ public class StatisticsDto {
   private String cycle_type;
   private boolean is_completed;
 
-  public StatisticsDto() {}
+  public BoardDto() {}
 
-  public StatisticsDto(String stack_measurement_ids, Integer stack_id, String pollutant_ids, Integer workplace_id, String stack_name, String cycle_type, boolean is_completed) {
+  public BoardDto(String stack_measurement_ids, Integer stack_id, String pollutant_ids, Integer workplace_id, String stack_name, String cycle_type, boolean is_completed) {
     this.stack_measurement_ids = stack_measurement_ids;
     this.stack_id = stack_id;
     this.pollutant_ids = pollutant_ids;
@@ -27,7 +27,7 @@ public class StatisticsDto {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    StatisticsDto that = (StatisticsDto) o;
+    BoardDto that = (BoardDto) o;
     return is_completed == that.is_completed && Objects.equals(stack_measurement_ids, that.stack_measurement_ids) && Objects.equals(stack_id, that.stack_id) && Objects.equals(pollutant_ids, that.pollutant_ids) && Objects.equals(workplace_id, that.workplace_id) && Objects.equals(stack_name, that.stack_name) && Objects.equals(cycle_type, that.cycle_type);
   }
 

@@ -1,8 +1,8 @@
-package com.ensolution.ensol.statistic.service.impl;
+package com.ensolution.ensol.dashboard.service.impl;
 
 import com.ensolution.ensol.common.util.StackCountCalculator;
-import com.ensolution.ensol.statistic.mapper.StatisticsMapper;
-import com.ensolution.ensol.statistic.service.StatisticsService;
+import com.ensolution.ensol.dashboard.mapper.BoardMapper;
+import com.ensolution.ensol.dashboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class StatisticsServiceImpl implements StatisticsService {
-  private final StatisticsMapper statisticsMapper;
+public class BoardServiceImpl implements BoardService {
+  private final BoardMapper boardMapper;
 
   @Autowired
-  public StatisticsServiceImpl(StatisticsMapper statisticsMapper) {
-      this.statisticsMapper = statisticsMapper;
+  public BoardServiceImpl(BoardMapper boardMapper) {
+      this.boardMapper = boardMapper;
     }
 
   @Override
@@ -25,7 +25,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     Map<String, Map<String, Long>> result = new HashMap<>();
     List<Integer> workplaceIds = new ArrayList<>();
     workplaceIds.add(1);
-    StackCountCalculator sc = new StackCountCalculator(statisticsMapper, workplaceIds);
+    StackCountCalculator sc = new StackCountCalculator(boardMapper, workplaceIds);
 
     result.put("allCnt", sc.stackCnt());
     result.put("allCompleteCnt", sc.completedStackCnt());
@@ -36,7 +36,7 @@ public class StatisticsServiceImpl implements StatisticsService {
   @Override
   public Map<String, Map<String, Long>> getChartStackCountByWorkplace(List<Integer> workplaceIds) {
     Map<String, Map<String, Long>> result = new HashMap<>();
-    StackCountCalculator sc = new StackCountCalculator(statisticsMapper, workplaceIds);
+    StackCountCalculator sc = new StackCountCalculator(boardMapper, workplaceIds);
 
     result.put("workplaceCnt", sc.stackCntByWorkplace());
     result.put("workplaceCompleteCnt", sc.completedStackCntByWorkplace());

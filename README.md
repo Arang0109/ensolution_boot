@@ -217,6 +217,25 @@
     <td>/stack-measurements</td>
     <td>GET</td>
   </tr>
+  <tr>
+    <td rowspan="3">dashboard</td>
+    <td>Dashboard main view</td>
+    <td rowspan="3">/dashboard</td>
+    <td></td>
+    <td></td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Global chart view</td>
+    <td rowspan="2">/chart</td>
+    <td>/global</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Chart view of workplaces</td>
+    <td>/workplaces</td>
+    <td>GET</td>
+  </tr>
 </table>
 
 ### 준비 사항

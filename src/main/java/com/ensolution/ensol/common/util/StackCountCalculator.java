@@ -1,7 +1,7 @@
 package com.ensolution.ensol.common.util;
 
-import com.ensolution.ensol.statistic.domain.StatisticsDto;
-import com.ensolution.ensol.statistic.mapper.StatisticsMapper;
+import com.ensolution.ensol.dashboard.domain.BoardDto;
+import com.ensolution.ensol.dashboard.mapper.BoardMapper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class StackCountCalculator {
   private final String[] CYCLE_TYPE = {"monthly", "twiceamonth", "quarterly", "semiannual", "annual"};
-  private final List<StatisticsDto> stacks;
-  private final List<StatisticsDto> stacksByWorkplace;
+  private final List<BoardDto> stacks;
+  private final List<BoardDto> stacksByWorkplace;
 
-  public StackCountCalculator(StatisticsMapper statisticsMapper, List<Integer> workplaceIds) {
-    this.stacks = statisticsMapper.selectAll();
-    this.stacksByWorkplace = statisticsMapper.selectByWorkplace(workplaceIds);
+  public StackCountCalculator(BoardMapper boardMapper, List<Integer> workplaceIds) {
+    this.stacks = boardMapper.selectAll();
+    this.stacksByWorkplace = boardMapper.selectByWorkplace(workplaceIds);
   }
 
-  private Map<String, Long> nonComplete(List<StatisticsDto> stack) {
+  private Map<String, Long> nonComplete(List<BoardDto> stack) {
     Map<String, Long> stackCnt = new HashMap<>();
     for (String cycle : CYCLE_TYPE) {
       stackCnt.put(
@@ -31,14 +31,14 @@ public class StackCountCalculator {
     return stackCnt;
   }
 
-  private Map<String, Long> complete(List<StatisticsDto> stack) {
+  private Map<String, Long> complete(List<BoardDto> stack) {
     Map<String, Long> stackCnt = new HashMap<>();
     for (String cycle : CYCLE_TYPE) {
       stackCnt.put(
           cycle, // 주기
           stack // 시설 수
               .stream()
-              .filter(StatisticsDto::is_completed)
+              .filter(BoardDto::is_completed)
               .filter(s -> s.getCycle_type().equals(cycle))
               .count());
     }
