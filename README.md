@@ -64,7 +64,7 @@
   <tr>
     <td rowspan="5">company</td>
     <td>List all companies</td>
-    <td rowspan="22">/management</td>
+    <td rowspan="23">/management</td>
     <td rowspan="4">/companies</td>
     <td>GET</td>
   </tr>
@@ -114,7 +114,7 @@
     <td>POST</td>
   </tr>
   <tr>
-    <td rowspan="7">stack</td>
+    <td rowspan="8">stack</td>
     <td>List all stacks</td>
     <td rowspan="4">/stacks</td>
     <td>GET</td>
@@ -135,6 +135,11 @@
     <td>Get a specific stack</td>
     <td >/stacks/{stack_id}</td>
     <td>GET</td>
+  </tr>
+<tr>
+    <td>Modify note of stack</td>
+    <td >/stacks/{stack_id}/note</td>
+    <td>PATCH</td>
   </tr>
   <tr>
     <td>Get image files</td>
@@ -175,6 +180,32 @@
   <tr>
     <td>Calculate availability score</td>
     <td>POST</td>
+  </tr>
+  <tr>
+    <td rowspan="5">schedule</td>
+    <td>Calendar View</td>
+    <td rowspan="5">/schedule</td>
+    <td rowspan="2">/calendar</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Delete schedules of calendar</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>Register schedule</td>
+    <td>/register</td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>Get stacks of workplace</td>
+    <td>/register/stacks</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Get stack-measurements of stack</td>
+    <td>/register/stack-measurements</td>
+    <td>GET</td>
   </tr>
 </table>
 

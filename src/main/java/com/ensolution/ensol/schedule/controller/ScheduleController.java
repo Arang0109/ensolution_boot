@@ -26,10 +26,10 @@ public class ScheduleController {
     this.scheduleService = scheduleService;
   }
 
-  @GetMapping("/list")
+  @GetMapping("/calendar")
   public String scheduleMainView(Model m) {
     m.addAttribute("schedules", scheduleService.findAllSchedules());
-    return "schedule/scheduleListView";
+    return "schedule/calendarView";
   }
 
   @GetMapping("/register")

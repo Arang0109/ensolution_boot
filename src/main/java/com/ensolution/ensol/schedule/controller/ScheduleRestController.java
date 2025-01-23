@@ -34,7 +34,26 @@ public class ScheduleRestController {
     this.scheduleService = scheduleService;
   }
 
-  @GetMapping("/register/getStack")
+  @DeleteMapping("/calendar")
+  public void deleteSchedule(@RequestBody List<Integer> schedule_ids) {
+    scheduleService.removeSchedules(schedule_ids);
+  }
+
+  @PatchMapping("/calendar/complete")
+  public void completeSchedule(@RequestBody List<Integer> scheduleIds) {
+    scheduleService.completeSchedules(scheduleIds);
+  }
+
+  @PostMapping("/register")
+  public void addPlan(@RequestBody List<ScheduleDto> scheduleDto) {
+    // 1. datepicker 선택된 날짜 (measure_date)
+    // 2. stack_measurement_id >> 여러개 >> schedule 여러개 >> ajax 로 처리
+    for (ScheduleDto schedule : scheduleDto) {
+      scheduleService.addNewSchedule(schedule);
+    }
+  }
+
+  @GetMapping("/register/stacks")
   public ResponseEntity<Map<String, Object>> getStackName(@RequestParam Integer workplaceId) {
     List<StackTableDto> stacks = stackService.findStacksByWorkplaceId(workplaceId);
 
@@ -44,7 +63,7 @@ public class ScheduleRestController {
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/register/getStackMeasurement")
+  @GetMapping("/register/stack-measurements")
   public ResponseEntity<Map<String, Object>> getStackMeasurement(@RequestParam Integer stackId) {
     Map<String, Object> response = new HashMap<>();
     String note = stackService.findStackById(stackId).getNote();
@@ -56,31 +75,5 @@ public class ScheduleRestController {
     response.put("note", note);
 
     return ResponseEntity.ok(response);
-  }
-
-  @PostMapping("/register/addSchedule")
-  public void addPlan(@RequestBody List<ScheduleDto> scheduleDto) {
-    // 1. datepicker 선택된 날짜 (measure_date)
-    // 2. stack_measurement_id >> 여러개 >> schedule 여러개 >> ajax 로 처리
-    for (ScheduleDto schedule : scheduleDto) {
-      scheduleService.addNewSchedule(schedule);
-    }
-  }
-
-  @PatchMapping("/modify/stack/note")
-  public void modifyStackNote(@RequestBody StackDto stack) {
-    StackDto stackDto = stackService.findStackById(stack.getStack_id());
-    stackDto.setNote(stack.getNote());
-    stackService.updateStack(stackDto);
-  }
-
-  @DeleteMapping("/delete")
-  public void deleteSchedule(@RequestBody List<Integer> schedule_ids) {
-    scheduleService.removeSchedules(schedule_ids);
-  }
-
-  @PatchMapping("/update/complete")
-  public void completeSchedule(@RequestBody List<Integer> schedule_ids) {
-    scheduleService.updateScheduleComplete(schedule_ids);
   }
 }

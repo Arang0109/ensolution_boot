@@ -15,7 +15,7 @@ public interface ScheduleService {
 
   void addNewSchedule(ScheduleDto scheduleDto);
 
-  void updateScheduleComplete(List<Integer> schedule_ids);
+  void completeSchedules(List<Integer> schedule_ids);
 
   void removeSchedules(List<Integer> schedule_ids);
 }

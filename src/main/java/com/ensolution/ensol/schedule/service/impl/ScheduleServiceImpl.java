@@ -62,7 +62,7 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public void updateScheduleComplete(List<Integer> schedule_ids) {
+  public void completeSchedules(List<Integer> schedule_ids) {
     List<Integer> stack_measurement_ids = new ArrayList<>();
     for (Integer schedule_id : schedule_ids) {
       ScheduleDto scheduleDto = scheduleMapper.selectSchedule(schedule_id);

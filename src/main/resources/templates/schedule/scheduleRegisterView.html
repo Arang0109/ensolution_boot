@@ -138,7 +138,7 @@
       }
 
       $.ajax({
-        url: /*[[@{/schedule/modify/stack/note}]]*/ '',
+        url: `/management/stacks/${stack_id}/note`,
         type: 'PATCH',
         contentType: 'application/json',
         data: JSON.stringify(stack),
@@ -174,12 +174,11 @@
       const workplaceId = $(this).val();
 
       $.ajax({
-        url: `/schedule/register/getStack?workplaceId=${workplaceId}`,
+        url: `/schedule/register/stacks?workplaceId=${workplaceId}`,
         type: 'GET',
         contentType: 'application/json',
         success: function(result) {
-          const stacks = result.stacks;
-          selectStackOption(stacks);
+          selectStackOption(result.stacks);
         },
         error: function() {
           alert('failed');
@@ -195,7 +194,7 @@
       stackDetailLink.attr('target', '_blank');
 
       $.ajax({
-        url: '/management/images?stackId=' + stackId,
+        url: `/management/stacks/${stackId}/images`,
         method: 'GET',
         dataType: 'json',
         success: function(images) {
@@ -216,7 +215,7 @@
       });
 
       $.ajax({
-        url: `/schedule/register/getStackMeasurement?stackId=${stackId}`,
+        url: `/schedule/register/stack-measurements?stackId=${stackId}`,
         type: 'GET',
         contentType: 'application/json',
         success: function(response) {
@@ -229,7 +228,7 @@
       });
 
       $.ajax({
-        url: `/management/stack/getStackMeasurement?stackId=${stackId}`,
+        url: `/management/stacks/${stackId}/stack-measurements`,
         method: 'GET',
         success: function(response){
           const options = {
@@ -272,7 +271,7 @@
       }
 
       $.ajax({
-        url: /*[[@{/schedule/register/addSchedule}]]*/ '',
+        url: '/schedule/register',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(selectedMeasurement),

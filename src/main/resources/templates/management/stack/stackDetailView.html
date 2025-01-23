@@ -218,7 +218,7 @@
     });
 
     $.ajax({
-      url: /*[[@{/schedule/register/getStackMeasurement(stackId=${stack.stack_id})}]]*/ ``,
+      url: /*[[@{/schedule/register/stack-measurements(stackId=${stack.stack_id})}]]*/ ``,
       type: 'GET',
       contentType: 'application/json',
       success: function(response) {
@@ -230,7 +230,7 @@
     });
 
     $.ajax({
-      url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
+      url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
       method: 'GET',
       success: function(response){
         const options = {
@@ -253,7 +253,7 @@
       if (selectedPollutant.length === 0) return alert("항목을 선택해 주세요.");
 
       $.ajax({
-        url: /*[[@{/document/score/calculation}]]*/ '',
+        url: /*[[@{/document/availability-score}]]*/ '',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(selectedPollutant),
@@ -372,7 +372,7 @@
 
       $.ajax({
         type:'POST',
-        url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
         headers : { "Content-Type": "application/json"},
         dataType : 'text',
         data: JSON.stringify(pollutantList),
@@ -392,7 +392,7 @@
         closestTag: 'div',
         dataAttr: 'data-stack-measurement-id',
         idKey: 'stack_measurement_id',
-        url: /*[[@{/management/stacks/{stackId}/measurements(stackId=${stack.stack_id})}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
       }
 
       businessDeleteHandler(options);
