@@ -89,10 +89,7 @@ public class BusinessRestController {
   @PatchMapping("${management.stacks}")
   public void updateStack(@RequestBody StackDto stackDto) { stackService.updateStack(stackDto); }
 
-  @PatchMapping
-      ("${management.stacks}" +
-          "/{stackId}" +
-          "${stacks.information}")
+  @PatchMapping("${management.stacks}" + "/{stackId}/info")
   public void updateStackInfo(@PathVariable Integer stackId,
                               @RequestBody StackInformationDto stackInfoDto) {
     stackService.updateStackInfo(stackInfoDto, stackId);
@@ -110,24 +107,15 @@ public class BusinessRestController {
 
   @PostMapping
       ("${management.workplaces}" +
-          "/{workplaceId}" +
-          "${upload.excel}")
+          "/{workplaceId}/upload/excel")
   public void addExcelDataMeasurement(@PathVariable Integer workplaceId, @RequestBody List<ExcelStackMeasurementDto> exDataDto) {
     excelDataUploadService.addStackMeasurement(exDataDto);
   }
 
-  @PostMapping("/upload")
-  public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("stackId") Integer stackId) {
-    try {
-      stackService.saveFile(file, stackId);
-      return ResponseEntity.ok("파일 업로드 성공");
-    } catch (IOException e) {
-      return ResponseEntity.status(500).body("파일 업로드 실패: " + e.getMessage());
-    }
-  }
-
-  @GetMapping("/images")
-  public ResponseEntity<List<StackImagesDto>> getImagesByStackId(@RequestParam Integer stackId) {
+  @GetMapping
+      ("${management.stacks}" +
+          "/{stackId}/images")
+  public ResponseEntity<List<StackImagesDto>> getImagesByStackId(@PathVariable Integer stackId) {
     List<StackImagesDto> images = stackService.findAllStackImages(stackId);
     return ResponseEntity.ok(images);
   }

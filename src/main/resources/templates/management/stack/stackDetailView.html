@@ -197,7 +197,7 @@
     viewAddMeasurementToast(addResult);
 
     $.ajax({
-      url: '/management/images?stackId=' + id,
+      url: `/management/stacks/${id}/images`,
       method: 'GET',
       dataType: 'json',
       success: function(images) {

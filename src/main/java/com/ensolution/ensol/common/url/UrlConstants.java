@@ -20,8 +20,8 @@ public class UrlConstants {
   @Value("${management.measurements}")
   private String MANAGEMENT_MEASUREMENTS;
 
-  @Value("${stacks.information}")
-  private String STACKS_INFORMATION;
+  @Value("${file.upload_dir}")
+  private String UPLOAD_DIR;
 
   public String getMANAGEMENT_BASE() {
     return MANAGEMENT_BASE;
@@ -43,7 +43,7 @@ public class UrlConstants {
     return MANAGEMENT_MEASUREMENTS;
   }
 
-  public String getSTACKS_INFORMATION() {
-    return STACKS_INFORMATION;
+  public String getUPLOAD_DIR() {
+    return UPLOAD_DIR;
   }
 }

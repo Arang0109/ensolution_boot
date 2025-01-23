@@ -1,6 +1,7 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
+import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.management.domain.stack.StackDto;
 import com.ensolution.ensol.management.domain.stack.StackImagesDto;
 import com.ensolution.ensol.management.domain.stack.StackInformationDto;
@@ -27,23 +28,24 @@ public class StackServiceImpl implements StackService {
   private final StackMapper stackMapper;
   private final WorkplaceMapper workplaceMapper;
   private final StackImagesMapper stackImagesMapper;
-  @Value("${file.upload_dir}")
-  private String uploadDir;
+  private final UrlConstants urlConstants;
 
-  public StackServiceImpl(StackMapper stackMapper, WorkplaceMapper workplaceMapper, StackImagesMapper stackImagesMapper) {
+  public StackServiceImpl(StackMapper stackMapper, WorkplaceMapper workplaceMapper, StackImagesMapper stackImagesMapper,
+                          UrlConstants urlConstants) {
     this.stackMapper = stackMapper;
     this.workplaceMapper = workplaceMapper;
     this.stackImagesMapper = stackImagesMapper;
+    this.urlConstants = urlConstants;
   }
 
   @Override
   public Integer saveFile(MultipartFile file, Integer stackId) throws IOException {
-    File directory = new File(uploadDir);
+    File directory = new File(urlConstants.getUPLOAD_DIR());
     if (!directory.exists()) {
       directory.mkdirs();
     }
 
-    String filePath = uploadDir + File.separator + file.getOriginalFilename();
+    String filePath = urlConstants.getUPLOAD_DIR() + File.separator + file.getOriginalFilename();
 
     File destinationFile = new File(filePath);
     file.transferTo(destinationFile);

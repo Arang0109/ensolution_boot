@@ -112,7 +112,7 @@
     <td>POST</td>
   </tr>
   <tr>
-    <td rowspan="5">stack</td>
+    <td rowspan="7">stack</td>
     <td>List all stacks</td>
     <td rowspan="4">/stacks</td>
     <td>GET</td>
@@ -131,8 +131,17 @@
   </tr>
   <tr>
     <td>Get a specific stack</td>
-    <td>/stacks/{stack_id}</td>
+    <td >/stacks/{stack_id}</td>
     <td>GET</td>
+  </tr>
+  <tr>
+    <td>Get image files</td>
+    <td rowspan="2">/stacks/{stack_id}/images</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Upload image file of a stack </td>
+    <td>POST</td>
   </tr>
   <tr>
     <td>stack information</td>
