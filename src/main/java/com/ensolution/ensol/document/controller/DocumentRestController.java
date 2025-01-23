@@ -23,7 +23,7 @@ public class DocumentRestController {
     this.scoreService = scoreService;
   }
 
-  @PostMapping("/score/calculation")
+  @PostMapping("/availability-score")
   public ResponseEntity<Map<String, Object>> calScore(@RequestBody List<PollutantDto> pollutantDto) {
     List<PollutantDto> pollutants = documentService.findPollutantsById(pollutantDto);
     Map<String, Object> response = new HashMap<>();

@@ -17,9 +17,9 @@ public class DocumentController {
     this.pollutantService = pollutantService;
   }
 
-  @GetMapping("/score")
+  @GetMapping("/availability-score")
   public String abilityScore(Model m) {
     m.addAttribute("pollutants", pollutantService.findAllPollutants());
-    return "document/abilityScore";
+    return "document/availabilityScore";
   }
 }

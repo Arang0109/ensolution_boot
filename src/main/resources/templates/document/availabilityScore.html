@@ -127,7 +127,7 @@
       if (selectedPollutant.length === 0) return alert("항목을 선택해 주세요.");
 
       $.ajax({
-        url: /*[[@{/document/score/calculation}]]*/ '',
+        url: /*[[@{/document/availability-score}]]*/ '',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(selectedPollutant),

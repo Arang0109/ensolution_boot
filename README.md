@@ -57,12 +57,14 @@
   <tr>
     <th>대상</th>
     <th>동작</th>
+    <th>상위 URL</th>
     <th>URL</th>
     <th>HTTP method</th>
   </tr>
   <tr>
     <td rowspan="5">company</td>
     <td>List all companies</td>
+    <td rowspan="22">/management</td>
     <td rowspan="4">/companies</td>
     <td>GET</td>
   </tr>
@@ -162,6 +164,17 @@
   <tr>
     <td>Delete measurements of a specific stack</td>
     <td>DELETE</td>
+  </tr>
+  <tr>
+    <td rowspan="2">availability-score</td>
+    <td>Get a pollutant list</td>
+    <td rowspan="2">/document</td>
+    <td rowspan="2">/availability-score</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>Calculate availability score</td>
+    <td>POST</td>
   </tr>
 </table>
 
