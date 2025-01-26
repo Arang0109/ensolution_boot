@@ -126,11 +126,9 @@
       }
 
       const stack_measurements = [];
-      const workplace_id = /*[[${workplace.workplace_id}]]*/ '';
 
       $('#tbody tr').each(function() {
         const stack_measurement = {};
-        stack_measurement.workplace_id = workplace_id;
         stack_measurement.stack_name = $(this).find('td[data-role="stack_name"]').text();
         stack_measurement.pollutant_name = $(this).find('td[data-role="pollutant_name"]').text();
         stack_measurement.allow_value = $(this).find('td[data-role="allow_value"]').text();

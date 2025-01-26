@@ -37,21 +37,20 @@ public class BusinessRestController {
   }
 
   @DeleteMapping("${management.companies}")
-  public void deleteCompany(@RequestBody List<CompanyDto> companies) {
+  public void deleteCompanies(@RequestBody List<CompanyDto> companies) {
     companyService.removeCompanies(companies);
   }
 
   @DeleteMapping("${management.workplaces}")
-  public void deleteWorkplace(@RequestBody List<WorkplaceDto> workplaces) {
+  public void deleteWorkplaces(@RequestBody List<WorkplaceDto> workplaces) {
     workplaceService.removeWorkplaces(workplaces);
   }
 
   @DeleteMapping("${management.stacks}")
-  public void deleteStack(@RequestBody List<StackDto> stacks) {
+  public void deleteStacks(@RequestBody List<StackDto> stacks) {
     stackService.removeStacks(stacks);
   }
 
-  // "${management.stacks}" + "/{stackId}" + "${management.measurements}"
   @GetMapping
       ("${management.stacks}" +
           "/{stackId}/stack-measurements")
@@ -67,9 +66,8 @@ public class BusinessRestController {
   @DeleteMapping
       ("${management.stacks}" +
           "/{stackId}/stack-measurements")
-  public void deleteStackMeasurement(@PathVariable Integer stackId,
+  public void deleteStackMeasurements(@PathVariable Integer stackId,
                                      @RequestBody List<StackMeasurementDto> stackMeasurements) {
-    System.out.println("delete 수행.. stackId: " + stackId);
     stackMeasurementService.removeStackMeasurements(stackMeasurements);
   }
 
@@ -85,13 +83,13 @@ public class BusinessRestController {
   public void updateStack(@RequestBody StackDto stackDto) { stackService.updateStack(stackDto); }
 
   @PatchMapping("${management.stacks}" + "/{stackId}/info")
-  public void updateStackInfo(@PathVariable Integer stackId,
+  public void updateStackInformation(@PathVariable Integer stackId,
                               @RequestBody StackInformationDto stackInfoDto) {
     stackService.updateStackInfo(stackInfoDto, stackId);
   }
 
   @PatchMapping("${management.stacks}" + "{stackId}/note")
-  public void modifyStackNote(@RequestBody StackDto stack) {
+  public void updateStackNote(@RequestBody StackDto stack) {
     StackDto stackDto = stackService.findStackById(stack.getStack_id());
     stackDto.setNote(stack.getNote());
     stackService.updateStack(stackDto);
@@ -100,8 +98,9 @@ public class BusinessRestController {
   @PostMapping
       ("${management.stacks}" +
           "/{stackId}/stack-measurements")
-  public void addStackMeasurement(@RequestBody List<StackMeasurementDto> stackMeasurementList) {
+  public void addStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
+      stackMeasurementDto.setStack_id(stackId);
       stackMeasurementService.addNewStackMeasurement(stackMeasurementDto);
     }
   }
@@ -109,14 +108,14 @@ public class BusinessRestController {
   @PostMapping
       ("${management.workplaces}" +
           "/{workplaceId}/upload/excel")
-  public void addExcelDataMeasurement(@PathVariable Integer workplaceId, @RequestBody List<ExcelStackMeasurementDto> exDataDto) {
-    excelDataUploadService.addStackMeasurement(exDataDto);
+  public void uploadExcelDataMeasurements(@PathVariable Integer workplaceId, @RequestBody List<ExcelStackMeasurementDto> exDataDto) {
+    excelDataUploadService.addStackMeasurement(workplaceId, exDataDto);
   }
 
   @GetMapping
       ("${management.stacks}" +
           "/{stackId}/images")
-  public ResponseEntity<List<StackImagesDto>> getImagesByStackId(@PathVariable Integer stackId) {
+  public ResponseEntity<List<StackImagesDto>> getStackImages(@PathVariable Integer stackId) {
     List<StackImagesDto> images = stackService.findAllStackImages(stackId);
     return ResponseEntity.ok(images);
   }

@@ -65,7 +65,7 @@ public class BusinessController {
    * @return 측정대행 의뢰업체 목록 페이지
    */
   @GetMapping("${management.companies}")
-  public String companyListView(Model m) {
+  public String getCompanyList(Model m) {
     m.addAttribute("companies", companyService.findAllCompanies());
     return "management/company/companyListView";
   }
@@ -79,7 +79,7 @@ public class BusinessController {
    * @return 업체 목록 페이지로 리다이렉트
    */
   @PostMapping("${management.companies}")
-  public String addCompany(CompanyDto companyDto, RedirectAttributes rattr) {
+  public String createCompany(CompanyDto companyDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         companyDto,
         companyService::addNewCompany,
@@ -105,10 +105,12 @@ public class BusinessController {
   @GetMapping
       ("${management.companies}" +
           "/{companyId}")
-  public String companyDetailView(@PathVariable Integer companyId, Model m) {
+  public String getCompanyDetail(@PathVariable Integer companyId, Model m) {
     CompanyDto company = companyService.findCompanyById(companyId);
     if (company == null) {
-      return "redirect:" + urlConstants.getMANAGEMENT_BASE() + urlConstants.getMANAGEMENT_COMPANIES();
+      return MessageFormat.format("redirect:{0}{1}",
+          urlConstants.getMANAGEMENT_BASE(),
+          urlConstants.getMANAGEMENT_COMPANIES());
     }
     m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
     m.addAttribute("company", company);
@@ -124,7 +126,7 @@ public class BusinessController {
    * @return 측정대상 사업장 목록 페이지
    */
   @GetMapping("${management.workplaces}")
-  public String workplaceListView(Model m) {
+  public String getWorkplaceList(Model m) {
     m.addAttribute("workplaces", workplaceService.findAllWorkplaces());
     return "management/workplace/workplaceListView";
   }
@@ -138,7 +140,7 @@ public class BusinessController {
    * @return 사업장 목록 페이지로 리다이렉트
    */
   @PostMapping("${management.workplaces}")
-  public String addWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
+  public String createWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         workplaceDto,
         workplaceService::addNewWorkplace,
@@ -167,7 +169,7 @@ public class BusinessController {
   @GetMapping
       ("${management.workplaces}" +
           "/{workplaceId}")
-  public String workplaceDetailView(@PathVariable Integer workplaceId, Model m) {
+  public String getWorkplaceDetail(@PathVariable Integer workplaceId, Model m) {
     WorkplaceDto workplace = workplaceService.findWorkplaceById(workplaceId);
     if (workplace == null) {
       return MessageFormat.format("redirect:{0}{1}",
@@ -190,7 +192,7 @@ public class BusinessController {
    * @return 측정 시설 목록 페이지
    */
   @GetMapping("${management.stacks}")
-  public String stackListView(Model m) {
+  public String getStackList(Model m) {
     m.addAttribute("stacks", stackService.findStacksOfTable());
     return "management/stack/stackListView";
   }
@@ -204,7 +206,7 @@ public class BusinessController {
    * @return 시설 목록 페이지로 리다이렉트
    */
   @PostMapping("${management.stacks}")
-  public String addStack(StackDto stackDto, RedirectAttributes rattr) {
+  public String createStack(StackDto stackDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         stackDto,
         stackService::addNewStack,
@@ -234,7 +236,7 @@ public class BusinessController {
   @GetMapping
       ("${management.stacks}" +
           "/{stackId}")
-  public String stackDetailView(@PathVariable Integer stackId, Model m) {
+  public String getStackDetail(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
     if (stack == null) {
       return MessageFormat.format("redirect:{0}{1}",
@@ -249,10 +251,17 @@ public class BusinessController {
     return "management/stack/stackDetailView";
   }
 
+  /**
+   * 스택 이미지 업로드
+   *
+   * @param stackId 업로드할 스택의 ID
+   * @param file 업로드할 파일
+   * @return 업로드 후 스택 상세 페이지로 리다이렉트
+   */
   @PostMapping
       ("${management.stacks}" +
           "/{stackId}/images")
-  public String uploadFile(@PathVariable Integer stackId, @RequestParam("file") MultipartFile file) {
+  public String uploadStackImage(@PathVariable Integer stackId, @RequestParam("file") MultipartFile file) {
     try {
       stackService.saveFile(file, stackId);
       return "redirect:/management/stacks/" + stackId;

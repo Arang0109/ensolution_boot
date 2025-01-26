@@ -287,7 +287,6 @@
         let result = `
               <div class="row g-2 m-1 stackMeasurementDiv">
                 <div class="col-md">
-                  <input type="text" name="stack_id" value="${stackId}" hidden>
                   <div class="form-floating">
                     <input type="text" class="form-control" id="${value}" name="pollutant_id" placeholder="측정 항목" value="${text}" disabled>
                     <label for="${value}">측정 항목</label>
@@ -356,7 +355,6 @@
 
       $('div[class="row g-2 m-1 stackMeasurementDiv"]').each(function() {
         pollutantList.push({
-          "stack_id": $(this).find('input[name="stack_id"]').val(),
           "pollutant_id": $(this).find('input[name="pollutant_id"]').attr("id"),
           "cycle_type": $(this).find('select.cycle').val(),
           "is_completed": 0,
