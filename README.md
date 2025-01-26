@@ -166,7 +166,7 @@
   <tr>
     <td rowspan="3">stack measurement</td>
     <td>Get measurements of a specific stack</td>
-    <td rowspan="3">/measurements</td>
+    <td rowspan="3">/stack-measurements</td>
     <td>GET</td>
   </tr>
   <tr>

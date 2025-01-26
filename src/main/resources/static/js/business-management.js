@@ -35,7 +35,7 @@ function bizNumFormatter(selector) {
 
 function datepickerFormatter(selector) {
   const today = new Date();
-  const formatDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + String(today.getDate()).padStart(2, '0');
+  const formatDate = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0');
 
   selector.datepicker({
     defaultDate: new Date(),
