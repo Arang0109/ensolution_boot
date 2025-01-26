@@ -20,9 +20,7 @@ public class CompanyServiceImpl implements CompanyService {
   }
 
   @Override
-  public CompanyDto findCompanyById(Integer id) {
-    return companyMapper.selectOne(id);
-  }
+  public CompanyDto findCompanyById(Integer id) { return companyMapper.selectOne(id); }
 
   @Override
   public List<CompanyDto> findAllCompanies() {

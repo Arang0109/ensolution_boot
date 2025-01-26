@@ -50,10 +50,10 @@
               th:data-stack-measurement-ids="${schedule.stack_measurement_ids}"
               th:data-is-completed="${schedule.is_completed ? true : false}">
             <td></td>
-            <td><a th:href="@{/schedule/modify/${schedule.stack_id}/${schedule.measure_date}}">
+            <td><a href="">
               <span th:text="${#dates.format(schedule.measure_date, 'yyyy-MM-dd')}"></span></a></td>
             <td th:text="${schedule.workplace_name}"></td>
-            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/management/stack/{stackId}(stackId=${schedule.stack_id})}" th:text="${schedule.stack_name}" target="_blank"></a></td>
+            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/management/stacks/{stackId}(stackId=${schedule.stack_id})}" th:text="${schedule.stack_name}" target="_blank"></a></td>
             <td th:text="${schedule.pollutants}"></td>
             <td th:text="${schedule.team_name}"></td>
           </tr>
