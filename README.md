@@ -38,20 +38,20 @@
 - **백엔드:** Java, Spring Boot
 - **데이터베이스:** MySQL
 ### 데이터베이스
-| Table                 | Field                                                 | Foreign Key                              |
-|-----------------------|-------------------------------------------------------|------------------------------------------|
-| company               | id, name, address, ceo, biz_number, reg_date          |                                          |
-| workplace             | id, name, address, reg_date                           | company_id                               |
-| factory               | id, name                                              | workplace_id                             |
-| sub_factory           | id, name                                              | factory_id                               |
-| stack                 | id, name, prevention, note, reg_date                  | sub_factory_id, management_department_id |
-| stack_info            | id, 필요 재원들                                            | stack_id                                 |
-| stack_images          | id, name, image_data                                  | stack_id                                 |
-| pollutant             | id, name, name_en, method                             |                                          |
-| stack_measurement     | id, cycle_type, is_completed, is_measure, allow_value | stack_id, pollutant_id                   |
-| schedule              | id, measure_date, is_completed                        | team_id, stack_measurement_id            |
-| team                  | id, name                                              |                                          |
-| management_department | id, name, tel                                         | workplace_id                             |
+| Table                 | Field                                                                   | Foreign Key                              |
+|-----------------------|-------------------------------------------------------------------------|------------------------------------------|
+| company               | company_id, company_name, address, ceo, biz_number, reg_date            |                                          |
+| workplace             | workplace_id, workplace_name, address, reg_date                         | company_id                               |
+| factory               | factory_id, factory_name                                                | workplace_id                             |
+| sub_factory           | sub_factory_id, sub_factory_name                                        | factory_id                               |
+| stack                 | stack_id, stack_name, prevention, note, reg_date                        | sub_factory_id, management_department_id |
+| stack_info            | stack_info_id, 필요 재원들                                                   | stack_id                                 |
+| stack_images          | stack_images_id, image_name, image_data                                 | stack_id                                 |
+| pollutant             | pollutant_id, pollutnat_name, name_en, method                           |                                          |
+| stack_measurement     | stack_measurement_id, cycle_type, is_completed, is_measure, allow_value | stack_id, pollutant_id                   |
+| schedule              | schedule_id, measure_date, is_completed                                 | team_id, stack_measurement_id            |
+| team                  | team_id, team_name                                                      |                                          |
+| management_department | management_department_id, management_department_name, tel               | workplace_id                             |
 ### RESTful API 설계
 <table>
   <tr>
