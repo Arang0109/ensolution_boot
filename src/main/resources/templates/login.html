@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <div class="container" style="padding: 1.875rem 0 0; width: 500px;">
+    <div class="border p-4" style="background-color: white;">
+      <form th:action="@{/login}" method="POST" class="mb-3">
+        <input class="form-control mb-3" type="text" placeholder="아이디" aria-label="username" name="username">
+        <input class="form-control mb-3" type="password" placeholder="비밀번호" aria-label="password" name="password">
+        <div class="form-check mb-3 d-flex justify-content-between">
+          <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              아이디 저장하기
+            </label>
+          </div>
+          <a href="#">아이디·비밀번호 찾기</a>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">로그인</button>
+      </form>
+      <p>아이디 : test</p>
+      <p>비밀번호 : test1234</p>
+    </div>
+  </div>
+</main>
+
+<script layout:fragment="scriptContent" th:inline="javascript">
+  $(document).ready(function() {
+
+  });
+</script>
+
+</body>
+</html>
