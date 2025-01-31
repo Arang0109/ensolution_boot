@@ -1,5 +1,6 @@
 package com.ensolution.ensol;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,6 @@ public class HomeController {
       return "redirect:/login";
     }
 
-    return "home";
-  }
-
-  @GetMapping("/home")
-  public String home() {
     return "home";
   }
 

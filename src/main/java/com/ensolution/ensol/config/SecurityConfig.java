@@ -30,7 +30,7 @@ public class SecurityConfig {
         )
         .formLogin(login -> login
             .loginPage("/login")
-            .defaultSuccessUrl("/home", true)
+            .defaultSuccessUrl("/", true)
             .successHandler(loginSuccessHandler)
             .permitAll()
         )
@@ -38,7 +38,7 @@ public class SecurityConfig {
             .logoutUrl("/logout")
             .logoutSuccessUrl("/login")
             .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID")
+            .deleteCookies("JSESSIONID", "rememberedUsername")
         );
     return http.build();
   }
