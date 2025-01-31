@@ -88,10 +88,10 @@ public class BusinessRestController {
     stackService.updateStackInfo(stackInfoDto, stackId);
   }
 
-  @PatchMapping("${management.stacks}" + "{stackId}/note")
-  public void updateStackNote(@RequestBody StackDto stack) {
-    StackDto stackDto = stackService.findStackById(stack.getStack_id());
-    stackDto.setNote(stack.getNote());
+  @PatchMapping("${management.stacks}" + "/{stackId}/note")
+  public void updateStackNote(@PathVariable Integer stackId, @RequestBody String note) {
+    StackDto stackDto = stackService.findStackById(stackId);
+    stackDto.setNote(note);
     stackService.updateStack(stackDto);
   }
 

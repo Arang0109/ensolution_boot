@@ -126,12 +126,7 @@
         return;
       }
 
-      const note = selector.val();
       const stack_id = $('#selectStack').val();
-      const stack = {
-        'stack_id': stack_id,
-        'note': note,
-      }
       const msg = {
         successMsg: '수정 되었습니다.',
         failedMsg: '수정에 실패 하였습니다.'
@@ -141,7 +136,7 @@
         url: `/management/stacks/${stack_id}/note`,
         type: 'PATCH',
         contentType: 'application/json',
-        data: JSON.stringify(stack),
+        data: selector.val(),
         success: function() {
           $('#modifyNoteBtn').html('특이사항 수정');
           $('#noteOfStack').attr('readonly', true);
