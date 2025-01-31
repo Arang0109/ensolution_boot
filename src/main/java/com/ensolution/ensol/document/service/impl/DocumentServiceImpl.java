@@ -21,7 +21,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.scoreService = scoreService;
   }
 
-  @Override public List<PollutantDto> findPollutantsById(List<PollutantDto> pollutantDto) {
+  @Override public List<PollutantDto> selectPollutlantsList(List<PollutantDto> pollutantDto) {
     List<PollutantDto> pollutants = new ArrayList<>();
 
     for (PollutantDto p : pollutantDto) {

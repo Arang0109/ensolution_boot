@@ -17,8 +17,16 @@ public class DocumentController {
     this.pollutantService = pollutantService;
   }
 
+  /**
+   * 측정가용능력 점수 계산
+   *
+   * @param m Model 객체
+   * 모델 데이터
+   * - "pollutants" : 오염 물질 목록 데이터 pollutantService.findAllPollutants()
+   * @return 측정가용능력 점수 계산 페이지
+   */
   @GetMapping("/availability-score")
-  public String abilityScore(Model m) {
+  public String showAvailabilityScorePage(Model m) {
     m.addAttribute("pollutants", pollutantService.findAllPollutants());
     return "document/availabilityScore";
   }

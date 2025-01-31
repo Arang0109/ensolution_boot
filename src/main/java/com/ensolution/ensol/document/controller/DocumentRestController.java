@@ -24,12 +24,12 @@ public class DocumentRestController {
   }
 
   @PostMapping("/availability-score")
-  public ResponseEntity<Map<String, Object>> scoreCalculator(@RequestBody List<PollutantDto> pollutantDto) {
+  public ResponseEntity<Map<String, Object>> calculateAvailabilityScore(@RequestBody List<PollutantDto> pollutants) {
     Map<String, Object> response = new HashMap<>();
 
     response.put("score",
         scoreService
-            .CapabilityScorer(documentService.findPollutantsById(pollutantDto))
+            .CapabilityScorer(documentService.selectPollutlantsList(pollutants))
             .get("score"));
 
     return ResponseEntity.ok(response);
