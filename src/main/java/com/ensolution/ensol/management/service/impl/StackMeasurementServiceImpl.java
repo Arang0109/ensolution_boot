@@ -30,16 +30,16 @@ public class StackMeasurementServiceImpl implements StackMeasurementService {
   }
 
   @Override
-  public Integer addNewStackMeasurement(StackMeasurementDto stackMeasurementDto) {
+  public void createStackMeasurement(StackMeasurementDto stackMeasurementDto) {
     try {
-      return stackMeasurementMapper.insert(stackMeasurementDto);
+      stackMeasurementMapper.insert(stackMeasurementDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("StackMeasurement", "ID", stackMeasurementDto.getStack_id().toString(), e);
     }
   }
 
   @Override
-  public Integer removeStackMeasurements(List<StackMeasurementDto> stackMeasurements) {
+  public void removeStackMeasurements(List<StackMeasurementDto> stackMeasurements) {
     if (stackMeasurements == null || stackMeasurements.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty");
     }
@@ -54,7 +54,7 @@ public class StackMeasurementServiceImpl implements StackMeasurementService {
     }
 
     try {
-      return stackMeasurementMapper.deleteItems(ids);
+      stackMeasurementMapper.deleteItems(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting stackMeasurements", e);
     }

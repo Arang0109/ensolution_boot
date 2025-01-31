@@ -7,6 +7,6 @@ import java.util.List;
 public interface StackMeasurementService {
   StackMeasurementDto findStackMeasurementById(Integer id);
   List<StackMeasurementDto> findStackMeasurementsByStackId(Integer stack_id);
-  Integer addNewStackMeasurement(StackMeasurementDto stackMeasurement);
-  Integer removeStackMeasurements(List<StackMeasurementDto> stackMeasurements);
+  void createStackMeasurement(StackMeasurementDto stackMeasurement);
+  void removeStackMeasurements(List<StackMeasurementDto> stackMeasurements);
 }

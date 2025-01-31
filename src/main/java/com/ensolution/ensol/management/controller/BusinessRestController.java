@@ -101,7 +101,7 @@ public class BusinessRestController {
   public void addStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
       stackMeasurementDto.setStack_id(stackId);
-      stackMeasurementService.addNewStackMeasurement(stackMeasurementDto);
+      stackMeasurementService.createStackMeasurement(stackMeasurementDto);
     }
   }
 

@@ -47,16 +47,16 @@ public class WorkplaceServiceImpl implements WorkplaceService {
   }
 
   @Override
-  public Integer addNewWorkplace(WorkplaceDto workplaceDto) {
+  public void createWorkplace(WorkplaceDto workplaceDto) {
     try {
-      return workplaceMapper.insert(workplaceDto);
+      workplaceMapper.insert(workplaceDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("workplace", "Name", workplaceDto.getWorkplace_name(), e);
     }
   }
 
   @Override
-  public Integer updateWorkplace(WorkplaceDto workplaceDto) {
+  public void updateWorkplace(WorkplaceDto workplaceDto) {
     WorkplaceDto existingWorkplace = workplaceMapper.selectWorkplace(workplaceDto.getWorkplace_id());
 
     if (existingWorkplace == null) {
@@ -64,15 +64,14 @@ public class WorkplaceServiceImpl implements WorkplaceService {
     }
 
     if (existingWorkplace.equals(workplaceDto)) {
-      System.out.println("No changes detected for Workplace Name: " + workplaceDto.getWorkplace_name());
-      return 0;
+      throw new DuplicateKeyException("No changes detected for Workplace Name: " + workplaceDto.getWorkplace_name());
     }
 
-    return workplaceMapper.update(workplaceDto);
+    workplaceMapper.update(workplaceDto);
   }
 
   @Override
-  public Integer removeWorkplaces(List<WorkplaceDto> workplaces) {
+  public void removeWorkplaces(List<WorkplaceDto> workplaces) {
     if (workplaces == null || workplaces.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty");
     }
@@ -87,7 +86,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
     }
 
     try {
-      return workplaceMapper.deleteItems(ids);
+      workplaceMapper.deleteItems(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting workplaces", e);
     }

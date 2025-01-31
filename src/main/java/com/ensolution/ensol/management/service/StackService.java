@@ -17,9 +17,9 @@ public interface StackService {
   List<StackTableDto> findStacksOfTable();
   List<StackImagesDto> findAllStackImages(Integer stackId);
   Map<String, Integer> getCompanyWorkplaceId(Integer id);
-  Integer addNewStack(StackDto stack);
-  Integer updateStack(StackDto stack);
-  Integer updateStackInfo(StackInformationDto stackInformation, Integer stackId);
-  Integer removeStacks(List<StackDto> stacks);
-  Integer saveFile(MultipartFile file, Integer stackId) throws IOException;
+  void createStack(StackDto stack);
+  void updateStack(StackDto stack);
+  void updateStackInfo(StackInformationDto stackInformation, Integer stackId);
+  void removeStacks(List<StackDto> stacks);
+  void saveFile(MultipartFile file, Integer stackId) throws IOException;
 }

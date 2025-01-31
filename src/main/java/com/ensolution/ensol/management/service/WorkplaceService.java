@@ -12,7 +12,7 @@ public interface WorkplaceService {
   List<WorkplaceDto> findAllWorkplaces();
   List<SubFactoryDto> findSubFactoriesByWorkplaceId(Integer id);
   List<DepartmentDto> findDepartmentsByWorkplaceId(Integer id);
-  Integer addNewWorkplace(WorkplaceDto workplaceDto);
-  Integer updateWorkplace(WorkplaceDto workplaceDto);
-  Integer removeWorkplaces(List<WorkplaceDto> workplaces);
+  void createWorkplace(WorkplaceDto workplaceDto);
+  void updateWorkplace(WorkplaceDto workplaceDto);
+  void removeWorkplaces(List<WorkplaceDto> workplaces);
 }

@@ -84,7 +84,7 @@ public class BusinessController {
   public String createCompany(CompanyDto companyDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         companyDto,
-        companyService::addNewCompany,
+        companyService::createCompany,
         rattr,
         companyDto.getCompany_name()
     );
@@ -145,7 +145,7 @@ public class BusinessController {
   public String createWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         workplaceDto,
-        workplaceService::addNewWorkplace,
+        workplaceService::createWorkplace,
         rattr,
         workplaceDto.getWorkplace_name()
     );
@@ -211,7 +211,7 @@ public class BusinessController {
   public String createStack(StackDto stackDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         stackDto,
-        stackService::addNewStack,
+        stackService::createStack,
         rattr,
         stackDto.getStack_name()
     );

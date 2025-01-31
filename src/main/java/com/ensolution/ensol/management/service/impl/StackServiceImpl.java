@@ -39,7 +39,7 @@ public class StackServiceImpl implements StackService {
   }
 
   @Override
-  public Integer saveFile(MultipartFile file, Integer stackId) throws IOException {
+  public void saveFile(MultipartFile file, Integer stackId) throws IOException {
     File directory = new File(urlConstants.getUPLOAD_DIR());
     if (!directory.exists()) {
       directory.mkdirs();
@@ -55,7 +55,7 @@ public class StackServiceImpl implements StackService {
     stackImagesDto.setImage_path(filePath);
     stackImagesDto.setImage_name(file.getOriginalFilename());
 
-    return stackImagesMapper.insert(stackImagesDto);
+    stackImagesMapper.insert(stackImagesDto);
   }
 
   @Override
@@ -96,33 +96,33 @@ public class StackServiceImpl implements StackService {
   }
 
   @Override
-  public Integer addNewStack(StackDto stackDto) {
+  public void createStack(StackDto stackDto) {
     try {
-      return stackMapper.insert(stackDto);
+      stackMapper.insert(stackDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("stack", "Name", stackDto.getStack_name(), e);
     }
   }
 
   @Override
-  public Integer updateStack(StackDto stackDto) {
+  public void updateStack(StackDto stackDto) {
     StackDto existingStack = stackMapper.selectStack(stackDto.getStack_id());
 
     if (existingStack == null) {
       throw new IllegalArgumentException("Stack with Name " + stackDto.getStack_name() + " does not exist.");
     }
 
-    return stackMapper.update(stackDto);
+    stackMapper.update(stackDto);
   }
 
   @Override
-  public Integer updateStackInfo(StackInformationDto stackInformationDto, Integer stackId) {
+  public void updateStackInfo(StackInformationDto stackInformationDto, Integer stackId) {
     stackInformationDto.setStack_info_id(stackId);
-    return stackMapper.updateStackInfo(stackInformationDto);
+    stackMapper.updateStackInfo(stackInformationDto);
   }
 
   @Override
-  public Integer removeStacks(List<StackDto> stacks) {
+  public void removeStacks(List<StackDto> stacks) {
     if (stacks == null || stacks.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty");
     }
@@ -137,7 +137,7 @@ public class StackServiceImpl implements StackService {
     }
 
     try {
-      return stackMapper.deleteItems(ids);
+      stackMapper.deleteItems(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting stacks", e);
     }

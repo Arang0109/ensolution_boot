@@ -28,16 +28,16 @@ public class CompanyServiceImpl implements CompanyService {
   }
 
   @Override
-  public Integer addNewCompany(CompanyDto companyDto) {
+  public void createCompany(CompanyDto companyDto) {
     try {
-      return companyMapper.insert(companyDto);
+      companyMapper.insert(companyDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("company", "Name", companyDto.getCompany_name(), e);
     }
   }
 
   @Override
-  public Integer updateCompany(CompanyDto companyDto) {
+  public void updateCompany(CompanyDto companyDto) {
     CompanyDto existingCompany = companyMapper.selectOne(companyDto.getCompany_id());
 
     if (existingCompany == null) {
@@ -45,15 +45,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     if (existingCompany.equals(companyDto)) {
-      System.out.println("No changes detected for Company Name: " + companyDto.getCompany_name());
-      return 0;
+      throw new DuplicateKeyException("No changes detected for Company Name: " + companyDto.getCompany_name());
     }
 
-    return companyMapper.update(companyDto);
+    companyMapper.update(companyDto);
   }
 
   @Override
-  public Integer removeCompanies(List<CompanyDto> companies) {
+  public void removeCompanies(List<CompanyDto> companies) {
     if (companies == null || companies.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty");
     }
@@ -68,7 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     try {
-      return companyMapper.deleteItems(ids);
+      companyMapper.deleteItems(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting companies", e);
     }
