@@ -15,8 +15,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-  @Autowired
-  private LoginSuccessHandler loginSuccessHandler;
+  private final LoginSuccessHandler loginSuccessHandler;
+
+  public SecurityConfig(LoginSuccessHandler loginSuccessHandler) {
+    this.loginSuccessHandler = loginSuccessHandler;
+  }
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

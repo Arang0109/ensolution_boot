@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-  private UserMapper userMapper; // JPA Repository
+  private final UserMapper userMapper;
 
   @Autowired
   CustomUserDetailsService(UserMapper userMapper) {
