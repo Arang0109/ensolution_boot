@@ -9,9 +9,9 @@
 <main layout:fragment="content">
   <div class="container" style="padding: 1.875rem 0 0; width: 500px;">
     <div class="border p-4" style="background-color: white;">
-      <form action="" method="POST" class="mb-3">
-        <input class="form-control mb-3" type="text" placeholder="아이디" aria-label="user id">
-        <input class="form-control mb-3" type="password" placeholder="비밀번호" aria-label="password">
+      <form th:action="@{/login}" method="POST" class="mb-3">
+        <input class="form-control mb-3" type="text" placeholder="아이디" aria-label="username" name="username">
+        <input class="form-control mb-3" type="password" placeholder="비밀번호" aria-label="password" name="password">
         <div class="form-check mb-3 d-flex justify-content-between">
           <div>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>

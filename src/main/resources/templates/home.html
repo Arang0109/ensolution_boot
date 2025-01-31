@@ -7,7 +7,11 @@
 </head>
 <body>
 <main layout:fragment="content">
-
+  <div class="container" style="padding: 1.875rem 0 0;">
+    <div class="border p-4" style="background-color: white;">
+      <p th:utext="${user} ?: 'user 정보'">user 정보</p>
+    </div>
+  </div>
 </main>
 
 <script layout:fragment="scriptContent" th:inline="javascript">
