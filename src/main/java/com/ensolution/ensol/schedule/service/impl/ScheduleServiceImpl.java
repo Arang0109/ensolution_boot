@@ -56,7 +56,7 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public void addNewSchedule(ScheduleDto scheduleDto) {
+  public void createSchedule(ScheduleDto scheduleDto) {
     scheduleDto.setIs_completed(false);
     scheduleMapper.insert(scheduleDto);
   }

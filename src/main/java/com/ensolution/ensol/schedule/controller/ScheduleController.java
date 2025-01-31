@@ -27,13 +27,13 @@ public class ScheduleController {
   }
 
   @GetMapping("/calendar")
-  public String scheduleMainView(Model m) {
+  public String showSchedulePage(Model m) {
     m.addAttribute("schedules", scheduleService.findAllSchedules());
     return "schedule/calendarView";
   }
 
   @GetMapping("/register")
-  public String registerManager(Model m) {
+  public String showRegisterPage(Model m) {
     m.addAttribute("workplaces", workplaceService.findAllWorkplaces());
     return "schedule/scheduleRegisterView";
   }

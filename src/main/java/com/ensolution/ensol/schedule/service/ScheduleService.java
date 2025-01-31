@@ -13,7 +13,7 @@ public interface ScheduleService {
 
   List<HistoryDto> historyFormater(List<HistoryDto> histories);
 
-  void addNewSchedule(ScheduleDto scheduleDto);
+  void createSchedule(ScheduleDto scheduleDto);
 
   void completeSchedules(List<Integer> schedule_ids);
 

@@ -49,12 +49,12 @@ public class ScheduleRestController {
     // 1. datepicker 선택된 날짜 (measure_date)
     // 2. stack_measurement_id >> 여러개 >> schedule 여러개 >> ajax 로 처리
     for (ScheduleDto schedule : scheduleDto) {
-      scheduleService.addNewSchedule(schedule);
+      scheduleService.createSchedule(schedule);
     }
   }
 
   @GetMapping("/register/stacks")
-  public ResponseEntity<Map<String, Object>> getStackName(@RequestParam Integer workplaceId) {
+  public ResponseEntity<Map<String, Object>> getStacksOfWorkplace(@RequestParam Integer workplaceId) {
     List<StackTableDto> stacks = stackService.findStacksByWorkplaceId(workplaceId);
 
     Map<String, Object> response = new HashMap<>();
@@ -64,7 +64,7 @@ public class ScheduleRestController {
   }
 
   @GetMapping("/register/stack-measurements")
-  public ResponseEntity<Map<String, Object>> getStackMeasurement(@RequestParam Integer stackId) {
+  public ResponseEntity<Map<String, Object>> getStackMeasurementsOfStack(@RequestParam Integer stackId) {
     Map<String, Object> response = new HashMap<>();
     String note = stackService.findStackById(stackId).getNote();
     List<StackMeasurementDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);

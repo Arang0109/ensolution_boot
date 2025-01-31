@@ -98,7 +98,7 @@ public class BusinessRestController {
   @PostMapping
       ("${management.stacks}" +
           "/{stackId}/stack-measurements")
-  public void addStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
+  public void createStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
       stackMeasurementDto.setStack_id(stackId);
       stackMeasurementService.createStackMeasurement(stackMeasurementDto);
