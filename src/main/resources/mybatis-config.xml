@@ -21,6 +21,5 @@
     <typeAlias alias="HistoryDto" type="com.ensolution.ensol.schedule.domain.HistoryDto"/>
     <typeAlias alias="BoardDto" type="com.ensolution.ensol.dashboard.domain.BoardDto"/>
     <typeAlias alias="ExcelStackMeasurementDto" type="com.ensolution.ensol.management.domain.stack.ExcelStackMeasurementDto"/>
-    <typeAlias alias="UserDto" type="com.ensolution.ensol.common.domain.UserDto"/>
   </typeAliases>
 </configuration>

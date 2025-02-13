@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.ensolution.ensol.common.mapper.UserMapper">
-  <select id="findByUsername" resultType="UserDto">
-      SELECT * FROM users WHERE username = #{username};
-  </select>
-</mapper>

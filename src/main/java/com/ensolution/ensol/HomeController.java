@@ -9,16 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
   @GetMapping("/")
-  public String home(HttpSession session) {
-    if (session.getAttribute("user") == null) {
-      return "redirect:/login";
-    }
-
+  public String home() {
     return "home";
-  }
-
-  @GetMapping("/login")
-  public String login() {
-    return "login";
   }
 }
