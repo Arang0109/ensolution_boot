@@ -33,7 +33,7 @@ import java.text.MessageFormat;
  * - 계층형 업체 데이터 관리
  *
  * @author KangMinsu
- * @version 1.0
+ * @version 1.1
  * @since 2025-01-22
  */
 @Controller
