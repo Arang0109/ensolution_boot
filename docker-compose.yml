@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3308:3306"
+      - "3308:3307"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./ensolution.sql:/docker-entrypoint-initdb.d/ensolution.sql
@@ -38,7 +38,7 @@ services:
       mysql:
         condition: service_healthy
     env_file:
-      - .env.${SPRING_PROFILES_ACTIVE}
+      - .env
 
 volumes:
   mysql_data:
