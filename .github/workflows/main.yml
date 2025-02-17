@@ -57,3 +57,14 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ensolution:latest
+
+      - name: Build and Push Docker Image
+        run: |
+          docker-compose build
+          docker-compose push
+
+      - name: Run Docker Compose Services
+        run: docker-compose up -d
+
+      - name: Check Running Containers
+        run: docker ps
