@@ -20,13 +20,6 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-ENV DB_HOST=localhost \
-    DB_PORT=3306 \
-    DB_NAME=ensolution \
-    DB_USERNAME=admin \
-    DB_PASSWORD=0000 \
-    LOG_LEVEL=INFO
-
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
