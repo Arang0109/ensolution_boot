@@ -3,6 +3,7 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8
+    container_name: mysql_${GITHUB_RUN_ID}
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
@@ -21,7 +22,7 @@ services:
 
   app:
     image: arangpapa/ensolution:latest
-    container_name: ensolution
+    container_name: ensolution_${GITHUB_RUN_ID}
     build:
       context: .
       dockerfile: Dockerfile
