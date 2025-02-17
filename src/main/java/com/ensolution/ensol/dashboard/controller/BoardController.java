@@ -14,6 +14,7 @@ public class BoardController {
   WorkplaceService workplaceService;
   BoardService boardService;
 
+  // Test
   @Autowired
   public BoardController(WorkplaceService workplaceService, BoardService boardService) {
     this.workplaceService = workplaceService;

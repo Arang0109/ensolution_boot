@@ -20,6 +20,7 @@ services:
       retries: 3
 
   app:
+    image: arangpapa/ensolution:latest
     container_name: ensolution
     build:
       context: .
