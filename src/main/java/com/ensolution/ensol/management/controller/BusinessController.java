@@ -77,7 +77,7 @@ public class BusinessController {
    *
    * @param companyDto 추가할 업체 정보를 담고 있는 객체
    * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
-   * @return 업체 목록 페이지로 리다이렉트
+   * @return 업체 목록 페이지로 redirect
    */
   @PostMapping("${management.companies}")
   public String createCompany(CompanyDto companyDto, RedirectAttributes rattr) {
