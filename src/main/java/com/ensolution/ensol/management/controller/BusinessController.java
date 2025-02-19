@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.Optional;
 
 /**
  * <h2>BusinessController</h2>
@@ -81,11 +82,12 @@ public class BusinessController {
    */
   @PostMapping("${management.companies}")
   public String createCompany(CompanyDto companyDto, RedirectAttributes rattr) {
+    System.out.println(companyDto.toString());
     DataHandler.addOperationHandler(
         companyDto,
         companyService::createCompany,
         rattr,
-        companyDto.getCompany_name()
+        companyDto.getName()
     );
     return MessageFormat.format("redirect:{0}{1}",
         urlConstants.getMANAGEMENT_BASE(),
@@ -107,8 +109,8 @@ public class BusinessController {
       ("${management.companies}" +
           "/{companyId}")
   public String getCompanyDetail(@PathVariable Integer companyId, Model m) {
-    CompanyDto company = companyService.findCompanyById(companyId);
-    if (company == null) {
+    Optional<CompanyDto> company = companyService.findCompanyById(companyId);
+    if (company.isEmpty()) {
       return MessageFormat.format("redirect:{0}{1}",
           urlConstants.getMANAGEMENT_BASE(),
           urlConstants.getMANAGEMENT_COMPANIES());

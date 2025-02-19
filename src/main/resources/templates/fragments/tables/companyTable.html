@@ -22,22 +22,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="company : ${companies}" th:data-company-id="${company.company_id}">
+    <tr th:each="company : ${companies}" th:data-company-id="${company.id}">
       <td></td>
       <td>
         <a class="updateLink"
-           th:href="@{/management/companies/{id}(id=${company.company_id})}">
-          <span th:text="${company.company_name != null ? company.company_name : '-'}"></span>
+           th:href="@{/management/companies/{id}(id=${company.id})}">
+          <span th:text="${company.name != null ? company.name : '-'}"></span>
         </a>
       </td>
       <td>
-        <span th:text="${company.ceo_name != null ? company.ceo_name : '-'}"></span>
+        <span th:text="${company.ceoName != null ? company.ceoName : '-'}"></span>
       </td>
       <td>
         <span th:text="${company.address != null ? company.address : '-'}"></span>
       </td>
       <td class="bizNumber">
-        <span th:text="${company.biz_number != null ? company.biz_number : '-'}"></span>
+        <span th:text="${company.bizNumber != null ? company.bizNumber : '-'}"></span>
       </td>
     </tr>
     </tbody>
