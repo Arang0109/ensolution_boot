@@ -1,7 +1,6 @@
 package com.ensolution.ensol.management.domain.company;
 
 import java.time.LocalDate;
-import java.sql.Date;
 import java.util.Objects;
 
 public class WorkplaceDto {
@@ -9,19 +8,18 @@ public class WorkplaceDto {
   private Integer company_id;
   private String workplace_name;
   private String address;
-  private final Date reg_date;
-  private FactoryDto factory;
+  private boolean exist_factory;
+  private final LocalDate reg_date;
 
   public WorkplaceDto() {
-    this.reg_date = Date.valueOf(LocalDate.now());
+    this.reg_date = LocalDate.now();
   }
 
-  public WorkplaceDto(Integer company_id, String workplace_name, String address, FactoryDto factory) {
+  public WorkplaceDto(Integer company_id, String workplace_name, String address) {
     this.company_id = company_id;
     this.workplace_name = workplace_name;
     this.address = address;
-    this.reg_date = Date.valueOf(LocalDate.now());
-    this.factory = factory;
+    this.reg_date = LocalDate.now();
   }
 
   @Override
@@ -69,16 +67,12 @@ public class WorkplaceDto {
     this.address = address;
   }
 
-  public Date getReg_date() {
+  public boolean isExist_factory() {
+    return exist_factory;
+  }
+
+  public LocalDate getReg_date() {
     return reg_date;
-  }
-
-  public void setFactory(FactoryDto factory) {
-    this.factory = factory;
-  }
-
-  public FactoryDto getFactory() {
-    return factory;
   }
 
   @Override
@@ -88,8 +82,8 @@ public class WorkplaceDto {
         ", company_id=" + company_id +
         ", workplace_name='" + workplace_name + '\'' +
         ", address='" + address + '\'' +
+        ", exist_factory=" + exist_factory +
         ", reg_date=" + reg_date +
-        ", factory=" + factory +
         '}';
   }
 }

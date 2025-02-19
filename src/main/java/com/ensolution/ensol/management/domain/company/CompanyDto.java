@@ -1,6 +1,5 @@
 package com.ensolution.ensol.management.domain.company;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,10 +9,10 @@ public class CompanyDto {
   private String address;
   private String ceo_name;
   private String biz_number;
-  private final Date reg_date;
+  private final LocalDate reg_date;
 
   public CompanyDto() {
-    this.reg_date = Date.valueOf(LocalDate.now());
+    this.reg_date = LocalDate.now();
   }
 
   public CompanyDto(Integer company_id, String company_name, String address, String ceo_name, String biz_number) {
@@ -22,7 +21,7 @@ public class CompanyDto {
     this.address = address;
     this.ceo_name = ceo_name;
     this.biz_number = biz_number;
-    this.reg_date = Date.valueOf(LocalDate.now());
+    this.reg_date = LocalDate.now();
   }
 
   @Override
@@ -78,7 +77,7 @@ public class CompanyDto {
     this.biz_number = biz_number;
   }
 
-  public Date getReg_date() {
+  public LocalDate getReg_date() {
     return reg_date;
   }
 
