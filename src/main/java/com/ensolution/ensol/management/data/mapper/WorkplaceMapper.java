@@ -1,20 +1,17 @@
 package com.ensolution.ensol.management.data.mapper;
 
-import com.ensolution.ensol.management.data.dto.company.DepartmentDto;
-import com.ensolution.ensol.management.data.dto.company.SubFactoryDto;
 import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
-import org.apache.ibatis.annotations.Mapper;
+import com.ensolution.ensol.management.data.entity.Workplace;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface WorkplaceMapper {
-  WorkplaceDto selectWorkplace(Integer workplace_id);
-  List<SubFactoryDto> selectFactory(Integer workplace_id);
-  List<DepartmentDto> selectDepartment(Integer workplace_id);
-  List<WorkplaceDto> selectWorkplacesOfCompany(Integer id);
-  List<WorkplaceDto> selectAll();
-  Integer insert(WorkplaceDto workplace);
-  Integer update(WorkplaceDto workplace);
-  Integer deleteItems(List<Integer> ids);
+  @Mapping(source = "company.companyId", target = "companyId")
+  WorkplaceDto toDto(Workplace workplace);
+  @Mapping(source = "companyId", target = "company.companyId")
+  Workplace toEntity(WorkplaceDto workplaceDto);
+  List<WorkplaceDto> toDtoList(List<Workplace> workplaces);
 }

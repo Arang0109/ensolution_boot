@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class CompanyDto {
-  private Integer id;
-  private String name;
+  private Integer companyId;
+  private String companyName;
   private String address;
   private String ceoName;
   private String bizNumber;

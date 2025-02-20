@@ -1,73 +1,52 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.data.dto.company.DepartmentDto;
-import com.ensolution.ensol.management.data.dto.company.SubFactoryDto;
 import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
-import com.ensolution.ensol.management.data.mapper.WorkplaceMapper;
+import com.ensolution.ensol.management.service.WorkplaceDataService;
 import com.ensolution.ensol.management.service.WorkplaceService;
-import org.springframework.dao.DataAccessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class WorkplaceServiceImpl implements WorkplaceService {
-  private final WorkplaceMapper workplaceMapper;
+  private final WorkplaceDataService workplaceDataService;
 
-  public WorkplaceServiceImpl(WorkplaceMapper workplaceMapper) {
-    this.workplaceMapper = workplaceMapper;
+  @Override
+  public Optional<WorkplaceDto> findWorkplaceById(Integer id) {
+    return workplaceDataService.findWorkplaceById(id);
   }
 
   @Override
-  public WorkplaceDto findWorkplaceById(Integer id) {
-    return workplaceMapper.selectWorkplace(id);
-  }
-
-  @Override
-  public List<WorkplaceDto> findWorkplacesByCompanyId(Integer id) {
-    return workplaceMapper.selectWorkplacesOfCompany(id);
+  public List<WorkplaceDto> findWorkplacesByCompanyId(Integer companyId) {
+    return workplaceDataService.findWorkplacesByCompanyId(companyId);
   }
 
   @Override
   public List<WorkplaceDto> findAllWorkplaces() {
-    return workplaceMapper.selectAll();
-  }
-
-  @Override
-  public List<SubFactoryDto> findSubFactoriesByWorkplaceId(Integer id) {
-    return workplaceMapper.selectFactory(id);
-  }
-
-  @Override
-  public List<DepartmentDto> findDepartmentsByWorkplaceId(Integer id) {
-    return workplaceMapper.selectDepartment(id);
+    return workplaceDataService.findAll();
   }
 
   @Override
   public void createWorkplace(WorkplaceDto workplaceDto) {
     try {
-      workplaceMapper.insert(workplaceDto);
+      workplaceDataService.saveWorkplace(workplaceDto);
     } catch (DuplicateKeyException e) {
-      throw new CustomDKException("workplace", "Name", workplaceDto.getWorkplace_name(), e);
+      throw new CustomDKException("workplace", "Name", workplaceDto.getWorkplaceName(), e);
     }
   }
 
   @Override
   public void updateWorkplace(WorkplaceDto workplaceDto) {
-    WorkplaceDto existingWorkplace = workplaceMapper.selectWorkplace(workplaceDto.getWorkplace_id());
-
-    if (existingWorkplace == null) {
-      throw new IllegalArgumentException("Workplace with Name " + workplaceDto.getWorkplace_name() + " does not exist.");
+    if (!workplaceDataService.existsById(workplaceDto.getWorkplaceId())) {
+      throw new IllegalArgumentException("Workplace with Name " + workplaceDto.getWorkplaceName() + " does not exist.");
     }
-
-    if (existingWorkplace.equals(workplaceDto)) {
-      throw new DuplicateKeyException("No changes detected for Workplace Name: " + workplaceDto.getWorkplace_name());
-    }
-
-    workplaceMapper.update(workplaceDto);
+    workplaceDataService.saveWorkplace(workplaceDto);
   }
 
   @Override
@@ -82,12 +61,12 @@ public class WorkplaceServiceImpl implements WorkplaceService {
       if (workplaceDto == null) {
         throw new IllegalArgumentException("WorkplaceDto cannot be null");
       }
-      ids.add(workplaceDto.getWorkplace_id());
+      ids.add(workplaceDto.getWorkplaceId());
     }
 
     try {
-      workplaceMapper.deleteItems(ids);
-    } catch (DataAccessException e) {
+      workplaceDataService.deleteWorkplaces(ids);
+    } catch (DuplicateKeyException e) {
       throw new RuntimeException("Database error occurred while deleting workplaces", e);
     }
   }

@@ -86,9 +86,9 @@ public class StackServiceImpl implements StackService {
   public Map<String, Integer> getCompanyWorkplaceId(Integer id) {
     Map<String, Integer> map = new HashMap<>();
     Integer workplace_id = stackMapper.selectStack(id).getWorkplace_id();
-    Integer company_id = workplaceMapper.selectWorkplace(workplace_id).getCompany_id();
+//    Integer company_id = workplaceMapper.selectWorkplace(workplace_id).getCompany_id();
 
-    map.put("company_id", company_id);
+//    map.put("company_id", company_id);
     map.put("workplace_id", workplace_id);
 
     return map;

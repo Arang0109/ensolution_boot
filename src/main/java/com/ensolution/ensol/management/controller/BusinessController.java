@@ -9,9 +9,7 @@ import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import com.ensolution.ensol.management.service.PollutantService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,83 +20,38 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Optional;
 
-/**
- * <h2>BusinessController</h2>
- * 측정대행 의뢰업체, 측정대상 사업장, 측정 시설의 관리를 담당
- *
- * <h2>주요 URL</h2>
- * - `/management/companies`: 업체 리스트 및 추가, 삭제
- * - `/management/workplaces`: 사업장 리스트
- * - `/management/stacks`: 시설 리스트
- *
- * <h2>기능</h2>
- * - 계층형 업체 데이터 관리
- *
- * @author KangMinsu
- * @version 1.1
- * @since 2025-01-22
- */
 @Controller
 @RequestMapping("${management.base}")
 @RequiredArgsConstructor
 public class BusinessController {
-  public final CompanyService companyService; // 측정대행 의뢰업체 관련 로직 처리
-  public final WorkplaceService workplaceService; // 측정대상 사업장 관련 로직 처리
-  public final StackService stackService; // 측정 시설과 관련 로직 처리
-  public final PollutantService pollutantService; // 측정 오염물질 관련 로직 처리
-  public final UrlConstants urlConstants;
+  private final CompanyService companyService; // 측정대행 의뢰업체 관련 로직 처리
+  private final WorkplaceService workplaceService; // 측정대상 사업장 관련 로직 처리
+  private final StackService stackService; // 측정 시설과 관련 로직 처리
+  private final PollutantService pollutantService; // 측정 오염물질 관련 로직 처리
+  private final UrlConstants urlConstants;
 
-  /**
-   * 업체 목록 조회, 업체 상세페이지 이동 링크 제공
-   * 업체 추가 및 삭제 처리 지원
-   *
-   * @param m Model 객체
-   * 모델 데이터
-   * - "companies" : 회사 목록 데이터 companyService.findAllCompanies()
-   * @return 측정대행 의뢰업체 목록 페이지
-   */
-  @GetMapping("${management.companies}")
+  /** 측정대행 의뢰업체 목록 */
+  @GetMapping("/companies")
   public String getCompanyList(Model m) {
     m.addAttribute("companies", companyService.findAllCompanies());
     return "management/company/companyListView";
   }
 
-  /**
-   * 새로운 업체 추가
-   * `DataHandler.addOperationHandler`: 데이터 저장, 결과 메시지 관리, 예외 처리 수행
-   *
-   * @param companyDto 추가할 업체 정보를 담고 있는 객체
-   * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
-   * @return 업체 목록 페이지로 redirect
-   */
-  @PostMapping("${management.companies}")
+  /** 측정대행 의뢰업체 추가 */
+  @PostMapping("/companies")
   public String createCompany(CompanyDto companyDto, RedirectAttributes rattr) {
-    System.out.println(companyDto.toString());
     DataHandler.addOperationHandler(
         companyDto,
         companyService::createCompany,
         rattr,
-        companyDto.getName()
+        companyDto.getCompanyName()
     );
-    return MessageFormat.format("redirect:{0}{1}",
-        urlConstants.getMANAGEMENT_BASE(),
-        urlConstants.getMANAGEMENT_COMPANIES());
+    return "redirect:/management/companies";
   }
 
-  /** 업체 상세페이지
-   * 업체 정보 수정 및 사업장 목록 제공
-   * 사업장 추가 및 삭제 처리 지원
-   *
-   * @param companyId 측정대행 의뢰업체 ID
-   * @param m Model 객체
-   * 모델 데이터
-   * - "company" : 업체 정보 데이터 companyService.findCompanyById(companyId)
-   * - "workplaces" : 사업장 목록 데이터 workplaceService.findWorkplacesByCompanyId(companyId)
-   * @return 측정대행 의뢰업체 상세페이지
-   */
+  /** 측정대행 의뢰업체 상세페이지 */
   @GetMapping
-      ("${management.companies}" +
-          "/{companyId}")
+      ("/companies/{companyId}")
   public String getCompanyDetail(@PathVariable Integer companyId, Model m) {
     Optional<CompanyDto> company = companyService.findCompanyById(companyId);
 
@@ -106,88 +59,48 @@ public class BusinessController {
       m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
       m.addAttribute("company", company);
     } else {
-      return MessageFormat.format("redirect:{0}{1}",
-          urlConstants.getMANAGEMENT_BASE(),
-          urlConstants.getMANAGEMENT_COMPANIES());
+      return "redirect:/management/companies";
     }
 
     return "management/company/companyDetailView";
   }
 
-  /**
-   * 사업장 목록 조회, 사업장 상세페이지 이동 링크 제공
-   *
-   * @param m Model 객체
-   * 모델 데이터
-   * - "workplaces" : 사업장 목록 데이터 (workplaceService.findAllWorkplaces())
-   * @return 측정대상 사업장 목록 페이지
-   */
-  @GetMapping("${management.workplaces}")
+  /** 사업장 목록 조회, 사업장 상세페이지 이동 링크 제공 */
+  @GetMapping("/workplaces")
   public String getWorkplaceList(Model m) {
     m.addAttribute("workplaces", workplaceService.findAllWorkplaces());
     return "management/workplace/workplaceListView";
   }
 
-  /**
-   * 새로운 사업장 추가
-   * `DataHandler.addOperationHandler`: 데이터 저장, 결과 메시지 관리, 예외 처리 수행
-   *
-   * @param workplaceDto 추가할 사업장 정보를 담고 있는 객체
-   * @param rattr 리다이렉트 시 전달할 메시지를 저장하는 객체
-   * @return 사업장 목록 페이지로 리다이렉트
-   */
-  @PostMapping("${management.workplaces}")
+  /** 측정대상 사업장 추가 */
+  @PostMapping("/workplaces")
   public String createWorkplace(WorkplaceDto workplaceDto, RedirectAttributes rattr) {
     DataHandler.addOperationHandler(
         workplaceDto,
         workplaceService::createWorkplace,
         rattr,
-        workplaceDto.getWorkplace_name()
+        workplaceDto.getWorkplaceName()
     );
-    return MessageFormat.format("redirect:{0}{1}/{2}",
-        urlConstants.getMANAGEMENT_BASE(),
-        urlConstants.getMANAGEMENT_COMPANIES(),
-        workplaceDto.getCompany_id());
+    return MessageFormat.format("redirect:/management/companies/{0}",
+        workplaceDto.getCompanyId());
   }
 
-  /**
-   * 사업장 상세페이지
-   * 사업장 정보 수정 및 시설 목록 제공
-   * 시설 추가 및 삭제 처리 지원
-   *
-   * @param workplaceId 측정대상 사업장 ID
-   * @param m Model 객체
-   * 모델 데이터
-   * - "workplace" : 사업장 정보 데이터 (workplaceService.findWorkplaceById(workplaceId))
-   * - "stacks" : 시설 목록 데이터 (stackService.findStacksByWorkplaceId(workplaceId))
-   * - "company" : 업체 정보 데이터 (companyService.findCompanyById(workplace.getCompany_id()))
-   * @return 측정대상 사업장 상세페이지
-   */
+  /** 사업장 상세페이지 */
   @GetMapping
-      ("${management.workplaces}" +
-          "/{workplaceId}")
+      ("/workplaces/{workplaceId}")
   public String getWorkplaceDetail(@PathVariable Integer workplaceId, Model m) {
-    WorkplaceDto workplace = workplaceService.findWorkplaceById(workplaceId);
-    if (workplace == null) {
-      return MessageFormat.format("redirect:{0}{1}",
-          urlConstants.getMANAGEMENT_BASE(),
-          urlConstants.getMANAGEMENT_WORKPLACES());
+    Optional<WorkplaceDto> workplace = workplaceService.findWorkplaceById(workplaceId);
+    if (workplace.isPresent()) {
+      m.addAttribute("workplace", workplace);
+      m.addAttribute("stacks", stackService.findStacksByWorkplaceId(workplaceId));
+      m.addAttribute("company", companyService.findCompanyById(workplace.get().getCompanyId()));
+    } else {
+      return "redirect:/management/workplaces";
     }
-
-    m.addAttribute("workplace", workplace);
-    m.addAttribute("stacks", stackService.findStacksByWorkplaceId(workplaceId));
-    m.addAttribute("company", companyService.findCompanyById(workplace.getCompany_id()));
     return "management/workplace/workplaceDetailView";
   }
 
-  /**
-   * 시설 목록 조회, 시설 상세페이지 이동 링크 제공
-   *
-   * @param m Model 객체
-   * 모델 데이터
-   * - "stacks" : 시설 목록 데이터 (stackService.findStacksOfTable())
-   * @return 측정 시설 목록 페이지
-   */
+  /** 시설 목록 조회, 시설 상세페이지 이동 링크 제공 */
   @GetMapping("${management.stacks}")
   public String getStackList(Model m) {
     m.addAttribute("stacks", stackService.findStacksOfTable());

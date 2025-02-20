@@ -1,18 +1,25 @@
 package com.ensolution.ensol.management.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "company")
 public class Company {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "company_id")
-  private Integer id;
+  private Integer companyId;
   @Column(name = "company_name", nullable = false)
-  private String name;
+  private String companyName;
   @Column(length = 45)
   private String address;
   @Column(name = "ceo_name")
@@ -21,4 +28,8 @@ public class Company {
   private String bizNumber;
   @Column(name = "reg_date")
   private LocalDate regDate;
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "company")
+  private List<Workplace> workplaces = new ArrayList<>();
 }
