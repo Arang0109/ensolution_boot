@@ -1,6 +1,6 @@
-package com.ensolution.ensol.management.mapper;
+package com.ensolution.ensol.management.data.mapper;
 
-import com.ensolution.ensol.management.domain.stack.PollutantDto;
+import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

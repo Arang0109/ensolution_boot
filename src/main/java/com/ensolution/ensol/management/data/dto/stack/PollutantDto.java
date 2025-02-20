@@ -1,4 +1,4 @@
-package com.ensolution.ensol.management.domain.stack;
+package com.ensolution.ensol.management.data.dto.stack;
 
 
 import java.util.Objects;

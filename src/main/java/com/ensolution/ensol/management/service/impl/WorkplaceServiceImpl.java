@@ -1,10 +1,10 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.domain.company.DepartmentDto;
-import com.ensolution.ensol.management.domain.company.SubFactoryDto;
-import com.ensolution.ensol.management.domain.company.WorkplaceDto;
-import com.ensolution.ensol.management.mapper.WorkplaceMapper;
+import com.ensolution.ensol.management.data.dto.company.DepartmentDto;
+import com.ensolution.ensol.management.data.dto.company.SubFactoryDto;
+import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.mapper.WorkplaceMapper;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;

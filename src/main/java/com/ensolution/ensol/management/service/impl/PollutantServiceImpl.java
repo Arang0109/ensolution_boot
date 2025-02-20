@@ -1,8 +1,8 @@
 package com.ensolution.ensol.management.service.impl;
 
-import com.ensolution.ensol.management.domain.stack.PollutantDto;
+import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
 import com.ensolution.ensol.management.service.PollutantService;
-import com.ensolution.ensol.management.mapper.PollutantMapper;
+import com.ensolution.ensol.management.data.mapper.PollutantMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

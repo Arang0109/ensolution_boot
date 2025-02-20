@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.management.mapper.StackMeasurementMapper">
+<mapper namespace="com.ensolution.ensol.management.data.mapper.StackMeasurementMapper">
   <sql id="select">
     SELECT sm.stack_measurement_id, sm.stack_id, sm.pollutant_id, sm.cycle_type, sm.is_completed, p.pollutant_name,
            p.pollutant_name_en, p.method, sm.is_measure, sm.allow_value

@@ -1,11 +1,9 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.domain.company.CompanyDto;
-import com.ensolution.ensol.management.entity.Company;
-import com.ensolution.ensol.management.repository.CompanyRepository;
+import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.service.CompanyDataService;
 import com.ensolution.ensol.management.service.CompanyService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,30 +15,27 @@ import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-  private final CompanyRepository companyRepository;
-  private final ModelMapper modelMapper = new ModelMapper();
+  private final CompanyDataService companyDataService;
 
   @Autowired
-  public CompanyServiceImpl(CompanyRepository companyRepository) {
-    this.companyRepository = companyRepository;
+  public CompanyServiceImpl(CompanyDataService companyDataService) {
+    this.companyDataService = companyDataService;
   }
 
   @Override
-  public CompanyDto findCompanyById(Integer id) {
-    Company company = companyRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Company not found"));
-    return modelMapper.map(company, CompanyDto.class);
+  public Optional<CompanyDto> findCompanyById(Integer id) {
+    return companyDataService.findCompanyById(id);
   }
 
   @Override
   public List<CompanyDto> findAllCompanies() {
-    return companyRepository.findAll();
+    return companyDataService.findAll();
   }
 
   @Override
   public void createCompany(CompanyDto companyDto) {
     try {
-      companyRepository.save(companyDto);
+      companyDataService.saveCompany(companyDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("company", "Name", companyDto.getName(), e);
     }
@@ -48,13 +43,10 @@ public class CompanyServiceImpl implements CompanyService {
 
   @Override
   public void updateCompany(CompanyDto companyDto) {
-    boolean existCompany = companyRepository.existsById(companyDto.getId());
-
-    if (!existCompany) {
+    if (!companyDataService.existsById(companyDto.getId())) {
       throw new IllegalArgumentException("Company with Name " + companyDto.getName() + " does not exist.");
     }
-
-    companyRepository.save(companyDto);
+    companyDataService.saveCompany(companyDto);
   }
 
   @Override
@@ -73,7 +65,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     try {
-      companyRepository.deleteAllById(ids);
+      companyDataService.deleteCompanies(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting companies", e);
     }

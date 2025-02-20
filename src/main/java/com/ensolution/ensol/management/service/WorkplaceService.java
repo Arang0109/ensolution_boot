@@ -1,8 +1,8 @@
 package com.ensolution.ensol.management.service;
 
-import com.ensolution.ensol.management.domain.company.DepartmentDto;
-import com.ensolution.ensol.management.domain.company.SubFactoryDto;
-import com.ensolution.ensol.management.domain.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.company.DepartmentDto;
+import com.ensolution.ensol.management.data.dto.company.SubFactoryDto;
+import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
 
 import java.util.List;
 

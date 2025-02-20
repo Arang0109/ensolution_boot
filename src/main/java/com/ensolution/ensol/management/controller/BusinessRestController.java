@@ -1,9 +1,9 @@
 package com.ensolution.ensol.management.controller;
 
 import com.ensolution.ensol.common.service.ExcelDataUploadService;
-import com.ensolution.ensol.management.domain.company.CompanyDto;
-import com.ensolution.ensol.management.domain.company.WorkplaceDto;
-import com.ensolution.ensol.management.domain.stack.*;
+import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.stack.*;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackMeasurementService;
 import com.ensolution.ensol.management.service.StackService;

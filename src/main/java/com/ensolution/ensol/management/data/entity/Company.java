@@ -1,7 +1,6 @@
-package com.ensolution.ensol.management.entity;
+package com.ensolution.ensol.management.data.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDate;
 

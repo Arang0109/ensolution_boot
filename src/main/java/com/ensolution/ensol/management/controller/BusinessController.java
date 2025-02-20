@@ -2,13 +2,15 @@ package com.ensolution.ensol.management.controller;
 
 import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.common.util.DataHandler;
-import com.ensolution.ensol.management.domain.company.CompanyDto;
-import com.ensolution.ensol.management.domain.stack.StackDto;
-import com.ensolution.ensol.management.domain.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.data.dto.stack.StackDto;
+import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import com.ensolution.ensol.management.service.PollutantService;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.net.URI;
 import java.text.MessageFormat;
 import java.util.Optional;
 
@@ -39,23 +40,13 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("${management.base}")
+@RequiredArgsConstructor
 public class BusinessController {
-  CompanyService companyService; // 측정대행 의뢰업체 관련 로직 처리
-  WorkplaceService workplaceService; // 측정대상 사업장 관련 로직 처리
-  StackService stackService; // 측정 시설과 관련 로직 처리
-  PollutantService pollutantService; // 측정 오염물질 관련 로직 처리
-  UrlConstants urlConstants;
-
-  @Autowired
-  public BusinessController(CompanyService companyService, WorkplaceService workplaceService,
-                            StackService stackService, PollutantService pollutantService,
-                            UrlConstants urlConstants) {
-    this.companyService = companyService;
-    this.workplaceService = workplaceService;
-    this.stackService = stackService;
-    this.pollutantService = pollutantService;
-    this.urlConstants = urlConstants;
-  }
+  public final CompanyService companyService; // 측정대행 의뢰업체 관련 로직 처리
+  public final WorkplaceService workplaceService; // 측정대상 사업장 관련 로직 처리
+  public final StackService stackService; // 측정 시설과 관련 로직 처리
+  public final PollutantService pollutantService; // 측정 오염물질 관련 로직 처리
+  public final UrlConstants urlConstants;
 
   /**
    * 업체 목록 조회, 업체 상세페이지 이동 링크 제공
@@ -110,13 +101,16 @@ public class BusinessController {
           "/{companyId}")
   public String getCompanyDetail(@PathVariable Integer companyId, Model m) {
     Optional<CompanyDto> company = companyService.findCompanyById(companyId);
-    if (company.isEmpty()) {
+
+    if (company.isPresent()) {
+      m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
+      m.addAttribute("company", company);
+    } else {
       return MessageFormat.format("redirect:{0}{1}",
           urlConstants.getMANAGEMENT_BASE(),
           urlConstants.getMANAGEMENT_COMPANIES());
     }
-    m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
-    m.addAttribute("company", company);
+
     return "management/company/companyDetailView";
   }
 

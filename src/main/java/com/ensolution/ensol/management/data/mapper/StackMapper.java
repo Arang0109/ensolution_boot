@@ -1,9 +1,9 @@
-package com.ensolution.ensol.management.mapper;
+package com.ensolution.ensol.management.data.mapper;
 
-import com.ensolution.ensol.management.domain.stack.ExcelStackMeasurementDto;
-import com.ensolution.ensol.management.domain.stack.StackDto;
-import com.ensolution.ensol.management.domain.stack.StackInformationDto;
-import com.ensolution.ensol.management.domain.stack.StackTableDto;
+import com.ensolution.ensol.management.data.dto.stack.ExcelStackMeasurementDto;
+import com.ensolution.ensol.management.data.dto.stack.StackDto;
+import com.ensolution.ensol.management.data.dto.stack.StackInformationDto;
+import com.ensolution.ensol.management.data.dto.stack.StackTableDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

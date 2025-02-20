@@ -1,4 +1,4 @@
-package com.ensolution.ensol.management.domain.stack;
+package com.ensolution.ensol.management.data.dto.stack;
 
 import java.time.LocalDate;
 import java.sql.Date;

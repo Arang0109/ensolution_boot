@@ -2,7 +2,7 @@ package com.ensolution.ensol.document.service.impl;
 
 import com.ensolution.ensol.document.service.DocumentService;
 import com.ensolution.ensol.document.service.ScoreService;
-import com.ensolution.ensol.management.domain.stack.PollutantDto;
+import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
 import com.ensolution.ensol.management.service.PollutantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.service;
 
-import com.ensolution.ensol.management.domain.stack.StackMeasurementDto;
+import com.ensolution.ensol.management.data.dto.stack.StackMeasurementDto;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.management.mapper.WorkplaceMapper">
+<mapper namespace="com.ensolution.ensol.management.data.mapper.WorkplaceMapper">
   <sql id="select">
     SELECT company_id, workplace_id, workplace_name, address
     FROM workplace

@@ -1,4 +1,4 @@
-package com.ensolution.ensol.management.domain;
+package com.ensolution.ensol.management.data.dto;
 
 import java.util.Objects;
 

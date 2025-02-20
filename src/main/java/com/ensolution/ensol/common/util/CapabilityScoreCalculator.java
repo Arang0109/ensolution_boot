@@ -1,6 +1,6 @@
 package com.ensolution.ensol.common.util;
 
-import com.ensolution.ensol.management.domain.stack.PollutantDto;
+import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
 
 import java.util.HashMap;
 import java.util.List;
