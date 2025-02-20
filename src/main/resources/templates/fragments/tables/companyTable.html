@@ -22,12 +22,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="company : ${companies}" th:data-company-id="${company.id}">
+    <tr th:each="company : ${companies}" th:data-company-id="${company.companyId}">
       <td></td>
       <td>
         <a class="updateLink"
-           th:href="@{/management/companies/{id}(id=${company.id})}">
-          <span th:text="${company.name != null ? company.name : '-'}"></span>
+           th:href="@{/management/companies/{id}(id=${company.companyId})}">
+          <span th:text="${company.companyName != null ? company.companyName : '-'}"></span>
         </a>
       </td>
       <td>

@@ -13,7 +13,7 @@
     <div class="profile-header">
       <div class="profile-main d-flex justify-content-between">
         <div class="d-flex">
-          <h4 th:text="${company.company_name}"></h4>
+          <h4 th:text="${company.companyName}"></h4>
           <span th:text="${company.address}" style="margin-left: 1.25rem;"></span>
         </div>
         <div >
@@ -32,11 +32,11 @@
       <form id="companyInfoForm" class="needs-validation" novalidate>
         <div class="container text-center">
           <div class="row p-2">
-            <input name="company_id" type="text" class="form-control" th:value="${company.company_id}" readonly='readonly' hidden="hidden">
+            <input name="company_id" type="text" class="form-control" th:value="${company.companyId}" readonly='readonly' hidden="hidden">
             <div class="col">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="company_name">측정대행 의뢰업체 <small><b>(필수)</b></small></span>
-                <input name="company_name" type="text" class="form-control" th:value="${company.company_name}"
+                <input name="company_name" type="text" class="form-control" th:value="${company.companyName}"
                        aria-label="Username" aria-describedby="addon-wrapping" required
                        readonly='readonly'>
               </div>
@@ -56,7 +56,7 @@
             <div class="col">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="ceo_name">대표자 이름</span>
-                <input name="ceo_name" type="text" class="form-control" th:value="${company.ceo_name}"
+                <input name="ceo_name" type="text" class="form-control" th:value="${company.ceoName}"
                        aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly'>
               </div>
             </div>
@@ -66,7 +66,7 @@
                 <input
                     type="text"
                     name="biz_number"
-                    th:value="${company.biz_number}"
+                    th:value="${company.bizNumber}"
                     class="form-control"
                     id="inputBizNum"
                     aria-label="Username"
@@ -123,7 +123,7 @@
         selector: '#table tbody input[type="checkbox"]:checked',
         closestTag: 'tr',
         dataAttr: 'data-workplace-id',
-        idKey: 'workplace_id',
+        idKey: 'workplaceId',
         url: /*[[@{/management/workplaces}]]*/ '',
       }
       businessDeleteHandler(options);

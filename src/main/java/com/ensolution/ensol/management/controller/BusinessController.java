@@ -57,7 +57,7 @@ public class BusinessController {
 
     if (company.isPresent()) {
       m.addAttribute("workplaces", workplaceService.findWorkplacesByCompanyId(companyId));
-      m.addAttribute("company", company);
+      m.addAttribute("company", company.get());
     } else {
       return "redirect:/management/companies";
     }

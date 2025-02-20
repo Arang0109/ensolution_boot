@@ -20,12 +20,12 @@
     </tr>
     </thead>
     <tbody>
-      <tr th:each="workplace : ${workplaces}" th:data-workplace-id="${workplace.workplace_id}">
+      <tr th:each="workplace : ${workplaces}" th:data-workplace-id="${workplace.workplaceId}">
         <td></td>
         <td>
           <a class="updateLink"
-             th:href="@{/management/workplaces/{id}(id=${workplace.workplace_id})}">
-            <span th:text="${workplace.workplace_name != null ? workplace.workplace_name : '-'}"></span>
+             th:href="@{/management/workplaces/{id}(id=${workplace.workplaceId})}">
+            <span th:text="${workplace.workplaceName != null ? workplace.workplaceName : '-'}"></span>
           </a>
         </td>
         <td>
