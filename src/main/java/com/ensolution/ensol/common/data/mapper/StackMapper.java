@@ -18,5 +18,5 @@ public interface StackMapper {
   @Mapping(source = "factoryId", target = "factory.factoryId")
   @Mapping(source = "stackInformation", target = "stckInformation")
   Stack toEntity(StackDto stackDto);
-  List<StackDto> toDtoList(List<Stack> stackList);
+  List<StackDto> toDtoList(List<Stack> stacks);
 }

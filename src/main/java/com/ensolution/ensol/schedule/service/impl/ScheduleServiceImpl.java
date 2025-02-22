@@ -1,9 +1,7 @@
 package com.ensolution.ensol.schedule.service.impl;
 
 import com.ensolution.ensol.schedule.domain.HistoryDto;
-import com.ensolution.ensol.schedule.domain.ScheduleDto;
 import com.ensolution.ensol.schedule.domain.ScheduleTableDto;
-import com.ensolution.ensol.schedule.mapper.ScheduleMapper;
 import com.ensolution.ensol.schedule.service.ScheduleService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

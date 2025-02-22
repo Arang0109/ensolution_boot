@@ -1,9 +1,12 @@
 package com.ensolution.ensol.common.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groovyjarjarpicocli.CommandLine;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "stack_measurement")
@@ -28,4 +31,8 @@ public class StackMeasurement {
   private boolean isCompleted;
   @Column(name = "is_measured")
   private boolean isMeasured;
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "schedule")
+  private List<Schedule> schedules;
 }

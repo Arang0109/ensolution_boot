@@ -16,7 +16,7 @@ public class Stack {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "stack_id", nullable = false)
-  private int stackId;
+  private Integer stackId;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "workplace_id", nullable = false)
   private Workplace workplace;

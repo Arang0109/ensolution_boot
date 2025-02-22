@@ -1,7 +1,6 @@
 package com.ensolution.ensol.schedule.service;
 
 import com.ensolution.ensol.schedule.domain.HistoryDto;
-import com.ensolution.ensol.schedule.domain.ScheduleDto;
 import com.ensolution.ensol.schedule.domain.ScheduleTableDto;
 
 import java.util.List;
