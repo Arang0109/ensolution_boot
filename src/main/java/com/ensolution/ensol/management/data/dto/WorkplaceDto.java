@@ -1,7 +1,6 @@
-package com.ensolution.ensol.management.data.dto.company;
+package com.ensolution.ensol.management.data.dto;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -9,11 +8,11 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-public class CompanyDto {
+public class WorkplaceDto {
+  private Integer workplaceId;
   private Integer companyId;
-  private String companyName;
+  private String workplaceName;
   private String address;
-  private String ceoName;
-  private String bizNumber;
+  private boolean existFactory;
   private LocalDate regDate;
 }

@@ -1,8 +1,8 @@
 package com.ensolution.ensol.management.controller;
 
 import com.ensolution.ensol.common.service.ExcelDataUploadService;
-import com.ensolution.ensol.management.data.dto.company.CompanyDto;
-import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.CompanyDto;
+import com.ensolution.ensol.management.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.data.dto.stack.*;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackMeasurementService;
@@ -71,16 +71,23 @@ public class BusinessRestController {
     stackMeasurementService.removeStackMeasurements(stackMeasurements);
   }
 
-  @PatchMapping("${management.companies}")
-  public void updateCompany(@RequestBody CompanyDto companyDto) {
+  @PatchMapping("/companies/{companyId}")
+  public void updateCompany(@PathVariable Integer companyId, @RequestBody CompanyDto companyDto) {
+    companyDto.setCompanyId(companyId);
     companyService.updateCompany(companyDto);
   }
 
-  @PatchMapping("${management.workplaces}")
-  public void updateWorkplace(@RequestBody WorkplaceDto workplaceDto) { workplaceService.updateWorkplace(workplaceDto); }
+  @PatchMapping("/workplaces/{workplaceId}")
+  public void updateWorkplace(@PathVariable Integer workplaceId, @RequestBody WorkplaceDto workplaceDto) {
+    workplaceDto.setWorkplaceId(workplaceId);
+    workplaceService.updateWorkplace(workplaceDto);
+  }
 
-  @PatchMapping("${management.stacks}")
-  public void updateStack(@RequestBody StackDto stackDto) { stackService.updateStack(stackDto); }
+  @PatchMapping("/stacks/{stackId}")
+  public void updateStack(@PathVariable Integer stackId, @RequestBody StackDto stackDto) {
+    stackDto.setStack_id(stackId);
+    stackService.updateStack(stackDto);
+  }
 
   @PatchMapping("${management.stacks}" + "/{stackId}/info")
   public void updateStackInformation(@PathVariable Integer stackId,

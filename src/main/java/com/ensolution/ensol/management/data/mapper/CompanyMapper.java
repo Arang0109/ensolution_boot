@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.data.mapper;
 
-import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.data.dto.CompanyDto;
 import com.ensolution.ensol.management.data.entity.Company;
 import org.mapstruct.Mapper;
 

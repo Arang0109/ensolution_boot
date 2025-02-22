@@ -15,13 +15,13 @@ public class Workplace {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "workplace_id", nullable = false)
   private Integer workplaceId;
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "company_id" ,nullable = false)
   private Company company;
   @Column(name = "workplace_name", nullable = false)
   private String workplaceName;
   private String address;
-  @Column(name = "exist_factory")
+  @Column(name = "exist_factory", insertable = false, updatable = false)
   private String existFactory;
   @Column(name = "reg_date")
   private LocalDate regDate;

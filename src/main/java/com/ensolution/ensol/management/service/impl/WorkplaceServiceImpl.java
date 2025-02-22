@@ -1,13 +1,14 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.WorkplaceDataService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
   @Override
   public void createWorkplace(WorkplaceDto workplaceDto) {
     try {
+      workplaceDto.setRegDate(LocalDate.now());
       workplaceDataService.saveWorkplace(workplaceDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("workplace", "Name", workplaceDto.getWorkplaceName(), e);

@@ -2,9 +2,9 @@ package com.ensolution.ensol.management.controller;
 
 import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.common.util.DataHandler;
-import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.data.dto.CompanyDto;
 import com.ensolution.ensol.management.data.dto.stack.StackDto;
-import com.ensolution.ensol.management.data.dto.company.WorkplaceDto;
+import com.ensolution.ensol.management.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackService;
 import com.ensolution.ensol.management.service.WorkplaceService;
@@ -91,9 +91,10 @@ public class BusinessController {
   public String getWorkplaceDetail(@PathVariable Integer workplaceId, Model m) {
     Optional<WorkplaceDto> workplace = workplaceService.findWorkplaceById(workplaceId);
     if (workplace.isPresent()) {
-      m.addAttribute("workplace", workplace);
+      Integer companyId = workplace.get().getCompanyId();
+      m.addAttribute("workplace", workplace.get());
       m.addAttribute("stacks", stackService.findStacksByWorkplaceId(workplaceId));
-      m.addAttribute("company", companyService.findCompanyById(workplace.get().getCompanyId()));
+      m.addAttribute("company", companyService.findCompanyById(companyId).get());
     } else {
       return "redirect:/management/workplaces";
     }
@@ -101,7 +102,7 @@ public class BusinessController {
   }
 
   /** 시설 목록 조회, 시설 상세페이지 이동 링크 제공 */
-  @GetMapping("${management.stacks}")
+  @GetMapping("/stacks")
   public String getStackList(Model m) {
     m.addAttribute("stacks", stackService.findStacksOfTable());
     return "management/stack/stackListView";

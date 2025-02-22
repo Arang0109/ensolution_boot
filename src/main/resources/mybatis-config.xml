@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.management.data.dto.company.CompanyDto"/>
-    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.management.data.dto.company.WorkplaceDto"/>
+    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.management.data.dto.CompanyDto"/>
+    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.management.data.dto.WorkplaceDto"/>
     <typeAlias alias="StackDto" type="com.ensolution.ensol.management.data.dto.stack.StackDto"/>
     <typeAlias alias="StackTableDto" type="com.ensolution.ensol.management.data.dto.stack.StackTableDto"/>
     <typeAlias alias="StackImagesDto" type="com.ensolution.ensol.management.data.dto.stack.StackImagesDto"/>

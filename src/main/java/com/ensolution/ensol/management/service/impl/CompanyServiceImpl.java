@@ -1,7 +1,7 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.data.dto.company.CompanyDto;
+import com.ensolution.ensol.management.data.dto.CompanyDto;
 import com.ensolution.ensol.management.service.CompanyDataService;
 import com.ensolution.ensol.management.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
   @Override
   public void createCompany(CompanyDto companyDto) {
     try {
+      companyDto.setRegDate(LocalDate.now());
       companyDataService.saveCompany(companyDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("company", "Name", companyDto.getCompanyName(), e);
