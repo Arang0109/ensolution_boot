@@ -2,7 +2,7 @@ package com.ensolution.ensol.document.service.impl;
 
 import com.ensolution.ensol.document.service.DocumentService;
 import com.ensolution.ensol.document.service.ScoreService;
-import com.ensolution.ensol.common.data.dto.stack.PollutantDto;
+import com.ensolution.ensol.common.data.dto.PollutantDto;
 import com.ensolution.ensol.management.service.PollutantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class DocumentServiceImpl implements DocumentService {
     List<PollutantDto> pollutants = new ArrayList<>();
 
     for (PollutantDto p : pollutantDto) {
-      pollutants.add(pollutantService.findPollutantById(p.getPollutant_id()));
+      pollutants.add(pollutantService.findPollutantById(p.getPollutantId()));
     }
     
     return pollutants;
