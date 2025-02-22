@@ -3,7 +3,7 @@ package com.ensolution.ensol.management.controller;
 import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.common.util.DataHandler;
 import com.ensolution.ensol.management.data.dto.CompanyDto;
-import com.ensolution.ensol.management.data.dto.stack.StackDto;
+import com.ensolution.ensol.management.data.dto.StackDto;
 import com.ensolution.ensol.management.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackService;

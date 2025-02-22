@@ -2,7 +2,7 @@ package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.common.url.UrlConstants;
-import com.ensolution.ensol.management.data.dto.stack.StackDto;
+import com.ensolution.ensol.management.data.dto.StackDto;
 import com.ensolution.ensol.management.data.dto.stack.StackImagesDto;
 import com.ensolution.ensol.management.data.dto.stack.StackInformationDto;
 import com.ensolution.ensol.management.data.dto.stack.StackTableDto;
