@@ -3,6 +3,7 @@ package com.ensolution.ensol.common.data.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +19,6 @@ public class StackDto {
   private String note;
   private LocalDate regDate;
   private StackInformationDto stackInformation;
+
+  private List<StackImageDto> stackImages;
 }

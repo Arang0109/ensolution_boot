@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.common.data.mapper.mybatis.TableBatisMapper">
+    <sql id="selectTableArg">
+        SELECT
+            s.stack_id,
+            s.stack_name,
+            c.company_name,
+            w.workplace_name,
+            f.factory_category,
+            f.factory_name,
+            d.department_name
+        FROM stack s
+                 LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
+                 LEFT JOIN company c ON w.company_id = c.company_id
+                 LEFT JOIN factory f ON s.factory_id = f.factory_id
+                 LEFT JOIN department d ON f.department_id = d.department_id
+    </sql>
+    <select id="selectStacksOfTable" resultType="StackTableDto">
+        <include refid="selectTableArg"/>
+    </select>
+    <select id="selectStacksByWorkplaceOfTable" parameterType="Integer" resultType="StackTableDto">
+        <include refid="selectTableArg"/>
+        WHERE w.workplace_id = #{workplaceId}
+    </select>
+</mapper>

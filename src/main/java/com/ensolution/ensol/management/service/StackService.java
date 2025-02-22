@@ -1,6 +1,8 @@
 package com.ensolution.ensol.management.service;
 
 import com.ensolution.ensol.common.data.dto.StackDto;
+import com.ensolution.ensol.common.data.dto.StackImageDto;
+import com.ensolution.ensol.common.data.dto.StackInformationDto;
 import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,9 +15,7 @@ public interface StackService {
   List<StackDto> findAllStacks();
   List<StackTableDto> findStacksByWorkplaceId(Integer id);
   List<StackTableDto> findStacksOfTable();
-  List<StackImagesDto> findAllStackImages(Integer stackId);
-  Map<String, Integer> getCompanyWorkplaceId(Integer id);
-  void createStack(StackDto stack);
+  List<StackImageDto> findAllStackImages(Integer stackId);void createStack(StackDto stack);
   void updateStack(StackDto stack);
   void updateStackInfo(StackInformationDto stackInformation, Integer stackId);
   void removeStacks(List<StackDto> stacks);

@@ -1,11 +1,13 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.data.dto.StackImageDto;
+import com.ensolution.ensol.common.data.dto.StackInformationDto;
+import com.ensolution.ensol.common.data.mapper.mybatis.TableBatisMapper;
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.common.url.UrlConstants;
 import com.ensolution.ensol.common.data.dto.StackDto;
 import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
-import com.ensolution.ensol.common.data.mapper.WorkplaceMapper;
 import com.ensolution.ensol.management.service.StackService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -13,107 +15,64 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class StackServiceImpl implements StackService {
-  private final StackMapper stackMapper;
-  private final WorkplaceMapper workplaceMapper;
-  private final StackImagesMapper stackImagesMapper;
-  private final UrlConstants urlConstants;
+  private final StackDataService stackDataService;
+  private final TableBatisMapper tableBatisMapper;
 
-  public StackServiceImpl(StackMapper stackMapper, WorkplaceMapper workplaceMapper, StackImagesMapper stackImagesMapper,
-                          UrlConstants urlConstants) {
-    this.stackMapper = stackMapper;
-    this.workplaceMapper = workplaceMapper;
-    this.stackImagesMapper = stackImagesMapper;
-    this.urlConstants = urlConstants;
+  @Override
+  public List<StackImageDto> findAllStackImages(Integer stackId) {
+    return stackDataService.findAllStackImages(stackId);
   }
 
   @Override
-  public void saveFile(MultipartFile file, Integer stackId) throws IOException {
-    File directory = new File(urlConstants.getUPLOAD_DIR());
-    if (!directory.exists()) {
-      directory.mkdirs();
-    }
-
-    String filePath = urlConstants.getUPLOAD_DIR() + File.separator + file.getOriginalFilename();
-
-    File destinationFile = new File(filePath);
-    file.transferTo(destinationFile);
-
-    StackImagesDto stackImagesDto = new StackImagesDto();
-    stackImagesDto.setStack_id(stackId);
-    stackImagesDto.setImage_path(filePath);
-    stackImagesDto.setImage_name(file.getOriginalFilename());
-
-    stackImagesMapper.insert(stackImagesDto);
-  }
-
-  @Override
-  public List<StackImagesDto> findAllStackImages(Integer stackId) {
-    return stackImagesMapper.selectAllImagesByStackId(stackId);
-  }
-
-  @Override
-  public StackDto findStackById(Integer id) {
-    return stackMapper.selectStack(id);
+  public StackDto findStackById(Integer stackId) {
+    return stackDataService.findStackById(stackId);
   }
 
   @Override
   public List<StackDto> findAllStacks() {
-    return stackMapper.selectAll();
+    return stackDataService.findAllStacks();
   }
 
+  // 특정 사업장의 시설 테이블 목록
   @Override
-  public List<StackTableDto> findStacksByWorkplaceId(Integer id) {
-    return stackMapper.selectStacksOfWorkplace(id);
+  public List<StackTableDto> findStacksByWorkplaceId(Integer workplaceId) {
+    return tableBatisMapper.selectStacksByWorkplaceOfTable(workplaceId);
   }
 
+  // 전체 시설 테이블 목록
   @Override
   public List<StackTableDto> findStacksOfTable() {
-    return stackMapper.selectAllOfTable();
-  }
-
-  @Override
-  public Map<String, Integer> getCompanyWorkplaceId(Integer id) {
-    Map<String, Integer> map = new HashMap<>();
-    Integer workplace_id = stackMapper.selectStack(id).getWorkplace_id();
-//    Integer company_id = workplaceMapper.selectWorkplace(workplace_id).getCompany_id();
-
-//    map.put("company_id", company_id);
-    map.put("workplace_id", workplace_id);
-
-    return map;
+    return tableBatisMapper.selectStacksOfTable();
   }
 
   @Override
   public void createStack(StackDto stackDto) {
     try {
-      stackMapper.insert(stackDto);
+      stackDto.setRegDate(LocalDate.now());
+      stackDataService.saveStack(stackDto);
     } catch (DuplicateKeyException e) {
-      throw new CustomDKException("stack", "Name", stackDto.getStack_name(), e);
+      throw new CustomDKException("stack", "Name", stackDto.getStackName(), e);
     }
   }
 
   @Override
   public void updateStack(StackDto stackDto) {
-    StackDto existingStack = stackMapper.selectStack(stackDto.getStack_id());
-
-    if (existingStack == null) {
-      throw new IllegalArgumentException("Stack with Name " + stackDto.getStack_name() + " does not exist.");
+    if (!stackDataService.existsStackById(stackDto.getStackId())) {
+      throw new IllegalArgumentException("Stack with Name " + stackDto.getStackName() + " does not exist.");
     }
-
-    stackMapper.update(stackDto);
   }
 
   @Override
   public void updateStackInfo(StackInformationDto stackInformationDto, Integer stackId) {
-    stackInformationDto.setStack_info_id(stackId);
-    stackMapper.updateStackInfo(stackInformationDto);
+    stackInformationDto.setStackId(stackId);
+    stackDataService.saveStackInformation(stackInformationDto);
   }
 
   @Override
@@ -128,13 +87,33 @@ public class StackServiceImpl implements StackService {
       if (stackDto == null) {
         throw new IllegalArgumentException("StackDto cannot be null");
       }
-      ids.add(stackDto.getStack_id());
+      ids.add(stackDto.getStackId());
     }
 
     try {
-      stackMapper.deleteItems(ids);
+      stackDataService.deleteStacks(ids);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting stacks", e);
     }
+  }
+
+  @Override
+  public void saveFile(MultipartFile file, Integer stackId) throws IOException {
+    File directory = new File("C:/EnSolution/uploads");
+    if (!directory.exists()) {
+      directory.mkdirs();
+    }
+
+    String filePath = "C:/EnSolution/uploads" + File.separator + file.getOriginalFilename();
+
+    File destinationFile = new File(filePath);
+    file.transferTo(destinationFile);
+
+    StackImageDto stackImageDto = new StackImageDto();
+    stackImageDto.setStackId(stackId);
+    stackImageDto.setImagePath(filePath);
+    stackImageDto.setImageName(file.getOriginalFilename());
+
+    stackDataService.saveStackImage(stackImageDto);
   }
 }

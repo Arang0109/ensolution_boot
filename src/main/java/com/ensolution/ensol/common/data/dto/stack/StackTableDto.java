@@ -3,94 +3,92 @@ package com.ensolution.ensol.common.data.dto.stack;
 import java.util.Objects;
 
 public class StackTableDto {
-  private Integer stack_id;
-  private String stack_name;
-  private String company_name;
-  private String workplace_name;
-  private String sub_factory_name;
-  private String department_name;
+  private Integer stackId;
+  private String stackName;
+  private String companyName;
+  private String workplaceName;
+  private String factoryCategory;
+  private String factoryName;
+  private String departmentName;
 
   public StackTableDto() {}
 
-  public StackTableDto(Integer stack_id, String stack_name, String company_name, String workplace_name, String sub_factory_name, String department_name) {
-    this.stack_id = stack_id;
-    this.stack_name = stack_name;
-    this.company_name = company_name;
-    this.workplace_name = workplace_name;
-    this.sub_factory_name = sub_factory_name;
-    this.department_name = department_name;
+  public StackTableDto(Integer stackId, String stackName, String companyName, String workplaceName, String factoryCategory, String factoryName, String departmentName) {
+    this.stackId = stackId;
+    this.stackName = stackName;
+    this.companyName = companyName;
+    this.workplaceName = workplaceName;
+    this.factoryCategory = factoryCategory;
+    this.factoryName = factoryName;
+    this.departmentName = departmentName;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    StackTableDto that = (StackTableDto) o;
-    return Objects.equals(stack_id, that.stack_id) && Objects.equals(stack_name, that.stack_name) && Objects.equals(company_name, that.company_name) && Objects.equals(workplace_name, that.workplace_name) && Objects.equals(sub_factory_name, that.sub_factory_name) && Objects.equals(department_name, that.department_name);
+  public Integer getStackId() {
+    return stackId;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(stack_id, stack_name, company_name, workplace_name, sub_factory_name, department_name);
+  public void setStackId(Integer stackId) {
+    this.stackId = stackId;
   }
 
-  public Integer getStack_id() {
-    return stack_id;
+  public String getStackName() {
+    return stackName;
   }
 
-  public void setStack_id(Integer stack_id) {
-    this.stack_id = stack_id;
+  public void setStackName(String stackName) {
+    this.stackName = stackName;
   }
 
-  public String getStack_name() {
-    return stack_name;
+  public String getCompanyName() {
+    return companyName;
   }
 
-  public void setStack_name(String stack_name) {
-    this.stack_name = stack_name;
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
   }
 
-  public String getSub_factory_name() {
-    return sub_factory_name;
+  public String getWorkplaceName() {
+    return workplaceName;
   }
 
-  public void setSub_factory_name(String sub_factory_name) {
-    this.sub_factory_name = sub_factory_name;
+  public void setWorkplaceName(String workplaceName) {
+    this.workplaceName = workplaceName;
   }
 
-  public String getDepartment_name() {
-    return department_name;
+  public String getFactoryCategory() {
+    return factoryCategory;
   }
 
-  public void setDepartment_name(String department_name) {
-    this.department_name = department_name;
+  public void setFactoryCategory(String factoryCategory) {
+    this.factoryCategory = factoryCategory;
   }
 
-  public String getCompany_name() {
-    return company_name;
+  public String getFactoryName() {
+    return factoryName;
   }
 
-  public void setCompany_name(String company_name) {
-    this.company_name = company_name;
+  public void setFactoryName(String factoryName) {
+    this.factoryName = factoryName;
   }
 
-  public String getWorkplace_name() {
-    return workplace_name;
+  public String getDepartmentName() {
+    return departmentName;
   }
 
-  public void setWorkplace_name(String workplace_name) {
-    this.workplace_name = workplace_name;
+  public void setDepartmentName(String departmentName) {
+    this.departmentName = departmentName;
   }
 
   @Override
   public String toString() {
     return "StackTableDto{" +
-        "stack_id=" + stack_id +
-        ", stack_name='" + stack_name + '\'' +
-        ", company_name='" + company_name + '\'' +
-        ", workplace_name='" + workplace_name + '\'' +
-        ", sub_factory_name='" + sub_factory_name + '\'' +
-        ", department_name='" + department_name + '\'' +
+        "stackId=" + stackId +
+        ", stackName='" + stackName + '\'' +
+        ", companyName='" + companyName + '\'' +
+        ", workplaceName='" + workplaceName + '\'' +
+        ", factoryCategory='" + factoryCategory + '\'' +
+        ", factoryName='" + factoryName + '\'' +
+        ", departmentName='" + departmentName + '\'' +
         '}';
   }
 }
