@@ -4,20 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="CompanyDto" type="com.ensolution.ensol.common.data.dto.CompanyDto"/>
-    <typeAlias alias="WorkplaceDto" type="com.ensolution.ensol.common.data.dto.WorkplaceDto"/>
-    <typeAlias alias="StackDto" type="com.ensolution.ensol.common.data.dto.StackDto"/>
     <typeAlias alias="StackTableDto" type="com.ensolution.ensol.common.data.dto.stack.StackTableDto"/>
-    <typeAlias alias="StackImagesDto" type="com.ensolution.ensol.common.data.dto.stack.StackImagesDto"/>
-    <typeAlias alias="StackInformationDto" type="com.ensolution.ensol.common.data.dto.stack.StackInformationDto"/>
-    <typeAlias alias="StackMeasurementDto" type="com.ensolution.ensol.common.data.dto.stack.StackMeasurementDto"/>
-    <typeAlias alias="FactoryDto" type="com.ensolution.ensol.management.data.dto.company.FactoryDto"/>
-    <typeAlias alias="SubFactoryDto" type="com.ensolution.ensol.management.data.dto.company.SubFactoryDto"/>
-    <typeAlias alias="DepartmentDto" type="com.ensolution.ensol.management.data.dto.company.DepartmentDto"/>
-    <typeAlias alias="PollutantDto" type="com.ensolution.ensol.common.data.dto.stack.PollutantDto"/>
-    <typeAlias alias="ScheduleDto" type="com.ensolution.ensol.schedule.domain.ScheduleDto"/>
+    <typeAlias alias="TableIdDto" type="com.ensolution.ensol.common.data.dto.stack.TableIdDto"/>
     <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.schedule.domain.ScheduleTableDto"/>
-    <typeAlias alias="TeamDto" type="com.ensolution.ensol.management.data.dto.TeamDto"/>
     <typeAlias alias="HistoryDto" type="com.ensolution.ensol.schedule.domain.HistoryDto"/>
     <typeAlias alias="BoardDto" type="com.ensolution.ensol.dashboard.domain.BoardDto"/>
     <typeAlias alias="ExcelStackMeasurementDto" type="com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto"/>

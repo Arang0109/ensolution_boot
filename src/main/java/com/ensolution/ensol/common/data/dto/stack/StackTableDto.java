@@ -1,7 +1,5 @@
 package com.ensolution.ensol.common.data.dto.stack;
 
-import java.util.Objects;
-
 public class StackTableDto {
   private Integer stackId;
   private String stackName;

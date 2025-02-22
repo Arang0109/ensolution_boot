@@ -2,10 +2,13 @@ package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.data.dto.StackImageDto;
 import com.ensolution.ensol.common.data.dto.StackInformationDto;
+import com.ensolution.ensol.common.data.dto.stack.TableIdDto;
+import com.ensolution.ensol.common.data.mapper.mybatis.GetIdMapper;
 import com.ensolution.ensol.common.data.mapper.mybatis.TableBatisMapper;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.common.data.dto.StackDto;
 import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
+import com.ensolution.ensol.management.service.StackDataService;
 import com.ensolution.ensol.management.service.StackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -24,6 +27,7 @@ import java.util.List;
 public class StackServiceImpl implements StackService {
   private final StackDataService stackDataService;
   private final TableBatisMapper tableBatisMapper;
+  private final GetIdMapper getIdMapper;
 
   @Override
   public List<StackImageDto> findAllStackImages(Integer stackId) {
@@ -115,5 +119,10 @@ public class StackServiceImpl implements StackService {
     stackImageDto.setImageName(file.getOriginalFilename());
 
     stackDataService.saveStackImage(stackImageDto);
+  }
+
+  @Override
+  public TableIdDto findIds(Integer id) {
+    return getIdMapper.getCompanyId(id);
   }
 }

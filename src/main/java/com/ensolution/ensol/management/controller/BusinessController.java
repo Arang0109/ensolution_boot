@@ -1,5 +1,6 @@
 package com.ensolution.ensol.management.controller;
 
+import com.ensolution.ensol.common.data.dto.stack.TableIdDto;
 import com.ensolution.ensol.common.util.DataHandler;
 import com.ensolution.ensol.common.data.dto.CompanyDto;
 import com.ensolution.ensol.common.data.dto.StackDto;
@@ -124,13 +125,14 @@ public class BusinessController {
       ("/stacks/{stackId}")
   public String getStackDetail(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
+    TableIdDto ids = stackService.findIds(stackId);
     if (stack == null) {
       return "redirect:/management/stacks";
     }
 
     m.addAttribute("stack", stack);
-    m.addAttribute("company", companyService.findCompanyById(stackService.getCompanyWorkplaceId(stackId).get("company_id")));
-    m.addAttribute("workplace", workplaceService.findWorkplaceById(stackService.getCompanyWorkplaceId(stackId).get("workplace_id")));
+    m.addAttribute("company", companyService.findCompanyById(ids.getCompanyId()));
+    m.addAttribute("workplace", workplaceService.findWorkplaceById(ids.getWorkplaceId()));
     m.addAttribute("pollutants", pollutantService.findAllPollutants());
     return "management/stack/stackDetailView";
   }

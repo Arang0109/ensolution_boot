@@ -4,6 +4,8 @@ import com.ensolution.ensol.common.data.dto.StackDto;
 import com.ensolution.ensol.common.data.dto.StackImageDto;
 import com.ensolution.ensol.common.data.dto.StackInformationDto;
 import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
+import com.ensolution.ensol.common.data.dto.stack.TableIdDto;
+import com.ensolution.ensol.common.data.mapper.mybatis.GetIdMapper;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,4 +22,5 @@ public interface StackService {
   void updateStackInfo(StackInformationDto stackInformation, Integer stackId);
   void removeStacks(List<StackDto> stacks);
   void saveFile(MultipartFile file, Integer stackId) throws IOException;
+  TableIdDto findIds(Integer id);
 }

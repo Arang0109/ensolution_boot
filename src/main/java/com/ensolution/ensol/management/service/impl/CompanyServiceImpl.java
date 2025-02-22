@@ -20,8 +20,8 @@ public class CompanyServiceImpl implements CompanyService {
   private final CompanyDataService companyDataService;
 
   @Override
-  public Optional<CompanyDto> findCompanyById(Integer id) {
-    return companyDataService.findCompanyById(id);
+  public Optional<CompanyDto> findCompanyById(Integer companyId) {
+    return companyDataService.findCompanyById(companyId);
   }
 
   @Override
