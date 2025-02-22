@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.service;
 
-import com.ensolution.ensol.management.data.dto.CompanyDto;
+import com.ensolution.ensol.common.data.dto.CompanyDto;
 
 import java.util.List;
 import java.util.Optional;

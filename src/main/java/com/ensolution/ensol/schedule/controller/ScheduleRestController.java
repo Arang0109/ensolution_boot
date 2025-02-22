@@ -1,7 +1,7 @@
 package com.ensolution.ensol.schedule.controller;
 
-import com.ensolution.ensol.management.data.dto.stack.StackMeasurementDto;
-import com.ensolution.ensol.management.data.dto.stack.StackTableDto;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementDto;
+import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
 import com.ensolution.ensol.schedule.domain.HistoryDto;
 import com.ensolution.ensol.schedule.domain.ScheduleDto;
 import com.ensolution.ensol.management.service.StackMeasurementService;

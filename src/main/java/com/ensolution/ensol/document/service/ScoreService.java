@@ -1,6 +1,6 @@
 package com.ensolution.ensol.document.service;
 
-import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
+import com.ensolution.ensol.common.data.dto.stack.PollutantDto;
 
 import java.util.List;
 import java.util.Map;

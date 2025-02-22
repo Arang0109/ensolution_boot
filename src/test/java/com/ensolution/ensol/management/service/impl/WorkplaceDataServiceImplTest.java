@@ -1,6 +1,6 @@
 package com.ensolution.ensol.management.service.impl;
 
-import com.ensolution.ensol.management.data.dto.WorkplaceDto;
+import com.ensolution.ensol.common.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.WorkplaceDataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

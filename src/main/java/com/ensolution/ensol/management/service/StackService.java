@@ -1,9 +1,7 @@
 package com.ensolution.ensol.management.service;
 
-import com.ensolution.ensol.management.data.dto.StackDto;
-import com.ensolution.ensol.management.data.dto.stack.StackImagesDto;
-import com.ensolution.ensol.management.data.dto.stack.StackInformationDto;
-import com.ensolution.ensol.management.data.dto.stack.StackTableDto;
+import com.ensolution.ensol.common.data.dto.StackDto;
+import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

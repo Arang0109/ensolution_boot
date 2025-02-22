@@ -1,15 +1,16 @@
 package com.ensolution.ensol.management.controller;
 
+import com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementDto;
 import com.ensolution.ensol.common.service.ExcelDataUploadService;
-import com.ensolution.ensol.management.data.dto.CompanyDto;
-import com.ensolution.ensol.management.data.dto.StackDto;
-import com.ensolution.ensol.management.data.dto.WorkplaceDto;
-import com.ensolution.ensol.management.data.dto.stack.*;
+import com.ensolution.ensol.common.data.dto.CompanyDto;
+import com.ensolution.ensol.common.data.dto.StackDto;
+import com.ensolution.ensol.common.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackMeasurementService;
 import com.ensolution.ensol.management.service.StackService;
 import com.ensolution.ensol.management.service.WorkplaceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,43 +19,32 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("${management.base}")
+@RequestMapping("/management")
+@RequiredArgsConstructor
 public class BusinessRestController {
-  CompanyService companyService;
-  WorkplaceService workplaceService;
-  StackService stackService;
-  StackMeasurementService stackMeasurementService;
-  ExcelDataUploadService excelDataUploadService;
+  private final CompanyService companyService;
+  private final WorkplaceService workplaceService;
+  private final StackService stackService;
+  private final StackMeasurementService stackMeasurementService;
+  private final ExcelDataUploadService excelDataUploadService;
 
-  @Autowired
-  public BusinessRestController(CompanyService companyService, WorkplaceService workplaceService,
-                                StackService stackService, StackMeasurementService stackMeasurementService,
-                                ExcelDataUploadService excelDataUploadService) {
-    this.companyService = companyService;
-    this.workplaceService = workplaceService;
-    this.stackService = stackService;
-    this.stackMeasurementService = stackMeasurementService;
-    this.excelDataUploadService = excelDataUploadService;
-  }
-
-  @DeleteMapping("${management.companies}")
+  @DeleteMapping("/companies")
   public void deleteCompanies(@RequestBody List<CompanyDto> companies) {
     companyService.removeCompanies(companies);
   }
 
-  @DeleteMapping("${management.workplaces}")
+  @DeleteMapping("/workplaces")
   public void deleteWorkplaces(@RequestBody List<WorkplaceDto> workplaces) {
     workplaceService.removeWorkplaces(workplaces);
   }
 
-  @DeleteMapping("${management.stacks}")
+  @DeleteMapping("/stacks")
   public void deleteStacks(@RequestBody List<StackDto> stacks) {
     stackService.removeStacks(stacks);
   }
 
   @GetMapping
-      ("${management.stacks}" +
-          "/{stackId}/stack-measurements")
+      ("/stacks/{stackId}/stack-measurements")
   public ResponseEntity<Map<String, Object>> getStackMeasurements(@PathVariable Integer stackId) {
     List<StackMeasurementDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
 
@@ -65,8 +55,7 @@ public class BusinessRestController {
   }
 
   @DeleteMapping
-      ("${management.stacks}" +
-          "/{stackId}/stack-measurements")
+      ("/stacks/{stackId}/stack-measurements")
   public void deleteStackMeasurements(@PathVariable Integer stackId,
                                      @RequestBody List<StackMeasurementDto> stackMeasurements) {
     stackMeasurementService.removeStackMeasurements(stackMeasurements);
@@ -86,17 +75,17 @@ public class BusinessRestController {
 
   @PatchMapping("/stacks/{stackId}")
   public void updateStack(@PathVariable Integer stackId, @RequestBody StackDto stackDto) {
-    stackDto.setStack_id(stackId);
+    stackDto.setStackId(stackId);
     stackService.updateStack(stackDto);
   }
 
-  @PatchMapping("${management.stacks}" + "/{stackId}/info")
+  @PatchMapping("/stacks/{stackId}/info")
   public void updateStackInformation(@PathVariable Integer stackId,
                               @RequestBody StackInformationDto stackInfoDto) {
     stackService.updateStackInfo(stackInfoDto, stackId);
   }
 
-  @PatchMapping("${management.stacks}" + "/{stackId}/note")
+  @PatchMapping("/stacks/{stackId}/note")
   public void updateStackNote(@PathVariable Integer stackId, @RequestBody String note) {
     StackDto stackDto = stackService.findStackById(stackId);
     stackDto.setNote(note);
@@ -104,8 +93,7 @@ public class BusinessRestController {
   }
 
   @PostMapping
-      ("${management.stacks}" +
-          "/{stackId}/stack-measurements")
+      ("/stacks/{stackId}/stack-measurements")
   public void createStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
       stackMeasurementDto.setStack_id(stackId);
@@ -114,15 +102,13 @@ public class BusinessRestController {
   }
 
   @PostMapping
-      ("${management.workplaces}" +
-          "/{workplaceId}/upload/excel")
+      ("/workplaces/{workplaceId}/upload/excel")
   public void uploadExcelDataMeasurements(@PathVariable Integer workplaceId, @RequestBody List<ExcelStackMeasurementDto> exDataDto) {
     excelDataUploadService.addStackMeasurement(workplaceId, exDataDto);
   }
 
   @GetMapping
-      ("${management.stacks}" +
-          "/{stackId}/images")
+      ("/stacks/{stackId}/images")
   public ResponseEntity<List<StackImagesDto>> getStackImages(@PathVariable Integer stackId) {
     List<StackImagesDto> images = stackService.findAllStackImages(stackId);
     return ResponseEntity.ok(images);

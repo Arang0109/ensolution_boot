@@ -1,9 +1,9 @@
 package com.ensolution.ensol.management.service.impl;
 
-import com.ensolution.ensol.management.data.dto.CompanyDto;
-import com.ensolution.ensol.management.data.entity.Company;
-import com.ensolution.ensol.management.data.mapper.CompanyMapper;
-import com.ensolution.ensol.management.data.repository.CompanyRepository;
+import com.ensolution.ensol.common.data.dto.CompanyDto;
+import com.ensolution.ensol.common.data.entity.Company;
+import com.ensolution.ensol.common.data.mapper.CompanyMapper;
+import com.ensolution.ensol.common.data.repository.CompanyRepository;
 import com.ensolution.ensol.management.service.CompanyDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

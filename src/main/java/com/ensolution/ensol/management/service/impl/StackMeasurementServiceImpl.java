@@ -1,8 +1,7 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.data.dto.stack.StackMeasurementDto;
-import com.ensolution.ensol.management.data.mapper.StackMeasurementMapper;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementDto;
 import com.ensolution.ensol.management.service.StackMeasurementService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;

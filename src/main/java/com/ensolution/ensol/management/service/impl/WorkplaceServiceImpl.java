@@ -1,7 +1,7 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.management.data.dto.WorkplaceDto;
+import com.ensolution.ensol.common.data.dto.WorkplaceDto;
 import com.ensolution.ensol.management.service.WorkplaceDataService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import lombok.RequiredArgsConstructor;

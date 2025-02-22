@@ -1,7 +1,7 @@
 package com.ensolution.ensol.document.controller;
 
 import com.ensolution.ensol.document.service.DocumentService;
-import com.ensolution.ensol.management.data.dto.stack.PollutantDto;
+import com.ensolution.ensol.common.data.dto.stack.PollutantDto;
 import com.ensolution.ensol.document.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
