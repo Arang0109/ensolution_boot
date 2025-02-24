@@ -1,7 +1,6 @@
 package com.ensolution.ensol.common.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import groovyjarjarpicocli.CommandLine;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +32,6 @@ public class StackMeasurement {
   private boolean isMeasured;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "schedule")
+  @OneToMany(mappedBy = "stackMeasurement")
   private List<Schedule> schedules;
 }

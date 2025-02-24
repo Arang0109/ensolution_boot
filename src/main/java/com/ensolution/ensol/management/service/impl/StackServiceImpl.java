@@ -71,6 +71,8 @@ public class StackServiceImpl implements StackService {
     if (!stackDataService.existsStackById(stackDto.getStackId())) {
       throw new IllegalArgumentException("Stack with Name " + stackDto.getStackName() + " does not exist.");
     }
+
+    stackDataService.updateStack(stackDto);
   }
 
   @Override

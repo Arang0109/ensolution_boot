@@ -1,5 +1,6 @@
 package com.ensolution.ensol.schedule.service;
 
+import com.ensolution.ensol.common.data.dto.ScheduleDto;
 import com.ensolution.ensol.schedule.domain.HistoryDto;
 import com.ensolution.ensol.schedule.domain.ScheduleTableDto;
 
@@ -8,9 +9,9 @@ import java.util.List;
 public interface ScheduleService {
   List<ScheduleTableDto> findAllSchedules();
 
-  List<HistoryDto> findAllHistoryOfStacks(Integer stack_id);
-
-  List<HistoryDto> historyFormater(List<HistoryDto> histories);
+//  List<HistoryDto> findAllHistoryOfStacks(Integer stack_id);
+//
+//  List<HistoryDto> historyFormater(List<HistoryDto> histories);
 
   void createSchedule(ScheduleDto scheduleDto);
 

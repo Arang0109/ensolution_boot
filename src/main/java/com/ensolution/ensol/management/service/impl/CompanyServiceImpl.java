@@ -44,7 +44,7 @@ public class CompanyServiceImpl implements CompanyService {
     if (!companyDataService.existsById(companyDto.getCompanyId())) {
       throw new IllegalArgumentException("Company with Name " + companyDto.getCompanyName() + " does not exist.");
     }
-    companyDataService.saveCompany(companyDto);
+    companyDataService.updateCompany(companyDto);
   }
 
   @Override

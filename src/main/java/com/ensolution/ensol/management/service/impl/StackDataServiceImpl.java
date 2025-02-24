@@ -3,16 +3,19 @@ package com.ensolution.ensol.management.service.impl;
 import com.ensolution.ensol.common.data.dto.StackDto;
 import com.ensolution.ensol.common.data.dto.StackImageDto;
 import com.ensolution.ensol.common.data.dto.StackInformationDto;
+import com.ensolution.ensol.common.data.entity.Factory;
 import com.ensolution.ensol.common.data.entity.Stack;
 import com.ensolution.ensol.common.data.mapper.StackImageMapper;
 import com.ensolution.ensol.common.data.mapper.StackInformationMapper;
 import com.ensolution.ensol.common.data.mapper.StackMapper;
+import com.ensolution.ensol.common.data.repository.FactoryRepository;
 import com.ensolution.ensol.common.data.repository.StackImageRepository;
 import com.ensolution.ensol.common.data.repository.StackInformationRepository;
 import com.ensolution.ensol.common.data.repository.StackRepository;
 import com.ensolution.ensol.management.service.StackDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class StackDataServiceImpl implements StackDataService {
   private final StackMapper stackMapper;
   private final StackInformationMapper stackInformationMapper;
   private final StackImageMapper stackImageMapper;
+  private final FactoryRepository factoryRepository;
 
   @Override
   public boolean existsStackById(Integer stackId) {
@@ -32,8 +36,38 @@ public class StackDataServiceImpl implements StackDataService {
   }
 
   @Override
+  @Transactional
   public void saveStack(StackDto stackDto) {
-    stackRepository.save(stackMapper.toEntity(stackDto));
+    Stack stack = stackMapper.toEntity(stackDto);
+
+    if (stackDto.getFactoryId() != null) {
+      Factory factory = factoryRepository.findById(stackDto.getFactoryId())
+          .orElseThrow(() -> new RuntimeException("Factory not found"));
+      stack.setFactory(factory);
+    } else {
+      stack.setFactory(null);
+    }
+
+    stackRepository.save(stack);
+  }
+
+  @Override
+  @Transactional
+  public void updateStack(StackDto stackDto) {
+    Stack stack = stackRepository.findById(stackDto.getStackId())
+        .orElseThrow(() -> new RuntimeException("stack not found"));
+
+    if (stackDto.getStackName() != null) {
+      stack.setStackName(stackDto.getStackName());
+    }
+
+    if (stackDto.getPrevention() != null) {
+      stack.setPrevention(stackDto.getPrevention());
+    }
+
+    if (stackDto.getNote() != null) {
+      stack.setNote(stackDto.getNote());
+    }
   }
 
   @Override

@@ -24,7 +24,7 @@ public class Schedule {
   @Column(name = "measure_date")
   private LocalDate measureDate;
   @Column(name = "is_completed")
-  private Boolean isCompleted;
+  private boolean isCompleted;
   @Column(name = "reg_date")
   private LocalDate regDate;
 }

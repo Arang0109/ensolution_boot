@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ensolution.ensol.common.data.mapper.mybatis.ScheduleTableBatisMapper">
+    <select id="selectSchedules" resultType="ScheduleTableDto">
+        SELECT
+            GROUP_CONCAT(sc.schedule_id) AS schedule_ids,
+            sc.team_id,
+            GROUP_CONCAT(sc.stack_measurement_id) AS stack_measurement_ids,
+            w.workplace_name, s.stack_name, s.stack_id,
+            GROUP_CONCAT(p.pollutant_name_kr) AS pollutant_names,
+            GROUP_CONCAT(p.pollutant_id) AS pollutant_ids,
+            t.team_name, sc.measure_date, sc.is_completed
+        FROM schedule sc
+            LEFT JOIN stack_measurement sm ON sc.stack_measurement_id = sm.stack_measurement_id
+            LEFT JOIN stack s ON sm.stack_id = s.stack_id
+            LEFT JOIN pollutant p ON sm.pollutant_id = p.pollutant_id
+            LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
+            LEFT JOIN team t ON sc.team_id = t.team_id
+        GROUP BY sc.team_id, w.workplace_name, s.stack_name, s.stack_id, t.team_name, sc.measure_date, sc.is_completed;
+    </select>
+
+    <update id="updateStackMeasurementComplete" parameterType="list">
+        UPDATE stack_measruement
+        SET is_completed = 1
+        WHERE stack_measurement_id IN
+        <foreach item="stack_measurement_id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{stack_measurement_id}
+        </foreach>
+    </update>
+
+    <update id="updateScheduleComplete" parameterType="list">
+        UPDATE schedule
+        SET is_completed = 1
+        WHERE schedule_id IN
+        <foreach item="schedule_id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{schedule_id}
+        </foreach>
+    </update>
+</mapper>

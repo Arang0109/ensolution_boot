@@ -1,12 +1,15 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.data.dto.WorkplaceDto;
+import com.ensolution.ensol.common.data.entity.Company;
 import com.ensolution.ensol.common.data.entity.Workplace;
 import com.ensolution.ensol.common.data.mapper.WorkplaceMapper;
+import com.ensolution.ensol.common.data.repository.CompanyRepository;
 import com.ensolution.ensol.common.data.repository.WorkplaceRepository;
 import com.ensolution.ensol.management.service.WorkplaceDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class WorkplaceDataServiceImpl implements WorkplaceDataService {
+  private final CompanyRepository companyRepository;
   private final WorkplaceRepository workplaceRepository;
   private final WorkplaceMapper workplaceMapper;
 
@@ -35,8 +39,32 @@ public class WorkplaceDataServiceImpl implements WorkplaceDataService {
   }
 
   @Override
+  public Integer findFactoryId(Integer workplaceId) {
+
+
+    return 0;
+  }
+
+  @Override
+  @Transactional
   public void saveWorkplace(WorkplaceDto workplaceDto) {
-    workplaceRepository.save(workplaceMapper.toEntity(workplaceDto));
+    Workplace workplace = workplaceMapper.toEntity(workplaceDto);
+    workplaceRepository.save(workplace);
+  }
+
+  @Override
+  @Transactional
+  public void updateWorkplace(WorkplaceDto workplaceDto) {
+    Workplace workplace = workplaceRepository.findById(workplaceDto.getWorkplaceId())
+        .orElseThrow(() -> new RuntimeException("Workplace not found"));
+
+    if (workplaceDto.getWorkplaceName() != null) {
+      workplace.setWorkplaceName(workplaceDto.getWorkplaceName());
+    }
+
+    if (workplaceDto.getAddress() != null) {
+      workplace.setAddress(workplaceDto.getAddress());
+    }
   }
 
   @Override

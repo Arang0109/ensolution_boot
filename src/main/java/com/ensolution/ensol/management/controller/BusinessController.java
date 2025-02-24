@@ -116,6 +116,11 @@ public class BusinessController {
         rattr,
         stackDto.getStackName()
     );
+
+    System.out.println("controller");
+    System.out.println("stackDto: " + stackDto);
+    System.out.println("=====");
+
     return MessageFormat.format("redirect:/management/workplaces/{0}",
         stackDto.getWorkplaceId());
   }
@@ -126,14 +131,19 @@ public class BusinessController {
   public String getStackDetail(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
     TableIdDto ids = stackService.findIds(stackId);
+    WorkplaceDto workplace = workplaceService.findWorkplaceById(ids.getWorkplaceId()).get();
     if (stack == null) {
       return "redirect:/management/stacks";
     }
 
     m.addAttribute("stack", stack);
     m.addAttribute("company", companyService.findCompanyById(ids.getCompanyId()));
-    m.addAttribute("workplace", workplaceService.findWorkplaceById(ids.getWorkplaceId()));
+    m.addAttribute("workplace", workplace);
     m.addAttribute("pollutants", pollutantService.findAllPollutants());
+
+    if (workplace.isExistFactory()) {
+//      m.addAttribute("factory", )
+    }
     return "management/stack/stackDetailView";
   }
 

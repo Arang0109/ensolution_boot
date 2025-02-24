@@ -26,6 +26,6 @@ public class Department {
   private String departmentPhone;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "factory")
+  @OneToMany(mappedBy = "department")
   private List<Factory> factories = new ArrayList<>();
 }

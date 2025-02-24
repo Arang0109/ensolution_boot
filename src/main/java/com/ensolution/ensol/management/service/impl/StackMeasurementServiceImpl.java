@@ -1,38 +1,37 @@
 package com.ensolution.ensol.management.service.impl;
 
+import com.ensolution.ensol.common.data.dto.StackMeasurementDto;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.service.StackMeasurementService;
-import org.springframework.dao.DataAccessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StackMeasurementServiceImpl implements StackMeasurementService {
-  private final StackMeasurementMapper stackMeasurementMapper;
+  private final StackMeasurementDataService stackMeasurementDataService;
 
-  public StackMeasurementServiceImpl(StackMeasurementMapper stackMeasurementMapper) {
-    this.stackMeasurementMapper = stackMeasurementMapper;
+  @Override
+  public Optional<StackMeasurementDto> findStackMeasurementById(Integer stackMeasurementId) {
+   return stackMeasurementDataService.findStackMeasurementById(stackMeasurementId);
   }
 
   @Override
-  public StackMeasurementDto findStackMeasurementById(Integer id) {
-    return stackMeasurementMapper.selectStackMeasurement(id);
-  }
-
-  @Override
-  public List<StackMeasurementDto> findStackMeasurementsByStackId(Integer stack_id) {
-    return stackMeasurementMapper.selectStackMeasurementsOfStack(stack_id);
+  public List<StackMeasurementDto> findStackMeasurementsByStackId(Integer stackId) {;
+    return stackMeasurementDataService.findStackMeasurementsByStackId(stackId);
   }
 
   @Override
   public void createStackMeasurement(StackMeasurementDto stackMeasurementDto) {
     try {
-      stackMeasurementMapper.insert(stackMeasurementDto);
+      stackMeasurementDataService.createStackMeasurement(stackMeasurementDto);
     } catch (DuplicateKeyException e) {
-      throw new CustomDKException("StackMeasurement", "ID", stackMeasurementDto.getStack_id().toString(), e);
+      throw new CustomDKException("StackMeasurement", "ID", stackMeasurementDto.getStackId().toString(), e);
     }
   }
 
@@ -48,13 +47,9 @@ public class StackMeasurementServiceImpl implements StackMeasurementService {
       if (stackMeasurementDto == null) {
         throw new IllegalArgumentException("stackMeasurementDto cannot be null");
       }
-      ids.add(stackMeasurementDto.getStack_measurement_id());
+      ids.add(stackMeasurementDto.getStackMeasurementId());
     }
 
-    try {
-      stackMeasurementMapper.deleteItems(ids);
-    } catch (DataAccessException e) {
-      throw new RuntimeException("Database error occurred while deleting stackMeasurements", e);
-    }
+    stackMeasurementDataService.removeStackMeasurements(ids);
   }
 }

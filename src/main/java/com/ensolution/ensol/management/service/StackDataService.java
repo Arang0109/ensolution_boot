@@ -11,10 +11,9 @@ public interface StackDataService {
 
   void saveStack(StackDto stackDto);
 
-  void saveStackInformation(StackInformationDto stackInformationDto);
+  void updateStack(StackDto stackDto);
 
-  // 시설 사진 업로드 서비스
-  void saveStackImage(StackImageDto stackImageDto);
+  void saveStackInformation(StackInformationDto stackInformationDto);
 
   // 특정 시설 사진 조회
   List<StackImageDto> findAllStackImages(Integer stackId);
@@ -27,6 +26,9 @@ public interface StackDataService {
 
   // 특정 사업장의 시설 목록 조회
   List<StackDto> findAllStacksByWorkplaceId(Integer workplaceId);
+
+  // 시설 사진 업로드 서비스
+  void saveStackImage(StackImageDto stackImageDto);
 
   void deleteStacks(List<Integer> ids);
 }

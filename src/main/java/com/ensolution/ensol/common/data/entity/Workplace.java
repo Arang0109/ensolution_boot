@@ -30,12 +30,12 @@ public class Workplace {
   private LocalDate regDate;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "stack")
+  @OneToMany(mappedBy = "workplace")
   private List<Stack> stacks = new ArrayList<>();
   @JsonIgnore
-  @OneToMany(mappedBy = "department")
+  @OneToMany(mappedBy = "workplace")
   private List<Department> departments = new ArrayList<>();
   @JsonIgnore
-  @OneToMany(mappedBy = "factory")
+  @OneToMany(mappedBy = "workplace")
   private List<Factory> factories = new ArrayList<>();
 }

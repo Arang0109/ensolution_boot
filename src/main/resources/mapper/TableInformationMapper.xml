@@ -5,13 +5,13 @@
 <mapper namespace="com.ensolution.ensol.common.data.mapper.mybatis.TableBatisMapper">
     <sql id="selectTableArg">
         SELECT
-            s.stack_id,
-            s.stack_name,
-            c.company_name,
-            w.workplace_name,
-            f.factory_category,
-            f.factory_name,
-            d.department_name
+            s.stack_id AS stackId,
+            s.stack_name AS stackName,
+            c.company_name AS companyName,
+            w.workplace_name AS workplaeName,
+            f.factory_category AS factoryCategory,
+            f.factory_name AS factoryName,
+            d.department_name AS departmentName
         FROM stack s
                  LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
                  LEFT JOIN company c ON w.company_id = c.company_id

@@ -93,7 +93,7 @@ public class BusinessRestController {
       ("/stacks/{stackId}/stack-measurements")
   public void createStackMeasurements(@PathVariable Integer stackId, @RequestBody List<StackMeasurementDto> stackMeasurementList) {
     for (StackMeasurementDto stackMeasurementDto : stackMeasurementList) {
-      stackMeasurementDto.setStack_id(stackId);
+      stackMeasurementDto.setStackId(stackId);
       stackMeasurementService.createStackMeasurement(stackMeasurementDto);
     }
   }
@@ -106,8 +106,8 @@ public class BusinessRestController {
 
   @GetMapping
       ("/stacks/{stackId}/images")
-  public ResponseEntity<List<StackImagesDto>> getStackImages(@PathVariable Integer stackId) {
-    List<StackImagesDto> images = stackService.findAllStackImages(stackId);
+  public ResponseEntity<List<StackImageDto>> getStackImages(@PathVariable Integer stackId) {
+    List<StackImageDto> images = stackService.findAllStackImages(stackId);
     return ResponseEntity.ok(images);
   }
 }

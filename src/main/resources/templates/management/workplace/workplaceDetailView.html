@@ -16,13 +16,13 @@
       <div class="profile-main d-flex justify-content-between">
         <div class="d-flex">
           <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-                 th:href="@{/management/companies/{id}(id=${company.company_id})}" th:text="${company.company_name}"></a> /
-            <span th:text="${workplace.workplace_name}"></span></h4>
+                 th:href="@{/management/companies/{id}(id=${company.companyId})}" th:text="${company.companyName}"></a> /
+            <span th:text="${workplace.workplaceName}"></span></h4>
           <span style="margin-left: 1.25rem;" th:text="${workplace.address}"></span>
         </div>
         <div >
           <button id="modifyBtn" class="btn btn-primary btn-sm" type="button">수정</button>
-          <a class="btn btn-primary btn-sm" th:href="@{/management/workplace}">목록</a>
+          <a class="btn btn-primary btn-sm" th:href="@{/management/workplaces}">목록</a>
         </div>
       </div>
     </div>
@@ -33,12 +33,12 @@
       <hr>
       <form id="workplaceInfoForm" class="needs-validation" novalidate>
         <div class="container text-center">
-          <input name="workplace_id" type="text" class="form-control" th:value="${workplace.workplace_id}" readonly='readonly' hidden="hidden">
+          <input name="workplaceId" type="text" class="form-control" th:value="${workplace.workplaceId}" readonly='readonly' hidden="hidden">
           <div class="row p-2">
             <div class="col">
               <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="workplace_name">측정대상 사업장 <small><b>(필수)</b></small></span>
-                <input name="workplace_name" type="text" class="form-control" th:value="${workplace.workplace_name}"
+                <input name="workplaceName" type="text" class="form-control" th:value="${workplace.workplaceName}"
                        aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly' required>
               </div>
             </div>
@@ -100,7 +100,7 @@
         selector: '#table tbody input[type="checkbox"]:checked',
         closestTag: 'tr',
         dataAttr: 'data-stack-id',
-        idKey: 'stack_id',
+        idKey: 'stackId',
         url: /*[[@{/management/stacks}]]*/ '',
       }
       businessDeleteHandler(options);
@@ -109,7 +109,7 @@
       const options = {
         btnId: $(this),
         selector: $('#workplaceInfoForm'),
-        url: /*[[@{/management/workplaces}]]*/ '',
+        url: /*[[@{/management/workplaces/{workplaceId}(workplaceId=${workplace.workplaceId})}]]*/ '',
       }
       businessModifyHandler(options);
     });
@@ -138,7 +138,7 @@
       })
 
       $.ajax({
-        url: /*[[@{/management/workplaces/{workplaceId}/upload/excel(workplaceId=${workplace.workplace_id})}]]*/ '',
+        url: /*[[@{/management/workplaces/{workplaceId}/upload/excel(workplaceId=${workplace.workplaceId})}]]*/ '',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(stack_measurements),

@@ -9,6 +9,7 @@ public interface CompanyDataService {
   Optional<CompanyDto> findCompanyById(Integer id);
   List<CompanyDto> findAll();
   void saveCompany(CompanyDto companyDto);
+  void updateCompany(CompanyDto companyDto);
   void deleteCompanies(List<Integer> ids);
   boolean existsById(Integer id);
 }

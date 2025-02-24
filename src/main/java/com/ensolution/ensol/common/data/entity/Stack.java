@@ -37,8 +37,8 @@ public class Stack {
       orphanRemoval = true)
   private StackInformation stackInformation;
   @JsonIgnore
-  @OneToMany(mappedBy = "stackImage")
+  @OneToMany(mappedBy = "stack")
   private List<StackImage> stackImages;
-  @OneToMany(mappedBy = "stackMeasurement")
+  @OneToMany(mappedBy = "stack")
   private List<StackMeasurement> stackMeasurements;
 }

@@ -29,9 +29,9 @@ public class Factory {
   private String factoryCategory;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "manager")
+  @OneToMany(mappedBy = "factory")
   private List<Manager> managers = new ArrayList<>();
   @JsonIgnore
-  @OneToMany(mappedBy = "stack")
+  @OneToMany(mappedBy = "factory")
   private List<Stack> stacks = new ArrayList<>();
 }

@@ -1,24 +1,30 @@
 package com.ensolution.ensol.common.service;
 
+import com.ensolution.ensol.common.data.dto.StackMeasurementDto;
 import com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ensolution.ensol.common.data.entity.Pollutant;
+import com.ensolution.ensol.common.data.entity.Stack;
+import com.ensolution.ensol.common.data.mapper.PollutantMapper;
+import com.ensolution.ensol.common.data.mapper.StackMapper;
+import com.ensolution.ensol.common.data.mapper.StackMeasurementMapper;
+import com.ensolution.ensol.common.data.repository.PollutantRepository;
+import com.ensolution.ensol.common.data.repository.StackMeasurementRepository;
+import com.ensolution.ensol.common.data.repository.StackRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ExcelDataUploadService {
   StackMapper stackMapper;
+  StackRepository stackRepository;
   PollutantMapper pollutantMapper;
+  PollutantRepository pollutantRepository;
   StackMeasurementMapper stackMeasurementMapper;
-
-  @Autowired
-  public ExcelDataUploadService(StackMapper stackMapper, PollutantMapper pollutantMapper,
-                                StackMeasurementMapper stackMeasurementMapper) {
-    this.stackMapper = stackMapper;
-    this.pollutantMapper = pollutantMapper;
-    this.stackMeasurementMapper = stackMeasurementMapper;
-  }
+  StackMeasurementRepository stackMeasurementRepository;
 
   public void addStackMeasurement(Integer workplaceId, List<ExcelStackMeasurementDto> excelData) {
     for (ExcelStackMeasurementDto item : excelData) {
@@ -26,13 +32,17 @@ public class ExcelDataUploadService {
 
       StackMeasurementDto stackMeasurementDto = new StackMeasurementDto();
 
-      stackMeasurementDto.setStack_id(stackMapper.selectStackIdByName(item));
-      stackMeasurementDto.setPollutant_id(pollutantMapper.selectPollutantIdByName(item.getPollutant_name()));
-      stackMeasurementDto.setCycle_type(item.getCycle_type());
-      stackMeasurementDto.setIs_measure(!item.getCycle_type().equals("nomeasure"));
-      stackMeasurementDto.setAllow_value(item.getAllow_value());
-
-      stackMeasurementMapper.insert(stackMeasurementDto);
+      Optional<Stack> stack = stackRepository.findByStackName(item.getStack_name());
+      Optional<Pollutant> pollutant = pollutantRepository.findByPollutantNameKR(item.getPollutant_name());
+      if (stack.isPresent() && pollutant.isPresent()) {
+        stackMeasurementDto.setStackId(stackMapper.toDto(stack.get()).getStackId());
+        stackMeasurementDto.setPollutantId(pollutantMapper.toDto(pollutant.get()).getPollutantId());
+        stackMeasurementDto.setCycleType(item.getCycle_type());
+        stackMeasurementDto.setMeasured(!item.getCycle_type().equals("nomeasure"));
+        stackMeasurementDto.setAllowValue(item.getAllow_value());
+      }
+      ;
+      stackMeasurementRepository.save(stackMeasurementMapper.toEntity(stackMeasurementDto));
     }
   }
 }

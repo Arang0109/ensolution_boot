@@ -2,6 +2,7 @@ package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.common.data.dto.WorkplaceDto;
+import com.ensolution.ensol.management.service.CompanyDataService;
 import com.ensolution.ensol.management.service.WorkplaceDataService;
 import com.ensolution.ensol.management.service.WorkplaceService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,11 @@ public class WorkplaceServiceImpl implements WorkplaceService {
   }
 
   @Override
+  public Integer findFactoryId(Integer workplaceId) {
+    return workplaceDataService.findFactoryId(workplaceId);
+  }
+
+  @Override
   public void createWorkplace(WorkplaceDto workplaceDto) {
     try {
       workplaceDto.setRegDate(LocalDate.now());
@@ -48,7 +54,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
     if (!workplaceDataService.existsById(workplaceDto.getWorkplaceId())) {
       throw new IllegalArgumentException("Workplace with Name " + workplaceDto.getWorkplaceName() + " does not exist.");
     }
-    workplaceDataService.saveWorkplace(workplaceDto);
+    workplaceDataService.updateWorkplace(workplaceDto);
   }
 
   @Override

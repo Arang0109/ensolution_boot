@@ -25,6 +25,6 @@ public class Pollutant {
   @Column(name = "sampling_volume")
   private String samplingVolume;
 
-  @OneToMany(mappedBy = "stackMeasurement")
+  @OneToMany(mappedBy = "pollutant")
   private List<StackMeasurement> stackMeasurements;
 }

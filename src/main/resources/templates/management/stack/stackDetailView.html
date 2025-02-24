@@ -17,12 +17,12 @@
       <div class="profile-main">
         <div class="d-flex justify-content-between">
           <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-                 th:href="@{/management/companies/{id}(id=${company.company_id})}"
-                 th:text="${company.company_name}"></a> /
+                 th:href="@{/management/companies/{id}(id=${company.companyId})}"
+                 th:text="${company.companyName}"></a> /
             <a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-               th:href="@{/management/workplaces/{id}(id=${workplace.workplace_id})}"
-               th:text="${workplace.workplace_name}"></a> /
-            <span th:text="${stack.stack_name}"></span></h4>
+               th:href="@{/management/workplaces/{id}(id=${workplace.workplaceId})}"
+               th:text="${workplace.workplaceName}"></a> /
+            <span th:text="${stack.stackName}"></span></h4>
           <div>
             <a class="btn btn-primary btn-sm"
                th:href="@{/management/stacks}">목록</a>
@@ -41,12 +41,12 @@
         <hr>
         <form id="stackInfoForm" class="needs-validation" novalidate>
           <div class="container text-center">
-            <input name="stack_id" type="text" class="form-control" th:value="${stack.stack_id}" readonly='readonly' hidden="hidden">
+            <input name="stackId" type="text" class="form-control" th:value="${stack.stackId}" readonly='readonly' hidden="hidden">
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="stack_name">측정 시설 <small><b>(필수)</b></small></span>
-                  <input name="stack_name" type="text" class="form-control" th:value="${stack.stack_name}"
+                  <input name="stackName" type="text" class="form-control" th:value="${stack.stackName}"
                          aria-label="Stack name" aria-describedby="addon-wrapping" readonly='readonly' required>
                 </div>
               </div>
@@ -73,19 +73,19 @@
         <hr>
         <div class="container text-center">
           <form id="stackSpecificationInfoForm" class="needs-validation" novalidate>
-            <input name="stack_info_id" type="text" class="form-control" th:value="${stack.stack_information.stack_info_id}" readonly='readonly' hidden="hidden">
+            <input name="stackId" type="text" class="form-control" th:value="${stack.stackId}" readonly='readonly' hidden="hidden">
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="diameter">직경 (m)</span>
-                  <input name="diameter" type="text" class="form-control" th:value="${stack.stack_information.diameter}"
+                  <input name="diameter" type="text" class="form-control" th:value="${stack.stackInformation.diameter}"
                          aria-label="Diameter" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="velocity_speed">유속 (m/s)</span>
-                  <input name="velocity_speed" type="text" class="form-control" th:value="${stack.stack_information.velocity_speed}"
+                  <input name="velocity" type="text" class="form-control" th:value="${stack.stackInformation.velocity}"
                          aria-label="Velocity speed" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
@@ -94,14 +94,14 @@
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="dynamic_pressure">동압 (mmH<sub>2</sub>O)</span>
-                  <input name="dynamic_pressure" type="text" class="form-control" th:value="${stack.stack_information.dynamic_pressure}"
+                  <input name="dynamicPressure" type="text" class="form-control" th:value="${stack.stackInformation.dynamicPressure}"
                          aria-label="Dynamic pressure" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="static_pressure">정압 (mmH<sub>2</sub>O)</span>
-                  <input name="static_pressure" type="text" class="form-control" th:value="${stack.stack_information.static_pressure}"
+                  <input name="staticPressure" type="text" class="form-control" th:value="${stack.stackInformation.staticPressure}"
                          aria-label="Static pressure" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
@@ -110,14 +110,14 @@
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="quantity">유량 (m<sup>3</sup>/hr)</span>
-                  <input name="quantity" type="text" class="form-control" th:value="${stack.stack_information.quantity}"
+                  <input name="quantity" type="text" class="form-control" th:value="${stack.stackInformation.quantity}"
                          aria-label="Quantity" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text" id="temperature">온도 (ºC)</span>
-                  <input name="temperature" type="text" class="form-control" th:value="${stack.stack_information.temperature}"
+                  <input name="temperature" type="text" class="form-control" th:value="${stack.stackInformation.temperature}"
                          aria-label="Temperature" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
@@ -177,9 +177,9 @@
         <table id="table" class="table table-bordered">
           <thead>
           <tr>
-            <th data-field="measure_date">측정일</th>
+            <th data-field="measureDate">측정일</th>
             <th data-field="pollutant">측정 항목</th>
-            <th data-field="team_name">팀</th>
+            <th data-field="teamName">팀</th>
           </tr>
           </thead>
           <tbody>
@@ -193,7 +193,7 @@
 <script layout:fragment="scriptContent" th:inline="javascript">
   $(document).ready(function(){
     const addResult = sessionStorage.getItem("addResult");
-    const id = /*[[${stack.stack_id}]]*/ '';
+    const id = /*[[${stack.stackId}]]*/ '';
     viewAddMeasurementToast(addResult);
 
     $.ajax({
@@ -218,7 +218,7 @@
     });
 
     $.ajax({
-      url: /*[[@{/schedule/register/stack-measurements(stackId=${stack.stack_id})}]]*/ ``,
+      url: /*[[@{/schedule/register/stack-measurements(stackId=${stack.stackId})}]]*/ ``,
       type: 'GET',
       contentType: 'application/json',
       success: function(response) {
@@ -230,7 +230,7 @@
     });
 
     $.ajax({
-      url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
+      url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stackId})}]]*/ '',
       method: 'GET',
       success: function(response){
         const options = {
@@ -283,18 +283,18 @@
 
       selectedValues.forEach(function(value) {
         const text = $(`#selectPoll option[value="${value}"]`).text();
-        const stackId = /*[[${stack.stack_id}]]*/ '';
+        const stackId = /*[[${stack.stackId}]]*/ '';
         let result = `
               <div class="row g-2 m-1 stackMeasurementDiv">
                 <div class="col-md">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="${value}" name="pollutant_id" placeholder="측정 항목" value="${text}" disabled>
+                    <input type="text" class="form-control" id="${value}" name="pollutantId" placeholder="측정 항목" value="${text}" disabled>
                     <label for="${value}">측정 항목</label>
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-floating">
-                    <select class="form-select cycle" name="cycle_type" id="selectCycle">
+                    <select class="form-select cycle" name="cycleType" id="selectCycle">
                       <option value="monthly">1회 / 월</option>
                       <option value="quarterly">1회 / 분기</option>
                       <option value="semiannual">1회 / 반기</option>
@@ -309,13 +309,13 @@
                 </div>
                 <div class="col-md">
                   <div class="form-floating">
-                    <input type="text" class="form-control" name="allow_value" id="allow_value" placeholder="혀용 기준치">
-                    <label for="allow_value">허용 기준치(ppm)</label>
+                    <input type="text" class="form-control" name="allowValue" id="allowValue" placeholder="혀용 기준치">
+                    <label for="allowValue">허용 기준치(ppm)</label>
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" name="is_measure" id="measureCheck${value}" checked>
+                    <input class="form-check-input" type="checkbox" role="switch" name="isMeasured" id="measureCheck${value}" checked>
                     <label class="form-check-label" for="measureCheck${value}">
                       측정 여부<br><span style="color: red; font-size:0.875rem;">* 측정하지 않는 항목일 경우 해제</span></label>
                   </div>
@@ -334,7 +334,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackInfoForm'),
-        url: /*[[@{/management/stacks}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}(stackId=${stack.stackId}})}]]*/ '',
       }
 
       businessModifyHandler(options);
@@ -344,7 +344,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackSpecificationInfoForm'),
-        url: /*[[@{/management/stacks/{stackId}/info(stackId=${stack.stack_id})}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/info(stackId=${stack.stackId})}]]*/ '',
       }
 
       businessModifyHandler(options);
@@ -355,11 +355,11 @@
 
       $('div[class="row g-2 m-1 stackMeasurementDiv"]').each(function() {
         pollutantList.push({
-          "pollutant_id": $(this).find('input[name="pollutant_id"]').attr("id"),
-          "cycle_type": $(this).find('select.cycle').val(),
-          "is_completed": 0,
-          "allow_value": $(this).find('input[name="allow_value"]').val(),
-          "is_measure": $(this).find('input[name="is_measure"]').is(":checked"),
+          "pollutantId": $(this).find('input[name="pollutantId"]').attr("id"),
+          "cycleType": $(this).find('select.cycle').val(),
+          "isCompleted": 0,
+          "allowValue": $(this).find('input[name="allowValue"]').val(),
+          "isMeasured": $(this).find('input[name="isMeasured"]').is(":checked"),
         })
       });
 
@@ -370,7 +370,7 @@
 
       $.ajax({
         type:'POST',
-        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stackId})}]]*/ '',
         headers : { "Content-Type": "application/json"},
         dataType : 'text',
         data: JSON.stringify(pollutantList),
@@ -389,8 +389,8 @@
         selector: '#stackMeasurement input[type="checkbox"]:checked',
         closestTag: 'div',
         dataAttr: 'data-stack-measurement-id',
-        idKey: 'stack_measurement_id',
-        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stack_id})}]]*/ '',
+        idKey: 'stackMeasurementId',
+        url: /*[[@{/management/stacks/{stackId}/stack-measurements(stackId=${stack.stackId})}]]*/ '',
       }
 
       businessDeleteHandler(options);

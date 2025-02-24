@@ -20,6 +20,6 @@ public class Team {
   private String teamName;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "schedule")
+  @OneToMany(mappedBy = "team")
   private List<Schedule> schedules;
 }
