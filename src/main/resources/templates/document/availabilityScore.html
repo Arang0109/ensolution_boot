@@ -26,8 +26,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '먼지'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -35,8 +35,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '현장측정'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name_en}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameEN}"></label>
               </div>
             </div>
           </div>
@@ -44,8 +44,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '카트리지'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -55,8 +55,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '흡수액'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -64,8 +64,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '비소'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -75,8 +75,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '중금속'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name_en}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameEN}"></label>
               </div>
             </div>
           </div>
@@ -84,8 +84,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '수은'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -95,8 +95,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '흡착관(T)'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -104,8 +104,8 @@
           <div class="my-3">
             <div th:each="pollutant : ${pollutants}">
               <div th:if="${pollutant.method == '흡착관(A)'}" class="form-check ms-2">
-                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutant_id}" th:id="${pollutant.pollutant_id}">
-                <label class="form-check-label" th:for="${pollutant.pollutant_id}" th:text="${pollutant.pollutant_name}"></label>
+                <input class="form-check-input" type="checkbox" th:value="${pollutant.pollutantId}" th:id="${pollutant.pollutantId}">
+                <label class="form-check-label" th:for="${pollutant.pollutantId}" th:text="${pollutant.pollutantNameKR}"></label>
               </div>
             </div>
           </div>
@@ -120,8 +120,8 @@
       const selectedPollutant = [];
 
       $('input[type=checkbox]:checked').each(function() {
-        const pollutant_id = $(this).val();
-        selectedPollutant.push({"pollutant_id": pollutant_id});
+        const pollutantId = $(this).val();
+        selectedPollutant.push({"pollutantId": pollutantId});
       });
 
       if (selectedPollutant.length === 0) return alert("항목을 선택해 주세요.");

@@ -96,25 +96,25 @@ function getNoteOfStack(note) {
   memo.val(note);
 }
 
-function getHistory(histories) {
-  const tbody = $('#table tbody');
-  tbody.empty();
-
-  histories.forEach(history => {
-    const date = new Date(history.measure_date);
-
-    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-
-    const innerHtml = `
-          <tr>
-            <td>` + localDate.toISOString().split('T')[0] + `</td>
-            <td>${history.pollutant_ids}</td>
-            <td>${history.team_name}</td>
-          </tr>
-        `;
-    tbody.append(innerHtml);
-  });
-}
+// function getHistory(histories) {
+//   const tbody = $('#table tbody');
+//   tbody.empty();
+//
+//   histories.forEach(history => {
+//     const date = new Date(history.measure_date);
+//
+//     const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+//
+//     const innerHtml = `
+//           <tr>
+//             <td>` + localDate.toISOString().split('T')[0] + `</td>
+//             <td>${history.pollutant_ids}</td>
+//             <td>${history.team_name}</td>
+//           </tr>
+//         `;
+//     tbody.append(innerHtml);
+//   });
+// }
 
 function uploadMeasurementExcelData(selector) {
   const isValidAValue = (value) => {
@@ -422,12 +422,12 @@ function methodList(pollutants) {
 }
 
 function sortCycle(pollutants) {
-  const cycle_type = {};
+  const cycleType = {};
   pollutants.forEach(item => {
     const cycle = item.cycle_type;
-    cycle_type[cycle] = convert[cycle];
+    cycleType[cycle] = convert[cycle];
   });
-  return orderCycle.filter(key => cycle_type.hasOwnProperty(key));
+  return orderCycle.filter(key => cycleType.hasOwnProperty(key));
 }
 
 // {monthly:['먼지', '중금속'], annual:['중금속']}
@@ -448,8 +448,7 @@ function createPollutantListView(options) {
             <div class="border p-4 mx-2 flex-grow-1 shadow-sm rounded bg-body-tertiary">
               <span class="badge text-bg-primary">` + convert[key] + `</span>
               <div id="` + key +  `" class="my-3 d-flex flex-column"></div>
-            </div>
-          `;
+            </div>`;
     parentDiv.append(childDiv)
   });
 
@@ -470,17 +469,17 @@ function createPollutantListView(options) {
   }
 
   pollutants.forEach(item => {
-    const cycle = item.cycle_type;
+    const cycle = item.cycleType;
     const id = '#' + cycle;
     const value = item.method;
     const tag = $(id);
-    const aValue = item.allow_value != null ? item.allow_value + ' ppm' : '';
-    const color = item.is_completed ? 'green' : 'red';
+    const aValue = item.allowValue != null ? item.allowValue + ' ppm' : '';
+    const color = item.isCompleted ? 'green' : 'red';
 
     const childDiv =
-               `<div class="form-check form-check-inline m-1" style="width: 300px;" data-stack-measurement-id="${item.stack_measurement_id}">
-                  <input class="form-check-input" type="checkbox" value="${item.pollutant_id}" id="${item.pollutant_id}">
-                  <label class="form-check-label" for="${item.pollutant_id}"><span style="color: ${color}">${item.pollutant_name}</span> <small style="color: saddlebrown">${aValue}</small></label>
+               `<div class="form-check form-check-inline m-1" style="width: 300px;" data-stack-measurement-id="${item.stackMeasurementId}">
+                  <input class="form-check-input" type="checkbox" value="${item.pollutantId}" id="${item.pollutantId}">
+                  <label class="form-check-label" for="${item.pollutantId}"><span style="color: ${color}">${item.pollutantNameKR}</span> <small style="color: saddlebrown">${aValue}</small></label>
                 </div>`;
 
     tag.find(`div[data-method="${value}"]`).append(childDiv)

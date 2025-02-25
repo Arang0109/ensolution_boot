@@ -44,7 +44,7 @@ public class BusinessRestController {
       ("/stacks/{stackId}/stack-measurements")
   public ResponseEntity<Map<String, Object>> getStackMeasurements(@PathVariable Integer stackId) {
     List<StackMeasurementDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
-
+    System.out.println(stackMeasurements);
     Map<String, Object> response = new HashMap<>();
     response.put("stackMeasurements", stackMeasurements);
 

@@ -17,7 +17,7 @@ public class PollutantDataService {
 
   public PollutantDto findPollutantById(Integer pollutantId) {
     Pollutant pollutant = pollutantRepository.findById(pollutantId)
-        .orElseThrow(() -> new RuntimeException("pollutat not found"));
+        .orElseThrow(() -> new RuntimeException("pollutant not found"));
 
     return pollutantMapper.toDto(pollutant);
   }
