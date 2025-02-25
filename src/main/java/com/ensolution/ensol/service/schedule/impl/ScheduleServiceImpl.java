@@ -1,7 +1,7 @@
 package com.ensolution.ensol.service.schedule.impl;
 
 import com.ensolution.ensol.dto.entity.ScheduleDto;
-import com.ensolution.ensol.dto.query.ScheduleTableDto;
+import com.ensolution.ensol.dto.query.table.ScheduleTableDto;
 import com.ensolution.ensol.service.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

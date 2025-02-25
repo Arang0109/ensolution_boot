@@ -3,9 +3,9 @@ package com.ensolution.ensol.service.schedule.impl;
 import com.ensolution.ensol.dto.entity.ScheduleDto;
 import com.ensolution.ensol.entity.Schedule;
 import com.ensolution.ensol.mapper.ScheduleMapper;
-import com.ensolution.ensol.repository.mybatis.ScheduleTableBatisMapper;
+import com.ensolution.ensol.repository.mybatis.ScheduleTableMapper;
 import com.ensolution.ensol.repository.jpa.schedule.ScheduleRepository;
-import com.ensolution.ensol.dto.query.ScheduleTableDto;
+import com.ensolution.ensol.dto.query.table.ScheduleTableDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,10 @@ import java.util.List;
 public class ScheduleDataService {
   private final ScheduleRepository scheduleRepository;
   private final ScheduleMapper scheduleMapper;
-  private final ScheduleTableBatisMapper scheduleTableBatisMapper;
+  private final ScheduleTableMapper scheduleTableMapper;
 
   public List<ScheduleTableDto> findAllSchedules() {
-    return scheduleTableBatisMapper.selectSchedules();
+    return scheduleTableMapper.selectSchedules();
   }
 
   public void createSchedule(ScheduleDto scheduleDto) {
@@ -38,8 +38,8 @@ public class ScheduleDataService {
       stackMeasurementIds.add(scheduleDto.getStackMeasurementId());
     }
     try {
-      scheduleTableBatisMapper.updateStackMeasurementComplete(stackMeasurementIds);
-      scheduleTableBatisMapper.updateScheduleComplete(scheduleIds);
+      scheduleTableMapper.updateStackMeasurementComplete(stackMeasurementIds);
+      scheduleTableMapper.updateScheduleComplete(scheduleIds);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting schedules", e);
     }

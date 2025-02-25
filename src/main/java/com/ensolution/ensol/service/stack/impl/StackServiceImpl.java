@@ -2,12 +2,12 @@ package com.ensolution.ensol.service.stack.impl;
 
 import com.ensolution.ensol.dto.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
-import com.ensolution.ensol.dto.query.TableIdDto;
-import com.ensolution.ensol.repository.mybatis.GetIdMapper;
-import com.ensolution.ensol.repository.mybatis.TableBatisMapper;
+import com.ensolution.ensol.dto.query.IdentityDto;
+import com.ensolution.ensol.repository.mybatis.IdentityMapper;
+import com.ensolution.ensol.repository.mybatis.TableInformationMapper;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.dto.entity.stack.StackDto;
-import com.ensolution.ensol.dto.query.StackTableDto;
+import com.ensolution.ensol.dto.query.table.StackTableDto;
 import com.ensolution.ensol.service.stack.StackDataService;
 import com.ensolution.ensol.service.stack.StackService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StackServiceImpl implements StackService {
   private final StackDataService stackDataService;
-  private final TableBatisMapper tableBatisMapper;
-  private final GetIdMapper getIdMapper;
+  private final TableInformationMapper tableInformationMapper;
+  private final IdentityMapper identityMapper;
 
   @Override
   public List<StackImageDto> findAllStackImages(Integer stackId) {
@@ -47,13 +47,13 @@ public class StackServiceImpl implements StackService {
   // 특정 사업장의 시설 테이블 목록
   @Override
   public List<StackTableDto> findStacksByWorkplaceId(Integer workplaceId) {
-    return tableBatisMapper.selectStacksByWorkplaceOfTable(workplaceId);
+    return tableInformationMapper.selectStacksByWorkplaceOfTable(workplaceId);
   }
 
   // 전체 시설 테이블 목록
   @Override
   public List<StackTableDto> findStacksOfTable() {
-    return tableBatisMapper.selectStacksOfTable();
+    return tableInformationMapper.selectStacksOfTable();
   }
 
   @Override
@@ -124,7 +124,7 @@ public class StackServiceImpl implements StackService {
   }
 
   @Override
-  public TableIdDto findIds(Integer stackId) {
-    return getIdMapper.getIds(stackId);
+  public IdentityDto findIds(Integer stackId) {
+    return identityMapper.getIds(stackId);
   }
 }

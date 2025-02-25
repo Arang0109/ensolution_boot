@@ -1,10 +1,10 @@
 package com.ensolution.ensol.service.stack.impl;
 
 import com.ensolution.ensol.dto.entity.stack.StackMeasurementDto;
-import com.ensolution.ensol.dto.query.StackMeasurementsOfStackDto;
+import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
 import com.ensolution.ensol.entity.stack.StackMeasurement;
 import com.ensolution.ensol.mapper.stack.StackMeasurementMapper;
-import com.ensolution.ensol.repository.mybatis.TableBatisMapper;
+import com.ensolution.ensol.repository.mybatis.TableInformationMapper;
 import com.ensolution.ensol.repository.jpa.stack.StackMeasurementRepository;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +20,15 @@ import java.util.Optional;
 public class StackMeasurementDataService {
   private final StackMeasurementMapper stackMeasurementMapper;
   private final StackMeasurementRepository stackMeasurementRepository;
-  private final TableBatisMapper tableBatisMapper;
+  private final TableInformationMapper tableInformationMapper;
 
   public Optional<StackMeasurementDto> findStackMeasurementById(Integer stackMeasurementId) {
     Optional<StackMeasurement> stackMeasurement = stackMeasurementRepository.findById(stackMeasurementId);
     return stackMeasurement.map(stackMeasurementMapper::toDto);
   }
 
-  public List<StackMeasurementsOfStackDto> findStackMeasurementsByStackId(Integer stackId) {
-    return tableBatisMapper.stackMeasurementsOfStack(stackId);
+  public List<StackMeasurementTableDto> findStackMeasurementsByStackId(Integer stackId) {
+    return tableInformationMapper.stackMeasurementsOfStack(stackId);
   }
 
   public void createStackMeasurement(StackMeasurementDto stackMeasurementDto) {

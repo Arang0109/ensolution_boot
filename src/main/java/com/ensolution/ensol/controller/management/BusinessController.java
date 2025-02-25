@@ -1,6 +1,6 @@
 package com.ensolution.ensol.controller.management;
 
-import com.ensolution.ensol.dto.query.TableIdDto;
+import com.ensolution.ensol.dto.query.IdentityDto;
 import com.ensolution.ensol.common.util.DataHandler;
 import com.ensolution.ensol.dto.entity.company.CompanyDto;
 import com.ensolution.ensol.dto.entity.stack.StackDto;
@@ -126,7 +126,7 @@ public class BusinessController {
       ("/stacks/{stackId}")
   public String getStackDetail(@PathVariable Integer stackId, Model m) {
     StackDto stack = stackService.findStackById(stackId);
-    TableIdDto ids = stackService.findIds(stackId);
+    IdentityDto ids = stackService.findIds(stackId);
     WorkplaceDto workplace = workplaceService.findWorkplaceById(ids.getWorkplaceId()).get();
     if (stack == null) {
       return "redirect:/management/stacks";

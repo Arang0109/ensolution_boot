@@ -1,4 +1,4 @@
-package com.ensolution.ensol.dto.query;
+package com.ensolution.ensol.dto.query.table;
 
 import lombok.*;
 

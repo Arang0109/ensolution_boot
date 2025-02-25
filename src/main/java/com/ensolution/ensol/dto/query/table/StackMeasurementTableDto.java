@@ -1,4 +1,4 @@
-package com.ensolution.ensol.dto.query;
+package com.ensolution.ensol.dto.query.table;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class StackMeasurementsOfStackDto {
+public class StackMeasurementTableDto {
   private Integer stackMeasurementId;
   private Integer stackId;
   private Integer pollutantId;

@@ -1,8 +1,8 @@
 package com.ensolution.ensol.controller.schedule;
 
 import com.ensolution.ensol.dto.entity.ScheduleDto;
-import com.ensolution.ensol.dto.query.StackMeasurementsOfStackDto;
-import com.ensolution.ensol.dto.query.StackTableDto;
+import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
+import com.ensolution.ensol.dto.query.table.StackTableDto;
 import com.ensolution.ensol.service.stack.StackMeasurementService;
 import com.ensolution.ensol.service.stack.StackService;
 import com.ensolution.ensol.service.company.WorkplaceService;
@@ -65,7 +65,7 @@ public class ScheduleRestController {
   public ResponseEntity<Map<String, Object>> getStackMeasurementsOfStack(@RequestParam Integer stackId) {
     Map<String, Object> response = new HashMap<>();
     String note = stackService.findStackById(stackId).getNote();
-    List<StackMeasurementsOfStackDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
+    List<StackMeasurementTableDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
 //    List<HistoryDto> histories = scheduleService.findAllHistoryOfStacks(stackId);
 
     response.put("measurements", stackMeasurements);

@@ -1,6 +1,6 @@
 package com.ensolution.ensol.common.data.mapper.mybatis;
 
-import com.ensolution.ensol.dto.query.TableIdDto;
+import com.ensolution.ensol.dto.query.IdentityDto;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 import com.ensolution.ensol.service.stack.impl.StackServiceImpl;
@@ -9,13 +9,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class GetIdMapperTest {
+class IdentityMapperTest {
   @Mock
   private StackServiceImpl stackService;
 
   @Test
   void getIds() {
-    TableIdDto mockData = new TableIdDto(1, 1,4);
+    IdentityDto mockData = new IdentityDto(1, 1,4);
 
     when(stackService.findIds(4)).thenReturn(mockData);
 

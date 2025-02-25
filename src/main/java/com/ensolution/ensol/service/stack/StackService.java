@@ -3,8 +3,8 @@ package com.ensolution.ensol.service.stack;
 import com.ensolution.ensol.dto.entity.stack.StackDto;
 import com.ensolution.ensol.dto.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
-import com.ensolution.ensol.dto.query.StackTableDto;
-import com.ensolution.ensol.dto.query.TableIdDto;
+import com.ensolution.ensol.dto.query.table.StackTableDto;
+import com.ensolution.ensol.dto.query.IdentityDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,5 +20,5 @@ public interface StackService {
   void updateStackInfo(StackInformationDto stackInformation, Integer stackId);
   void removeStacks(List<StackDto> stacks);
   void saveFile(MultipartFile file, Integer stackId) throws IOException;
-  TableIdDto findIds(Integer id);
+  IdentityDto findIds(Integer id);
 }

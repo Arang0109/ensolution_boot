@@ -7,7 +7,7 @@ import com.ensolution.ensol.dto.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
 import com.ensolution.ensol.dto.entity.stack.StackMeasurementDto;
 import com.ensolution.ensol.dto.query.ExcelStackMeasurementDto;
-import com.ensolution.ensol.dto.query.StackMeasurementsOfStackDto;
+import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
 import com.ensolution.ensol.service.document.impl.ExcelDataUploadService;
 import com.ensolution.ensol.service.company.CompanyService;
 import com.ensolution.ensol.service.stack.StackMeasurementService;
@@ -49,7 +49,7 @@ public class BusinessRestController {
   @GetMapping
       ("/stacks/{stackId}/stack-measurements")
   public ResponseEntity<Map<String, Object>> getStackMeasurements(@PathVariable Integer stackId) {
-    List<StackMeasurementsOfStackDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
+    List<StackMeasurementTableDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
     Map<String, Object> response = new HashMap<>();
     response.put("stackMeasurements", stackMeasurements);
 

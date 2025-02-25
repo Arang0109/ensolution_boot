@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class TableIdDto {
+public class IdentityDto {
   private Integer companyId;
   private Integer workplaceId;
   private Integer stackId;
