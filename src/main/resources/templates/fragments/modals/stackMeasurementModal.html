@@ -10,7 +10,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="stackMeasurementAddLabel" th:text="|${stack.stack_name} 측정 항목 추가|"></h1>
+        <h1 class="modal-title fs-5" id="stackMeasurementAddLabel" th:text="|${stack.stackName} 측정 항목 추가|"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -20,8 +20,8 @@
               <label for="selectPoll" class="form-label"><b>측정 물질 <span id="cnt"></span></b></label>
               <select id="selectPoll" class="js-example-basic-multiple" name="states[]" multiple="multiple" style="width: 100%;">
                 <option th:each="pollutant : ${pollutants}"
-                        th:value="${pollutant.pollutant_id}"
-                        th:text="${pollutant.pollutant_name}"></option>
+                        th:value="${pollutant.pollutantId}"
+                        th:text="${pollutant.pollutantName}"></option>
               </select>
             </div>
           </div>

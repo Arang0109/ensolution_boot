@@ -117,10 +117,6 @@ public class BusinessController {
         stackDto.getStackName()
     );
 
-    System.out.println("controller");
-    System.out.println("stackDto: " + stackDto);
-    System.out.println("=====");
-
     return MessageFormat.format("redirect:/management/workplaces/{0}",
         stackDto.getWorkplaceId());
   }
@@ -137,13 +133,10 @@ public class BusinessController {
     }
 
     m.addAttribute("stack", stack);
-    m.addAttribute("company", companyService.findCompanyById(ids.getCompanyId()));
+    m.addAttribute("company", companyService.findCompanyById(ids.getCompanyId()).get());
     m.addAttribute("workplace", workplace);
     m.addAttribute("pollutants", pollutantService.findAllPollutants());
 
-    if (workplace.isExistFactory()) {
-//      m.addAttribute("factory", )
-    }
     return "management/stack/stackDetailView";
   }
 

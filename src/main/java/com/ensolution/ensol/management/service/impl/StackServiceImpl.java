@@ -124,7 +124,7 @@ public class StackServiceImpl implements StackService {
   }
 
   @Override
-  public TableIdDto findIds(Integer id) {
-    return getIdMapper.getCompanyId(id);
+  public TableIdDto findIds(Integer stackId) {
+    return getIdMapper.getIds(stackId);
   }
 }

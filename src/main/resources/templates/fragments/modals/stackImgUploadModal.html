@@ -12,7 +12,7 @@
         <h1 class="modal-title fs-5" id="stackImageUploadLabel">사진 업로드</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form th:action="@{/management/stacks/{stackId}/images(stackId=${stack.stack_id})}" method="POST" enctype="multipart/form-data">
+      <form th:action="@{/management/stacks/{stackId}/images(stackId=${stack.stackId})}" method="POST" enctype="multipart/form-data">
       <div class="modal-body m-2">
         <div class="mb-3">
           <label for="formFile" class="form-label">사진 선택</label>

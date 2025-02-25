@@ -17,10 +17,10 @@
       <div class="profile-main">
         <div class="d-flex justify-content-between">
           <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-                 th:href="@{/management/companies/{id}(id=${company.companyId})}"
+                 th:href="@{/management/companies/{companyId}(companyId=${company.companyId})}"
                  th:text="${company.companyName}"></a> /
             <a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-               th:href="@{/management/workplaces/{id}(id=${workplace.workplaceId})}"
+               th:href="@{/management/workplaces/{workplaceId}(workplaceId=${workplace.workplaceId})}"
                th:text="${workplace.workplaceName}"></a> /
             <span th:text="${stack.stackName}"></span></h4>
           <div>
@@ -334,7 +334,7 @@
       const options = {
         btnId: $(this),
         selector: $('#stackInfoForm'),
-        url: /*[[@{/management/stacks/{stackId}(stackId=${stack.stackId}})}]]*/ '',
+        url: /*[[@{/management/stacks/{stackId}(stackId=${stack.stackId})}]]*/ '',
       }
 
       businessModifyHandler(options);

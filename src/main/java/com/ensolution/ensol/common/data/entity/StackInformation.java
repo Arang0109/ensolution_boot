@@ -11,7 +11,7 @@ import lombok.Setter;
 public class StackInformation {
   @Id
   @Column(name = "stack_id", nullable = false)
-  private String stackId;
+  private Integer stackId;
   private Double diameter;
   @Column(name = "dynamic_pressure")
   private Double dynamicPressure;

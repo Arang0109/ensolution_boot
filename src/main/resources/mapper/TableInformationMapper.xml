@@ -8,7 +8,7 @@
             s.stack_id AS stackId,
             s.stack_name AS stackName,
             c.company_name AS companyName,
-            w.workplace_name AS workplaeName,
+            w.workplace_name AS workplaceName,
             f.factory_category AS factoryCategory,
             f.factory_name AS factoryName,
             d.department_name AS departmentName

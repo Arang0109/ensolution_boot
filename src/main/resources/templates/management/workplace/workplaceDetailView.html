@@ -16,7 +16,7 @@
       <div class="profile-main d-flex justify-content-between">
         <div class="d-flex">
           <h4><a class="link-opacity-50 link-offset-2 link-underline link-underline-opacity-0"
-                 th:href="@{/management/companies/{id}(id=${company.companyId})}" th:text="${company.companyName}"></a> /
+                 th:href="@{/management/companies/{companyId}(companyId=${company.companyId})}" th:text="${company.companyName}"></a> /
             <span th:text="${workplace.workplaceName}"></span></h4>
           <span style="margin-left: 1.25rem;" th:text="${workplace.address}"></span>
         </div>

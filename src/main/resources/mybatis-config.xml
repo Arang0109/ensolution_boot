@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+
   <typeAliases>
     <typeAlias alias="StackTableDto" type="com.ensolution.ensol.common.data.dto.stack.StackTableDto"/>
     <typeAlias alias="TableIdDto" type="com.ensolution.ensol.common.data.dto.stack.TableIdDto"/>
@@ -11,4 +15,5 @@
     <typeAlias alias="BoardDto" type="com.ensolution.ensol.dashboard.domain.BoardDto"/>
     <typeAlias alias="ExcelStackMeasurementDto" type="com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto"/>
   </typeAliases>
+
 </configuration>
