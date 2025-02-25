@@ -409,7 +409,7 @@ function methodList(pollutants) {
   orderCycle.forEach(cycle => {
     const method = [];
     pollutants.forEach(poll => {
-      if (poll.cycle_type === cycle) {
+      if (poll.cycleType === cycle) {
         method.push(poll.method);
       }
     });
@@ -424,7 +424,7 @@ function methodList(pollutants) {
 function sortCycle(pollutants) {
   const cycleType = {};
   pollutants.forEach(item => {
-    const cycle = item.cycle_type;
+    const cycle = item.cycleType;
     cycleType[cycle] = convert[cycle];
   });
   return orderCycle.filter(key => cycleType.hasOwnProperty(key));

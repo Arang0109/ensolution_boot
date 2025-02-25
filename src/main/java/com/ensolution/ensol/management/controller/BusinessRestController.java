@@ -2,6 +2,7 @@ package com.ensolution.ensol.management.controller;
 
 import com.ensolution.ensol.common.data.dto.*;
 import com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementsOfStackDto;
 import com.ensolution.ensol.common.service.ExcelDataUploadService;
 import com.ensolution.ensol.management.service.CompanyService;
 import com.ensolution.ensol.management.service.StackMeasurementService;
@@ -43,8 +44,7 @@ public class BusinessRestController {
   @GetMapping
       ("/stacks/{stackId}/stack-measurements")
   public ResponseEntity<Map<String, Object>> getStackMeasurements(@PathVariable Integer stackId) {
-    List<StackMeasurementDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
-    System.out.println(stackMeasurements);
+    List<StackMeasurementsOfStackDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
     Map<String, Object> response = new HashMap<>();
     response.put("stackMeasurements", stackMeasurements);
 

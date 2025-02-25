@@ -13,10 +13,10 @@
             f.factory_name AS factoryName,
             d.department_name AS departmentName
         FROM stack s
-                 LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
-                 LEFT JOIN company c ON w.company_id = c.company_id
-                 LEFT JOIN factory f ON s.factory_id = f.factory_id
-                 LEFT JOIN department d ON f.department_id = d.department_id
+            LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
+            LEFT JOIN company c ON w.company_id = c.company_id
+            LEFT JOIN factory f ON s.factory_id = f.factory_id
+            LEFT JOIN department d ON f.department_id = d.department_id
     </sql>
     <select id="selectStacksOfTable" resultType="StackTableDto">
         <include refid="selectTableArg"/>
@@ -24,5 +24,21 @@
     <select id="selectStacksByWorkplaceOfTable" parameterType="Integer" resultType="StackTableDto">
         <include refid="selectTableArg"/>
         WHERE w.workplace_id = #{workplaceId}
+    </select>
+    <select id="stackMeasurementsOfStack" parameterType="Integer" resultType="StackMeasurementsOfStackDto">
+        SELECT
+            sm.stack_measurement_id AS stackMeasurementId,
+            sm.stack_id AS stackId,
+            sm.pollutant_id AS pollutantId,
+            sm.cycle_type AS cycleType,
+            sm.is_completed AS isCompleted,
+            p.pollutant_name_kr AS pollutantNameKR,
+            p.pollutant_name_en AS pollutantNameEN,
+            p.method,
+            sm.is_measured AS isMeasured,
+            sm.allow_value AS allowValue
+        FROM stack_measurement `sm`
+            INNER JOIN pollutant `p` on sm.pollutant_id = p.pollutant_id
+        WHERE sm.stack_id = #{stackId};
     </select>
 </mapper>

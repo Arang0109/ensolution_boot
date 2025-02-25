@@ -1,6 +1,7 @@
 package com.ensolution.ensol.management.service.impl;
 
 import com.ensolution.ensol.common.data.dto.StackMeasurementDto;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementsOfStackDto;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.management.service.StackMeasurementService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class StackMeasurementServiceImpl implements StackMeasurementService {
   }
 
   @Override
-  public List<StackMeasurementDto> findStackMeasurementsByStackId(Integer stackId) {;
+  public List<StackMeasurementsOfStackDto> findStackMeasurementsByStackId(Integer stackId) {;
     return stackMeasurementDataService.findStackMeasurementsByStackId(stackId);
   }
 

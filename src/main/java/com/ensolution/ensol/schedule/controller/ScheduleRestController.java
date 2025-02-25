@@ -2,6 +2,7 @@ package com.ensolution.ensol.schedule.controller;
 
 import com.ensolution.ensol.common.data.dto.ScheduleDto;
 import com.ensolution.ensol.common.data.dto.StackMeasurementDto;
+import com.ensolution.ensol.common.data.dto.stack.StackMeasurementsOfStackDto;
 import com.ensolution.ensol.common.data.dto.stack.StackTableDto;
 import com.ensolution.ensol.schedule.domain.HistoryDto;
 import com.ensolution.ensol.management.service.StackMeasurementService;
@@ -66,7 +67,7 @@ public class ScheduleRestController {
   public ResponseEntity<Map<String, Object>> getStackMeasurementsOfStack(@RequestParam Integer stackId) {
     Map<String, Object> response = new HashMap<>();
     String note = stackService.findStackById(stackId).getNote();
-    List<StackMeasurementDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
+    List<StackMeasurementsOfStackDto> stackMeasurements = stackMeasurementService.findStackMeasurementsByStackId(stackId);
 //    List<HistoryDto> histories = scheduleService.findAllHistoryOfStacks(stackId);
 
     response.put("measurements", stackMeasurements);
