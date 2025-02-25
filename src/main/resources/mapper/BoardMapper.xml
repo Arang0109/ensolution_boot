@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.dashboard.mapper.BoardMapper">
+<mapper namespace="com.ensolution.ensol.repository.mybatis.BoardMapper">
   <sql id="select">
     SELECT GROUP_CONCAT(stack_measurement_id) AS stack_measurement_ids,
            s.stack_id, GROUP_CONCAT(pollutant_id) AS pollutant_ids,

@@ -8,13 +8,13 @@
   </settings>
 
   <typeAliases>
-    <typeAlias alias="StackTableDto" type="com.ensolution.ensol.common.data.dto.stack.StackTableDto"/>
-    <typeAlias alias="TableIdDto" type="com.ensolution.ensol.common.data.dto.stack.TableIdDto"/>
-    <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.schedule.domain.ScheduleTableDto"/>
-    <typeAlias alias="StackMeasurementsOfStackDto" type="com.ensolution.ensol.common.data.dto.stack.StackMeasurementsOfStackDto"/>
-    <typeAlias alias="HistoryDto" type="com.ensolution.ensol.schedule.domain.HistoryDto"/>
-    <typeAlias alias="BoardDto" type="com.ensolution.ensol.dashboard.domain.BoardDto"/>
-    <typeAlias alias="ExcelStackMeasurementDto" type="com.ensolution.ensol.common.data.dto.stack.ExcelStackMeasurementDto"/>
+    <typeAlias alias="StackTableDto" type="com.ensolution.ensol.dto.query.StackTableDto"/>
+    <typeAlias alias="TableIdDto" type="com.ensolution.ensol.dto.query.TableIdDto"/>
+    <typeAlias alias="ScheduleTableDto" type="com.ensolution.ensol.dto.query.ScheduleTableDto"/>
+    <typeAlias alias="StackMeasurementsOfStackDto" type="com.ensolution.ensol.dto.query.StackMeasurementsOfStackDto"/>
+    <typeAlias alias="HistoryDto" type="com.ensolution.ensol.dto.query.HistoryDto"/>
+    <typeAlias alias="BoardDto" type="com.ensolution.ensol.dto.query.BoardDto"/>
+    <typeAlias alias="ExcelStackMeasurementDto" type="com.ensolution.ensol.dto.query.ExcelStackMeasurementDto"/>
   </typeAliases>
 
 </configuration>

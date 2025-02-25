@@ -1,9 +1,9 @@
 package com.ensolution.ensol.common.data.mapper.mybatis;
 
-import com.ensolution.ensol.common.data.dto.stack.TableIdDto;
+import com.ensolution.ensol.dto.query.TableIdDto;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
-import com.ensolution.ensol.management.service.impl.StackServiceImpl;
+import com.ensolution.ensol.service.stack.impl.StackServiceImpl;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;

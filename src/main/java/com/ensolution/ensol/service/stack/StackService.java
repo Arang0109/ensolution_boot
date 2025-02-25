@@ -1,0 +1,24 @@
+package com.ensolution.ensol.service.stack;
+
+import com.ensolution.ensol.dto.entity.stack.StackDto;
+import com.ensolution.ensol.dto.entity.stack.StackImageDto;
+import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
+import com.ensolution.ensol.dto.query.StackTableDto;
+import com.ensolution.ensol.dto.query.TableIdDto;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
+
+public interface StackService {
+  StackDto findStackById(Integer id);
+  List<StackDto> findAllStacks();
+  List<StackTableDto> findStacksByWorkplaceId(Integer id);
+  List<StackTableDto> findStacksOfTable();
+  List<StackImageDto> findAllStackImages(Integer stackId);void createStack(StackDto stack);
+  void updateStack(StackDto stack);
+  void updateStackInfo(StackInformationDto stackInformation, Integer stackId);
+  void removeStacks(List<StackDto> stacks);
+  void saveFile(MultipartFile file, Integer stackId) throws IOException;
+  TableIdDto findIds(Integer id);
+}

@@ -1,7 +1,7 @@
 package com.ensolution.ensol.common.util;
 
-import com.ensolution.ensol.dashboard.domain.BoardDto;
-import com.ensolution.ensol.dashboard.mapper.BoardMapper;
+import com.ensolution.ensol.dto.query.BoardDto;
+import com.ensolution.ensol.repository.mybatis.BoardMapper;
 
 import java.util.HashMap;
 import java.util.List;
