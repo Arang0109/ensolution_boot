@@ -46,16 +46,16 @@
         </thead>
         <tbody style="font-size: 0.75rem">
           <tr th:each="schedule : ${schedules}"
-              th:data-schedule-ids="${schedule.schedule_ids}"
-              th:data-stack-measurement-ids="${schedule.stack_measurement_ids}"
-              th:data-is-completed="${schedule.is_completed ? true : false}">
+              th:data-schedule-ids="${schedule.scheduleIds}"
+              th:data-stack-measurement-ids="${schedule.stackMeasurementIds}"
+              th:data-is-completed="${schedule.isCompleted ? true : false}">
             <td></td>
             <td><a href="">
-              <span th:text="${#dates.format(schedule.measure_date, 'yyyy-MM-dd')}"></span></a></td>
-            <td th:text="${schedule.workplace_name}"></td>
-            <td th:data-stack-id="${schedule.stack_id}"><a th:href="@{/management/stacks/{stackId}(stackId=${schedule.stack_id})}" th:text="${schedule.stack_name}" target="_blank"></a></td>
+              <span th:text="${#temporals.format(schedule.measureDate, 'yyyy-MM-dd')}"></span></a></td>
+            <td th:text="${schedule.workplaceName}"></td>
+            <td th:data-stack-id="${schedule.stackId}"><a th:href="@{/management/stacks/{stackId}(stackId=${schedule.stackId})}" th:text="${schedule.stackName}" target="_blank"></a></td>
             <td th:text="${schedule.pollutants}"></td>
-            <td th:text="${schedule.team_name}"></td>
+            <td th:text="${schedule.teamName}"></td>
           </tr>
         </tbody>
       </table>
@@ -66,20 +66,20 @@
   $(document).ready(function(){
     function selectScheduleIds(selector) {
       const is_checked = selector;
-      let schedule_ids = [];
+      let scheduleIds = [];
 
       is_checked.each(function () {
         const schedule_id = $(this).closest('tr').attr('data-schedule-ids').split(',');
         schedule_id.forEach(item => {
-          schedule_ids.push(item);
+          scheduleIds.push(item);
         })
       });
 
-      return schedule_ids;
+      return scheduleIds;
     }
 
     $('#completeBtn').on('click', function() {
-      const schedule_ids = selectScheduleIds($('#table tr td input[type="checkbox"]:checked'));
+      const scheduleIds = selectScheduleIds($('#table tr td input[type="checkbox"]:checked'));
 
       const msg = {
         successMsg: '일정이 완료 처리 되었습니다.',
@@ -90,7 +90,7 @@
         url: /*[[@{/schedule/calendar/complete}]]*/ '',
         type: 'PATCH',
         contentType: 'application/json',
-        data: JSON.stringify(schedule_ids),
+        data: JSON.stringify(scheduleIds),
         success: function () {
           sessionStorage.setItem('completeResult', 'success');
           location.reload();

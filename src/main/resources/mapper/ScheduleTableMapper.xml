@@ -22,7 +22,7 @@
     </select>
 
     <update id="updateStackMeasurementComplete" parameterType="list">
-        UPDATE stack_measruement
+        UPDATE stack_measurement
         SET is_completed = 1
         WHERE stack_measurement_id IN
         <foreach item="stack_measurement_id" index="index" collection="list"

@@ -2,12 +2,14 @@ package com.ensolution.ensol.service.stack.impl;
 
 import com.ensolution.ensol.dto.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
+import com.ensolution.ensol.dto.query.HistoryDto;
 import com.ensolution.ensol.dto.query.IdentityDto;
 import com.ensolution.ensol.repository.mybatis.IdentityMapper;
 import com.ensolution.ensol.repository.mybatis.TableInformationMapper;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.dto.entity.stack.StackDto;
 import com.ensolution.ensol.dto.query.table.StackTableDto;
+import com.ensolution.ensol.service.pollutant.impl.PollutantDataService;
 import com.ensolution.ensol.service.stack.StackDataService;
 import com.ensolution.ensol.service.stack.StackService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StackServiceImpl implements StackService {
   private final StackDataService stackDataService;
+  private final PollutantDataService pollutantDataService;
   private final TableInformationMapper tableInformationMapper;
   private final IdentityMapper identityMapper;
 
@@ -126,5 +129,32 @@ public class StackServiceImpl implements StackService {
   @Override
   public IdentityDto findIds(Integer stackId) {
     return identityMapper.getIds(stackId);
+  }
+
+  @Override
+  public List<HistoryDto> findAllHistoryOfStacks(Integer stackId) {
+    List<HistoryDto> histories = stackDataService.selectStackHistory(stackId);
+
+    return historyFormater(histories);
+  }
+
+  private List<HistoryDto> historyFormater(List<HistoryDto> histories) {
+    for (HistoryDto history : histories) {
+      StringBuilder pollutants = new StringBuilder();
+      String pollutantIds = history.getPollutantIds();
+
+      for (String pollutantId : pollutantIds.split(",")) {
+        Integer id = Integer.parseInt(pollutantId);
+        String pollutantName = pollutantDataService.findPollutantById(id).getPollutantNameKR();
+        pollutants.append(pollutantName).append(", ");
+      }
+
+      if (!pollutants.isEmpty()) {
+        pollutants.setLength(pollutants.length() - 2);
+      }
+
+      history.setPollutantIds(pollutants.toString());
+    }
+    return histories;
   }
 }

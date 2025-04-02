@@ -6,6 +6,7 @@ import com.ensolution.ensol.repository.mybatis.BoardMapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class StackCountCalculator {
   private final String[] CYCLE_TYPE = {"monthly", "twiceamonth", "quarterly", "semiannual", "annual"};
@@ -24,6 +25,7 @@ public class StackCountCalculator {
           cycle, // 주기
           stack // 시설 수
               .stream()
+              .filter(Objects::nonNull)
               .filter(s -> !s.is_completed())
               .filter(s -> s.getCycle_type().equals(cycle))
               .count());
@@ -38,6 +40,7 @@ public class StackCountCalculator {
           cycle, // 주기
           stack // 시설 수
               .stream()
+              .filter(Objects::nonNull)
               .filter(BoardDto::is_completed)
               .filter(s -> s.getCycle_type().equals(cycle))
               .count());

@@ -42,8 +42,8 @@
               <select id="selectWorkplace" class="js-example-basic-single" style="width: 100%;">
                 <option value="">-- select workplace --</option>
                 <option th:each="workplace : ${workplaces}"
-                        th:value="${workplace.workplace_id}"
-                        th:text="${workplace.workplace_name}"></option>
+                        th:value="${workplace.workplaceId}"
+                        th:text="${workplace.workplaceName}"></option>
               </select>
             </div>
             <div class="p-2">
@@ -126,14 +126,14 @@
         return;
       }
 
-      const stack_id = $('#selectStack').val();
+      const stackId = $('#selectStack').val();
       const msg = {
         successMsg: '수정 되었습니다.',
         failedMsg: '수정에 실패 하였습니다.'
       }
 
       $.ajax({
-        url: `/management/stacks/${stack_id}/note`,
+        url: `/management/stacks/${stackId}/note`,
         type: 'PATCH',
         contentType: 'application/json',
         data: selector.val(),
@@ -161,7 +161,7 @@
       select.append('<option value="">-- select stack --</option>');
 
       stacks.forEach((item) => {
-        select.append(`<option value="${item.stack_id}">${item.stack_name}</option>`);
+        select.append(`<option value="${item.stackId}">${item.stackName}</option>`);
       });
     }
 
@@ -196,8 +196,8 @@
           let $container = $('#image-container');
           $.each(images, function(index, image) {
             let $img = $('<img>')
-              .attr('src', '/uploads/' + image.image_name)
-              .attr('alt', image.image_name)
+              .attr('src', '/uploads/' + image.imageName)
+              .attr('alt', image.imageName)
               .css('width', '300px')
               .addClass('img-thumbnail')
               .addClass('m-2'); // 이미지 크기 조정
@@ -238,20 +238,20 @@
 
     $("#addPlan").on('click', function() {
       const selectedMeasurement = [];
-      const measure_date = $("#datepicker").val();
-      const team_id = $('input[type="radio"]:checked').val();
+      const measureDate = $("#datepicker").val();
+      const teamId = $('input[type="radio"]:checked').val();
 
-      if (!team_id) {
+      if (!teamId) {
         loadToast('fail', { failedMsg : "팀을 선택해주세요!"});
         return;
       }
 
       $('#addPlanForm input[type="checkbox"]:checked').each(function () {
-        const stack_measurement_id = $(this).closest('div').attr('data-stack-measurement-id');
+        const stackMeasurementId = $(this).closest('div').attr('data-stack-measurement-id');
         selectedMeasurement.push({
-          "team_id": team_id,
-          "stack_measurement_id": stack_measurement_id,
-          "measure_date": measure_date,
+          "teamId": teamId,
+          "stackMeasurementId": stackMeasurementId,
+          "measureDate": measureDate,
         })
       });
 

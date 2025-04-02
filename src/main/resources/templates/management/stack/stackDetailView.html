@@ -204,8 +204,8 @@
         let $container = $('#image-container');
         $.each(images, function(index, image) {
           let $img = $('<img>')
-            .attr('src', '/uploads/' + image.image_name)
-            .attr('alt', image.image_name)
+            .attr('src', '/uploads/' + image.imageName)
+            .attr('alt', image.imageName)
             .css('width', '300px')
             .addClass('img-thumbnail')
             .addClass('m-2'); // 이미지 크기 조정
@@ -222,7 +222,7 @@
       type: 'GET',
       contentType: 'application/json',
       success: function(response) {
-        // getHistory(response.histories);
+        getHistory(response.histories);
       },
       error: function() {
         alert('failed');

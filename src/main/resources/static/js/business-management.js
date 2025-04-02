@@ -96,25 +96,25 @@ function getNoteOfStack(note) {
   memo.val(note);
 }
 
-// function getHistory(histories) {
-//   const tbody = $('#table tbody');
-//   tbody.empty();
-//
-//   histories.forEach(history => {
-//     const date = new Date(history.measure_date);
-//
-//     const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-//
-//     const innerHtml = `
-//           <tr>
-//             <td>` + localDate.toISOString().split('T')[0] + `</td>
-//             <td>${history.pollutant_ids}</td>
-//             <td>${history.team_name}</td>
-//           </tr>
-//         `;
-//     tbody.append(innerHtml);
-//   });
-// }
+function getHistory(histories) {
+  const tbody = $('#table tbody');
+  tbody.empty();
+
+  histories.forEach(history => {
+    const date = new Date(history.measureDate);
+
+    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+
+    const innerHtml = `
+          <tr>
+            <td>` + localDate.toISOString().split('T')[0] + `</td>
+            <td>${history.pollutantIds}</td>
+            <td>${history.teamName}</td>
+          </tr>
+        `;
+    tbody.append(innerHtml);
+  });
+}
 
 function uploadMeasurementExcelData(selector) {
   const isValidAValue = (value) => {

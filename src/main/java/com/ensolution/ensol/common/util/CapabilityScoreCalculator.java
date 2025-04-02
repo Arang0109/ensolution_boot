@@ -40,6 +40,7 @@ public class CapabilityScoreCalculator {
       return score;
     }
 
+    if (existAs) gasCnt += 1;
 
     calculateGas();
     calculateParticle();

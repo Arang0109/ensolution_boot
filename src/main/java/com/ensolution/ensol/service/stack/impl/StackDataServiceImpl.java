@@ -3,6 +3,7 @@ package com.ensolution.ensol.service.stack.impl;
 import com.ensolution.ensol.dto.entity.stack.StackDto;
 import com.ensolution.ensol.dto.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
+import com.ensolution.ensol.dto.query.HistoryDto;
 import com.ensolution.ensol.entity.company.Factory;
 import com.ensolution.ensol.entity.stack.Stack;
 import com.ensolution.ensol.mapper.stack.StackImageMapper;
@@ -12,6 +13,7 @@ import com.ensolution.ensol.repository.jpa.company.FactoryRepository;
 import com.ensolution.ensol.repository.jpa.stack.StackImageRepository;
 import com.ensolution.ensol.repository.jpa.stack.StackInformationRepository;
 import com.ensolution.ensol.repository.jpa.stack.StackRepository;
+import com.ensolution.ensol.repository.mybatis.HistoryMapper;
 import com.ensolution.ensol.service.stack.StackDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class StackDataServiceImpl implements StackDataService {
   private final StackInformationMapper stackInformationMapper;
   private final StackImageMapper stackImageMapper;
   private final FactoryRepository factoryRepository;
+  private final HistoryMapper historyMapper;
 
   @Override
   public boolean existsStackById(Integer stackId) {
@@ -116,5 +119,10 @@ public class StackDataServiceImpl implements StackDataService {
   @Override
   public void deleteStacks(List<Integer> ids) {
     stackRepository.deleteAllById(ids);
+  }
+
+  @Override
+  public List<HistoryDto> selectStackHistory(Integer stackId) {
+    return historyMapper.selectStackHistory(stackId);
   }
 }
