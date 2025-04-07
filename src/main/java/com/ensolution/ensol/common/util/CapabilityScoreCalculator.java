@@ -1,6 +1,6 @@
 package com.ensolution.ensol.common.util;
 
-import com.ensolution.ensol.dto.entity.PollutantDto;
+import com.ensolution.ensol.dto.app.entity.PollutantDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +40,9 @@ public class CapabilityScoreCalculator {
       return score;
     }
 
-    if (existAs) gasCnt += 1;
+//    if (existAs) {
+//      gasCnt += 1;
+//    }
 
     calculateGas();
     calculateParticle();

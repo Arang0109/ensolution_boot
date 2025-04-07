@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.company;
 
-import com.ensolution.ensol.dto.entity.company.CompanyDto;
+import com.ensolution.ensol.dto.app.entity.company.CompanyDto;
 
 import java.util.List;
 import java.util.Optional;

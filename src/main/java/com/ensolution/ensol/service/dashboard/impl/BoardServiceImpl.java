@@ -1,7 +1,7 @@
 package com.ensolution.ensol.service.dashboard.impl;
 
 import com.ensolution.ensol.common.util.StackCountCalculator;
-import com.ensolution.ensol.repository.mybatis.BoardMapper;
+import com.ensolution.ensol.repository.app.mybatis.BoardMapper;
 import com.ensolution.ensol.service.dashboard.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

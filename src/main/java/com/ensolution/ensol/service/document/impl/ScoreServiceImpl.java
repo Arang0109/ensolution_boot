@@ -1,7 +1,7 @@
 package com.ensolution.ensol.service.document.impl;
 
 import com.ensolution.ensol.common.util.CapabilityScoreCalculator;
-import com.ensolution.ensol.dto.entity.PollutantDto;
+import com.ensolution.ensol.dto.app.entity.PollutantDto;
 import com.ensolution.ensol.service.document.ScoreService;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.ensolution.ensol.service.pollutant.impl;
 
-import com.ensolution.ensol.dto.entity.PollutantDto;
+import com.ensolution.ensol.dto.app.entity.PollutantDto;
 import com.ensolution.ensol.service.pollutant.PollutantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

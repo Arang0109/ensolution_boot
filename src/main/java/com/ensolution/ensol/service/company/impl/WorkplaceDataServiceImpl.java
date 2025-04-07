@@ -1,10 +1,10 @@
 package com.ensolution.ensol.service.company.impl;
 
-import com.ensolution.ensol.dto.entity.company.WorkplaceDto;
-import com.ensolution.ensol.entity.company.Workplace;
-import com.ensolution.ensol.mapper.company.WorkplaceMapper;
-import com.ensolution.ensol.repository.jpa.company.CompanyRepository;
-import com.ensolution.ensol.repository.jpa.company.WorkplaceRepository;
+import com.ensolution.ensol.dto.app.entity.company.WorkplaceDto;
+import com.ensolution.ensol.entity.app.company.Workplace;
+import com.ensolution.ensol.mapper.app.company.WorkplaceMapper;
+import com.ensolution.ensol.repository.app.jpa.company.CompanyRepository;
+import com.ensolution.ensol.repository.app.jpa.company.WorkplaceRepository;
 import com.ensolution.ensol.service.company.WorkplaceDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

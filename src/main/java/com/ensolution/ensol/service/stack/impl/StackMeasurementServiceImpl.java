@@ -1,7 +1,7 @@
 package com.ensolution.ensol.service.stack.impl;
 
-import com.ensolution.ensol.dto.entity.stack.StackMeasurementDto;
-import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackMeasurementDto;
+import com.ensolution.ensol.dto.app.query.table.StackMeasurementTableDto;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import com.ensolution.ensol.service.stack.StackMeasurementService;
 import lombok.RequiredArgsConstructor;

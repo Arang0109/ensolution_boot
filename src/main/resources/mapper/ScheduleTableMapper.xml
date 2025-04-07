@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.repository.mybatis.ScheduleTableMapper">
+<mapper namespace="com.ensolution.ensol.repository.app.mybatis.ScheduleTableMapper">
     <select id="selectSchedules" resultType="ScheduleTableDto">
         SELECT
             GROUP_CONCAT(sc.schedule_id) AS schedule_ids,

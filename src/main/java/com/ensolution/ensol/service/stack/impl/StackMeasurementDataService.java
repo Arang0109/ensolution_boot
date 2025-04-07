@@ -1,11 +1,11 @@
 package com.ensolution.ensol.service.stack.impl;
 
-import com.ensolution.ensol.dto.entity.stack.StackMeasurementDto;
-import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
-import com.ensolution.ensol.entity.stack.StackMeasurement;
-import com.ensolution.ensol.mapper.stack.StackMeasurementMapper;
-import com.ensolution.ensol.repository.mybatis.TableInformationMapper;
-import com.ensolution.ensol.repository.jpa.stack.StackMeasurementRepository;
+import com.ensolution.ensol.dto.app.entity.stack.StackMeasurementDto;
+import com.ensolution.ensol.dto.app.query.table.StackMeasurementTableDto;
+import com.ensolution.ensol.entity.app.stack.StackMeasurement;
+import com.ensolution.ensol.mapper.app.stack.StackMeasurementMapper;
+import com.ensolution.ensol.repository.app.mybatis.TableInformationMapper;
+import com.ensolution.ensol.repository.app.jpa.stack.StackMeasurementRepository;
 import com.ensolution.ensol.common.exception.CustomDKException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

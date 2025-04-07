@@ -1,15 +1,13 @@
 package com.ensolution.ensol.controller.schedule;
 
-import com.ensolution.ensol.dto.entity.ScheduleDto;
-import com.ensolution.ensol.dto.query.HistoryDto;
-import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
-import com.ensolution.ensol.dto.query.table.StackTableDto;
+import com.ensolution.ensol.dto.app.entity.ScheduleDto;
+import com.ensolution.ensol.dto.app.query.HistoryDto;
+import com.ensolution.ensol.dto.app.query.table.StackMeasurementTableDto;
+import com.ensolution.ensol.dto.app.query.table.StackTableDto;
 import com.ensolution.ensol.service.stack.StackMeasurementService;
 import com.ensolution.ensol.service.stack.StackService;
-import com.ensolution.ensol.service.company.WorkplaceService;
 import com.ensolution.ensol.service.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

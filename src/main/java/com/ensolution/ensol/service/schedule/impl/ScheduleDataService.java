@@ -1,11 +1,11 @@
 package com.ensolution.ensol.service.schedule.impl;
 
-import com.ensolution.ensol.dto.entity.ScheduleDto;
-import com.ensolution.ensol.entity.Schedule;
-import com.ensolution.ensol.mapper.ScheduleMapper;
-import com.ensolution.ensol.repository.mybatis.ScheduleTableMapper;
-import com.ensolution.ensol.repository.jpa.schedule.ScheduleRepository;
-import com.ensolution.ensol.dto.query.table.ScheduleTableDto;
+import com.ensolution.ensol.dto.app.entity.ScheduleDto;
+import com.ensolution.ensol.entity.app.Schedule;
+import com.ensolution.ensol.mapper.app.ScheduleMapper;
+import com.ensolution.ensol.repository.app.mybatis.ScheduleTableMapper;
+import com.ensolution.ensol.repository.app.jpa.schedule.ScheduleRepository;
+import com.ensolution.ensol.dto.app.query.table.ScheduleTableDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

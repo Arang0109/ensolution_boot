@@ -1,7 +1,7 @@
 package com.ensolution.ensol.service.company.impl;
 
 import com.ensolution.ensol.common.exception.CustomDKException;
-import com.ensolution.ensol.dto.entity.company.CompanyDto;
+import com.ensolution.ensol.dto.app.entity.company.CompanyDto;
 import com.ensolution.ensol.service.company.CompanyDataService;
 import com.ensolution.ensol.service.company.CompanyService;
 import lombok.RequiredArgsConstructor;

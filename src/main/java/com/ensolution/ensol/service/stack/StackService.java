@@ -1,11 +1,11 @@
 package com.ensolution.ensol.service.stack;
 
-import com.ensolution.ensol.dto.entity.stack.StackDto;
-import com.ensolution.ensol.dto.entity.stack.StackImageDto;
-import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
-import com.ensolution.ensol.dto.query.HistoryDto;
-import com.ensolution.ensol.dto.query.table.StackTableDto;
-import com.ensolution.ensol.dto.query.IdentityDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackImageDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackInformationDto;
+import com.ensolution.ensol.dto.app.query.HistoryDto;
+import com.ensolution.ensol.dto.app.query.table.StackTableDto;
+import com.ensolution.ensol.dto.app.query.IdentityDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

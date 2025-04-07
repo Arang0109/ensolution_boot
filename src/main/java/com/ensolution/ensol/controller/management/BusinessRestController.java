@@ -1,13 +1,13 @@
 package com.ensolution.ensol.controller.management;
 
-import com.ensolution.ensol.dto.entity.company.CompanyDto;
-import com.ensolution.ensol.dto.entity.company.WorkplaceDto;
-import com.ensolution.ensol.dto.entity.stack.StackDto;
-import com.ensolution.ensol.dto.entity.stack.StackImageDto;
-import com.ensolution.ensol.dto.entity.stack.StackInformationDto;
-import com.ensolution.ensol.dto.entity.stack.StackMeasurementDto;
-import com.ensolution.ensol.dto.query.ExcelStackMeasurementDto;
-import com.ensolution.ensol.dto.query.table.StackMeasurementTableDto;
+import com.ensolution.ensol.dto.app.entity.company.CompanyDto;
+import com.ensolution.ensol.dto.app.entity.company.WorkplaceDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackImageDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackInformationDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackMeasurementDto;
+import com.ensolution.ensol.dto.app.query.ExcelStackMeasurementDto;
+import com.ensolution.ensol.dto.app.query.table.StackMeasurementTableDto;
 import com.ensolution.ensol.service.document.impl.ExcelDataUploadService;
 import com.ensolution.ensol.service.company.CompanyService;
 import com.ensolution.ensol.service.stack.StackMeasurementService;

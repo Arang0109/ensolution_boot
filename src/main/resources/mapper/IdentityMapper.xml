@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ensolution.ensol.repository.mybatis.IdentityMapper">
+<mapper namespace="com.ensolution.ensol.repository.app.mybatis.IdentityMapper">
     <select id="getIds" parameterType="Integer" resultType="TableIdDto">
         SELECT w.company_id AS companyId,
                w.workplace_id AS workplaceId,

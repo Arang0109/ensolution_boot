@@ -1,8 +1,7 @@
 package com.ensolution.ensol.service.schedule;
 
-import com.ensolution.ensol.dto.entity.ScheduleDto;
-import com.ensolution.ensol.dto.query.HistoryDto;
-import com.ensolution.ensol.dto.query.table.ScheduleTableDto;
+import com.ensolution.ensol.dto.app.entity.ScheduleDto;
+import com.ensolution.ensol.dto.app.query.table.ScheduleTableDto;
 
 import java.util.List;
 

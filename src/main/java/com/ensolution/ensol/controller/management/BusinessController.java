@@ -1,10 +1,10 @@
 package com.ensolution.ensol.controller.management;
 
-import com.ensolution.ensol.dto.query.IdentityDto;
+import com.ensolution.ensol.dto.app.query.IdentityDto;
 import com.ensolution.ensol.common.util.DataHandler;
-import com.ensolution.ensol.dto.entity.company.CompanyDto;
-import com.ensolution.ensol.dto.entity.stack.StackDto;
-import com.ensolution.ensol.dto.entity.company.WorkplaceDto;
+import com.ensolution.ensol.dto.app.entity.company.CompanyDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackDto;
+import com.ensolution.ensol.dto.app.entity.company.WorkplaceDto;
 import com.ensolution.ensol.service.company.CompanyService;
 import com.ensolution.ensol.service.stack.StackService;
 import com.ensolution.ensol.service.company.WorkplaceService;
