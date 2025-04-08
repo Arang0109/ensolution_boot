@@ -1,8 +1,5 @@
 package com.ensolution.ensol.common.config;
 
-import com.ensolution.ensol.service.auth.AuthService;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

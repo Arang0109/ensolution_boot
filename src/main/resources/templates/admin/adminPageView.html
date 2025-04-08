@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>대기자가측정 통계</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <a th:href="@{/admin/register}" class="btn btn-primary">사용자 등록</a>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">name</th>
+      <th scope="col">email</th>
+      <th scope="col">phone</th>
+      <th scope="col">department</th>
+      <th scope="col">position</th>
+      <th scope="col">roles</th>
+      <th scope="col">joining date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, iterStat : ${users}">
+      <th scope="row" th:text="${iterStat.count}"></th>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.phone}"></td>
+      <td th:text="${user.department}"></td>
+      <td th:text="${user.position}"></td>
+      <td>
+        <select class="form-select" aria-label="Default select example">
+          <option th:each="role : ${user.roles}" th:text="${role.roleName}"></option>
+        </select>
+      </td>
+      <td th:text="${user.joiningDate}"></td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+<script layout:fragment="scriptContent" th:inline="javascript">
+
+</script>
+</body>
+</html>

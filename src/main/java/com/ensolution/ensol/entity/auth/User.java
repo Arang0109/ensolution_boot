@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,15 @@ public class User {
 
   @Column(nullable = false, length = 100)
   private String password;
+
+  private String name;
+  private String email;
+  private String phone;
+  private String department;
+  private String position;
+
+  @Column(name = "joining_date")
+  private LocalDate joiningDate;
 
   private boolean enabled = true;
 
