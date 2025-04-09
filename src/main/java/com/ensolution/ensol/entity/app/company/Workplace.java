@@ -24,19 +24,17 @@ public class Workplace {
   private Company company;
   @Column(name = "workplace_name", nullable = false)
   private String workplaceName;
+  @Column(name = "workplace_size")
+  private char workplaceSize;
   private String address;
-  @Column(name = "exist_factory", insertable = false, updatable = false)
-  private String existFactory;
+  @Column(name = "main_production")
+  private String mainProduction;
+  @Column(name = "business_type")
+  private String businessType;
   @Column(name = "reg_date")
   private LocalDate regDate;
 
   @JsonIgnore
   @OneToMany(mappedBy = "workplace")
   private List<Stack> stacks = new ArrayList<>();
-  @JsonIgnore
-  @OneToMany(mappedBy = "workplace")
-  private List<Department> departments = new ArrayList<>();
-  @JsonIgnore
-  @OneToMany(mappedBy = "workplace")
-  private List<Factory> factories = new ArrayList<>();
 }

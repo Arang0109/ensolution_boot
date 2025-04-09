@@ -12,7 +12,9 @@ public class WorkplaceDto {
   private Integer workplaceId;
   private Integer companyId;
   private String workplaceName;
+  private char workplaceSize;
   private String address;
-  private boolean existFactory;
+  private String mainProduction;
+  private String businessType;
   private LocalDate regDate;
 }

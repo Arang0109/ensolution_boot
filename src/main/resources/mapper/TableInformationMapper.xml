@@ -9,14 +9,12 @@
             s.stack_name AS stackName,
             c.company_name AS companyName,
             w.workplace_name AS workplaceName,
-            f.factory_category AS factoryCategory,
-            f.factory_name AS factoryName,
-            d.department_name AS departmentName
+            s.stack_type AS stackType,
+            s.stack_size AS stackSize,
+            s.prevention AS prevention
         FROM stack s
             LEFT JOIN workplace w ON s.workplace_id = w.workplace_id
             LEFT JOIN company c ON w.company_id = c.company_id
-            LEFT JOIN factory f ON s.factory_id = f.factory_id
-            LEFT JOIN department d ON f.department_id = d.department_id
     </sql>
 
     <select id="selectStacksOfTable" resultType="StackTableDto">

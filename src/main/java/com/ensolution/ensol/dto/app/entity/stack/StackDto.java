@@ -13,9 +13,12 @@ import java.util.List;
 public class StackDto {
   private Integer stackId;
   private Integer workplaceId;
-  private Integer factoryId;
   private String stackName;
+  private String stackType;
+  private char stackSize;
   private String prevention;
+  private Long preventionCapacity;
+  private Long fuelUsage;
   private String note;
   private LocalDate regDate;
   private StackInformationDto stackInformation;

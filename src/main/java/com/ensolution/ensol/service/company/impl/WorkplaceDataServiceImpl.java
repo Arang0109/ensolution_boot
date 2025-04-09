@@ -64,6 +64,10 @@ public class WorkplaceDataServiceImpl implements WorkplaceDataService {
     if (workplaceDto.getAddress() != null) {
       workplace.setAddress(workplaceDto.getAddress());
     }
+
+    workplace.setBusinessType(workplaceDto.getBusinessType());
+    workplace.setMainProduction(workplaceDto.getMainProduction());
+    workplace.setWorkplaceSize(workplaceDto.getWorkplaceSize());
   }
 
   @Override

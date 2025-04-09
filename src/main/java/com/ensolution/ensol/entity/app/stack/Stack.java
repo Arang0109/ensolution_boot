@@ -1,6 +1,5 @@
 package com.ensolution.ensol.entity.app.stack;
 
-import com.ensolution.ensol.entity.app.company.Factory;
 import com.ensolution.ensol.entity.app.company.Workplace;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -22,13 +21,18 @@ public class Stack {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "workplace_id", nullable = false)
   private Workplace workplace;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "factory_id")
-  private Factory factory;
   @Column(name = "stack_name", nullable = false)
   private String stackName;
+  @Column(name = "stack_type")
+  private String stackType;
+  @Column(name = "stack_size")
+  private char stackSize;
   @Column(name = "prevention")
   private String prevention;
+  @Column(name = "prevention_capacity")
+  private Long preventionCapacity;
+  @Column(name = "fuel_usage")
+  private Long fuelUsage;
   @Column(name = "note")
   private String note;
   @Column(name = "reg_date")

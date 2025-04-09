@@ -4,12 +4,10 @@ import com.ensolution.ensol.dto.app.entity.stack.StackDto;
 import com.ensolution.ensol.dto.app.entity.stack.StackImageDto;
 import com.ensolution.ensol.dto.app.entity.stack.StackInformationDto;
 import com.ensolution.ensol.dto.app.query.HistoryDto;
-import com.ensolution.ensol.entity.app.company.Factory;
 import com.ensolution.ensol.entity.app.stack.Stack;
 import com.ensolution.ensol.mapper.app.stack.StackImageMapper;
 import com.ensolution.ensol.mapper.app.stack.StackInformationMapper;
 import com.ensolution.ensol.mapper.app.stack.StackMapper;
-import com.ensolution.ensol.repository.app.jpa.company.FactoryRepository;
 import com.ensolution.ensol.repository.app.jpa.stack.StackImageRepository;
 import com.ensolution.ensol.repository.app.jpa.stack.StackInformationRepository;
 import com.ensolution.ensol.repository.app.jpa.stack.StackRepository;
@@ -30,7 +28,6 @@ public class StackDataServiceImpl implements StackDataService {
   private final StackMapper stackMapper;
   private final StackInformationMapper stackInformationMapper;
   private final StackImageMapper stackImageMapper;
-  private final FactoryRepository factoryRepository;
   private final HistoryMapper historyMapper;
 
   @Override
@@ -42,15 +39,6 @@ public class StackDataServiceImpl implements StackDataService {
   @Transactional
   public void saveStack(StackDto stackDto) {
     Stack stack = stackMapper.toEntity(stackDto);
-
-    if (stackDto.getFactoryId() != null) {
-      Factory factory = factoryRepository.findById(stackDto.getFactoryId())
-          .orElseThrow(() -> new RuntimeException("Factory not found"));
-      stack.setFactory(factory);
-    } else {
-      stack.setFactory(null);
-    }
-
     stackRepository.save(stack);
   }
 

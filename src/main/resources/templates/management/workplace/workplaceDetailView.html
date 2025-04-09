@@ -37,14 +37,14 @@
           <div class="row p-2">
             <div class="col">
               <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="workplace_name">측정대상 사업장 <small><b>(필수)</b></small></span>
+                <span class="input-group-text" id="workplaceName">상호 <small><b>(필수)</b></small></span>
                 <input name="workplaceName" type="text" class="form-control" th:value="${workplace.workplaceName}"
                        aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly' required>
               </div>
             </div>
             <div class="col">
               <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="address">사업장 주소</span>
+                <span class="input-group-text" id="address">소재지 (주소)</span>
                 <input name="address" type="text" class="form-control" th:value="${workplace.address}"
                        aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly'>
                 <span class="input-group-text" id="addon-wrapping">
@@ -53,6 +53,28 @@
               </div>
             </div>
           </div>
+          <div class="row p-2">
+            <div class="col">
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="businessType">업종</span>
+                <input name="businessType" type="text" class="form-control" th:value="${workplace.businessType}"
+                       aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly' required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="mainProduction">주생산 품목</span>
+                <input name="mainProduction" type="text" class="form-control" th:value="${workplace.mainProduction}"
+                       aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly'>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="workplaceSize">사업장 종별</span>
+                <input name="workplaceSize" type="text" class="form-control" th:value="${workplace.workplaceSize}"
+                       aria-label="Username" aria-describedby="addon-wrapping" readonly='readonly'>
+              </div>
+            </div>
         </div>
       </form>
     </div>

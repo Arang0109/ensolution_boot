@@ -15,8 +15,11 @@
     <thead>
     <tr>
       <th data-field="state" data-checkbox="true"></th>
-      <th data-field="workplace_name">측정 대상 사업장 <span class="badge text-bg-primary">수정시 사업장명 클릭</span></th>
-      <th data-field="address">주소</th>
+      <th data-field="workplaceName">상호 (기관명) <span class="badge text-bg-primary">수정시 기관명 클릭</span></th>
+      <th data-field="address">소재지 (주소)</th>
+      <th data-field="workplaceSize">사업장 종별</th>
+      <th data-field="businessType">업종</th>
+      <th data-field="mainProduction">주생산 품목</th>
     </tr>
     </thead>
     <tbody>
@@ -24,13 +27,14 @@
         <td></td>
         <td>
           <a class="updateLink"
-             th:href="@{/management/workplaces/{id}(id=${workplace.workplaceId})}">
-            <span th:text="${workplace.workplaceName != null ? workplace.workplaceName : '-'}"></span>
+             th:href="@{/management/workplaces/{id}(id=${workplace.workplaceId})}"
+             th:text="${workplace.workplaceName != null ? workplace.workplaceName : '-'}">
           </a>
         </td>
-        <td>
-          <span th:text="${workplace.address != null ? workplace.address : '-'}"></span>
-        </td>
+        <td th:text="${workplace.address != null ? workplace.address : '-'}"></td>
+        <td th:text="|${workplace.workplaceSize != null ? workplace.workplaceSize : '-'}종|"></td>
+        <td th:text="${workplace.businessType != null ? workplace.businessType : '-'}"></td>
+        <td th:text="${workplace.mainProduction != null ? workplace.mainProduction : '-'}"></td>
       </tr>
     </tbody>
   </table>

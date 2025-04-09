@@ -12,7 +12,7 @@ public class StackTableDto {
   private String stackName;
   private String companyName;
   private String workplaceName;
-  private String factoryCategory;
-  private String factoryName;
-  private String departmentName;
+  private String stackType;
+  private char stackSize;
+  private String prevention;
 }
