@@ -11,7 +11,10 @@ public class PollutantDto {
   private Integer pollutantId;
   private String pollutantNameKR;
   private String pollutantNameEN;
+  private String PollutantNameHyundai;
   private String method;
-  private String samplingTime;
-  private String samplingVolume;
+  private Integer samplingTime;
+  private Integer samplingVolume;
+  private String analysisEquipment;
+  private String legislationNumber;
 }

@@ -45,7 +45,7 @@
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="stack_name">측정 시설 <small><b>(필수)</b></small></span>
+                  <span class="input-group-text" id="stackName">배출 시설 <small><b>(필수)</b></small></span>
                   <input name="stackName" type="text" class="form-control" th:value="${stack.stackName}"
                          aria-label="Stack name" aria-describedby="addon-wrapping" readonly='readonly' required>
                 </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="border p-4" style="background-color: white; margin-left: 1.25rem;">
         <div class="d-flex justify-content-between">
-          <p style="margin-left: 1.25rem;"><b>측정 시설 제원</b></p>
+          <p style="margin-left: 1.25rem;"><b>배출 시설 제원</b></p>
           <div>
             <button id="modifySpecificationBtn" class="btn btn-primary btn-sm" type="button">수정</button>
           </div>
@@ -77,30 +77,30 @@
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="diameter">직경 (m)</span>
+                  <span class="input-group-text" id="diameter">연도 직경 (m)</span>
                   <input name="diameter" type="text" class="form-control" th:value="${stack.stackInformation.diameter}"
-                         aria-label="Diameter" aria-describedby="addon-wrapping" readonly='readonly'>
+                         aria-label="연도 직경" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="velocity_speed">유속 (m/s)</span>
-                  <input name="velocity" type="text" class="form-control" th:value="${stack.stackInformation.velocity}"
-                         aria-label="Velocity speed" aria-describedby="addon-wrapping" readonly='readonly'>
+                  <span class="input-group-text" id="height">측정공 높이 (m)</span>
+                  <input name="height" type="text" class="form-control" th:value="${stack.stackInformation.height}"
+                         aria-label="측정공 높이" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
             </div>
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="dynamic_pressure">동압 (mmH<sub>2</sub>O)</span>
+                  <span class="input-group-text" id="dynamicPressure">동압 (mmH<sub>2</sub>O)</span>
                   <input name="dynamicPressure" type="text" class="form-control" th:value="${stack.stackInformation.dynamicPressure}"
                          aria-label="Dynamic pressure" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="static_pressure">정압 (mmH<sub>2</sub>O)</span>
+                  <span class="input-group-text" id="staticPressure">정압 (mmH<sub>2</sub>O)</span>
                   <input name="staticPressure" type="text" class="form-control" th:value="${stack.stackInformation.staticPressure}"
                          aria-label="Static pressure" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
@@ -109,16 +109,23 @@
             <div class="row p-2">
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="quantity">유량 (m<sup>3</sup>/hr)</span>
+                  <span class="input-group-text" id="gasTemperature">온도 (ºC)</span>
+                  <input name="gasTemperature" type="text" class="form-control" th:value="${stack.stackInformation.gasTemperature}"
+                         aria-label="Temperature" aria-describedby="addon-wrapping" readonly='readonly'>
+                </div>
+              </div>
+              <div class="col">
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text" id="quantity">설계 유량 (m<sup>3</sup>/hr)</span>
                   <input name="quantity" type="text" class="form-control" th:value="${stack.stackInformation.quantity}"
                          aria-label="Quantity" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
               <div class="col">
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="temperature">온도 (ºC)</span>
-                  <input name="temperature" type="text" class="form-control" th:value="${stack.stackInformation.temperature}"
-                         aria-label="Temperature" aria-describedby="addon-wrapping" readonly='readonly'>
+                  <span class="input-group-text" id="stackShape">모양</span>
+                  <input name="stackShape" type="text" class="form-control" th:value="${stack.stackInformation.stackShape}"
+                         aria-label="모양" aria-describedby="addon-wrapping" readonly='readonly'>
                 </div>
               </div>
             </div>

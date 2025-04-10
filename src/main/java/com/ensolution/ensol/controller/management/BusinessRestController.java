@@ -1,5 +1,6 @@
 package com.ensolution.ensol.controller.management;
 
+import com.ensolution.ensol.dto.app.entity.PollutantDto;
 import com.ensolution.ensol.dto.app.entity.company.CompanyDto;
 import com.ensolution.ensol.dto.app.entity.company.WorkplaceDto;
 import com.ensolution.ensol.dto.app.entity.stack.StackDto;
@@ -92,6 +93,11 @@ public class BusinessRestController {
     StackDto stackDto = stackService.findStackById(stackId);
     stackDto.setNote(note);
     stackService.updateStack(stackDto);
+  }
+
+  @PatchMapping("/pollutants")
+  public void updatePollutants(@RequestBody String pollutants) {
+    System.out.println(pollutants);
   }
 
   @PostMapping

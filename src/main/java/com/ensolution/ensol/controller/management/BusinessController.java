@@ -10,6 +10,7 @@ import com.ensolution.ensol.service.stack.StackService;
 import com.ensolution.ensol.service.company.WorkplaceService;
 import com.ensolution.ensol.service.pollutant.PollutantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -150,5 +152,15 @@ public class BusinessController {
     } catch (IOException e) {
       return "redirect:/management/stacks/" + stackId;
     }
+  }
+
+  @GetMapping("/pollutants")
+  public String getPollutantList(Model m, Authentication auth) {
+    boolean editable = auth.getAuthorities().stream()
+        .anyMatch(a -> List.of("ROLE_LAB", "ROLE_ADMIN").contains(a.getAuthority()));
+
+    m.addAttribute("canEdit", editable);
+    m.addAttribute("pollutants", pollutantService.findAllPollutants());
+    return "management/pollutant/pollutantListView";
   }
 }

@@ -17,9 +17,13 @@ public class StackInformation {
   private Double dynamicPressure;
   @Column(name = "static_pressure")
   private Double staticPressure;
-  private Double velocity;
+  @Column(name = "gas_temperature")
+  private Integer gasTemperature;
   private Double quantity;
-  private Double temperature;
+  @Column(name = "height")
+  private Double height;
+  @Column(name = "stack_shape")
+  private String stackShape;
 
   @OneToOne
   @MapsId

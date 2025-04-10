@@ -20,11 +20,17 @@ public class Pollutant {
   private String pollutantNameKR;
   @Column(name = "pollutant_name_en")
   private String pollutantNameEN;
+  @Column(name = "pollutant_name_hyundai")
+  private String pollutantNameHyundai;
   private String method;
   @Column(name = "sampling_time")
-  private String samplingTime;
+  private Integer samplingTime;
   @Column(name = "sampling_volume")
-  private String samplingVolume;
+  private Integer samplingVolume;
+  @Column(name = "analysis_equipment")
+  private String analysisEquipment;
+  @Column(name = "legislation_number")
+  private String legislationNumber;
 
   @OneToMany(mappedBy = "pollutant")
   private List<StackMeasurement> stackMeasurements;

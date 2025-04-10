@@ -12,7 +12,8 @@ public class StackInformationDto {
   private Double diameter;
   private Double dynamicPressure;
   private Double staticPressure;
-  private Double velocity;
+  private Integer gasTemperature;
   private Double quantity;
-  private Double temperature;
+  private Double height;
+  private String stackShape;
 }

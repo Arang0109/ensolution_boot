@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<head>
+  <meta charset="UTF-8">
+  <title>측정 항목 관리</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <div class="container" style="padding: 1.875rem 0 0">
+    <div class="border p-4" style="background-color: white;">
+      <table id="table"
+             data-toggle="table"
+             data-locale="ko-KR"
+             data-search="true"
+             data-show-columns="true"
+             data-buttons-class="primary"
+             data-buttons-align="left">
+        <thead>
+        <tr>
+          <th data-field="pollutantNameKR">측정 항목(KR)</th>
+          <th data-field="pollutantNameEN">측정 항목(EN)</th>
+          <th data-field="pollutantNameHyundai">측정 항목(Hyundai)</th>
+          <th data-field="method">측정 방법</th>
+          <th data-field="samplingTime">채취 시간</th>
+          <th data-field="samplingVolume">채취 요구량</th>
+          <th data-field="analysisEquipment">분석 기기</th>
+          <th data-field="legislationNumber">공정시험법</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr class="editable" th:each="pollutant : ${pollutants}" th:attr="data-id=${pollutant.pollutantId}">
+            <td data-field="pollutantNameKR"  th:text="${pollutant.pollutantNameKR != null ? pollutant.pollutantNameKR : '-'}"></td>
+            <td data-field="pollutantNameEN" th:text="${pollutant.pollutantNameEN != null ? pollutant.pollutantNameEN : '-'}"></td>
+            <td data-field="pollutantNameHyundai" th:text="${pollutant.pollutantNameHyundai != null ? pollutant.pollutantNameHyundai : '-'}"></td>
+            <td data-field="method" th:text="${pollutant.method != null ? pollutant.method : '-'}"></td>
+            <td data-field="samplingTime" th:text="${pollutant.samplingTime != null ? pollutant.samplingTime : '-'}"></td>
+            <td data-field="samplingVolume" th:text="${pollutant.samplingVolume != null ? pollutant.samplingVolume : '-'}"></td>
+            <td data-field="analysisEquipment" th:text="${pollutant.analysisEquipment != null ? pollutant.analysisEquipment : '-'}"></td>
+            <td data-field="legislationNumber" th:text="${pollutant.legislationNumber != null ? pollutant.legislationNumber : '-'}"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+          th:if="${canEdit}"
+          id="saveChangesBtn"
+          class="btn btn-primary"
+          type="button">저장</button>
+    </div>
+  </div>
+</main>
+<script layout:fragment="scriptContent" th:inline="javascript">
+  $(document).ready(function() {
+    var editedData = {};
+
+    $(document).on('click', '.editable > td', function () {
+      const $td = $(this);
+      if ($td.find('input').length > 0) return; // 이미 편집 중
+
+      const originalValue = $td.text();
+      const input = $('<input>', {
+        type: 'text',
+        value: originalValue,
+        class: 'form-control form-control-sm'
+      })
+
+      $td.empty().append(input);
+
+      input.focus().on('blur', function () {
+        const newValue = $(this).val();
+        const field = $td.data('field');
+        const id = $td.closest('tr').data('id');
+
+        $td.text(newValue);
+
+        if (newValue !== originalValue) {
+          if (!editedData[id]) {
+            editedData[id] = {};
+          }
+          editedData[id][field] = newValue;
+        }
+      });
+
+      console.log(editedData);
+    });
+
+    $('#saveChangesBtn').on('click', function () {
+      const updates = Object.entries(editedData).map(([pollutantId, fields]) => ({
+        pollutantId,
+        ...fields
+      }));
+
+      $.ajax({
+        url: /*[[@{/management/pollutants}]]*/ '/management/pollutants',
+        method: 'PATCH',
+        contentType: 'application/json',
+        data: JSON.stringify(updates), // 배열로 보냄
+        success: () => {
+          alert('일괄 저장 성공!');
+          editedData = {}; // 초기화
+        },
+        error: () => {
+          alert('일괄 저장 실패');
+        }
+      });
+    });
+
+  });
+
+</script>
+</body>
+</html>
