@@ -1,6 +1,7 @@
 package com.ensolution.ensol.controller.schedule;
 
 import com.ensolution.ensol.dto.app.entity.ScheduleDto;
+import com.ensolution.ensol.dto.app.entity.stack.StackDto;
 import com.ensolution.ensol.dto.app.query.HistoryDto;
 import com.ensolution.ensol.dto.app.query.table.StackMeasurementTableDto;
 import com.ensolution.ensol.dto.app.query.table.StackTableDto;
@@ -42,7 +43,7 @@ public class ScheduleRestController {
 
   @GetMapping("/register/stacks")
   public ResponseEntity<Map<String, Object>> getStacksOfWorkplace(@RequestParam Integer workplaceId) {
-    List<StackTableDto> stacks = stackService.findStacksByWorkplaceId(workplaceId);
+    List<StackDto> stacks = stackService.findStacksByWorkplaceId(workplaceId);
 
     Map<String, Object> response = new HashMap<>();
     response.put("stacks", stacks);

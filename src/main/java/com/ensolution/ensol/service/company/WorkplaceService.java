@@ -13,4 +13,5 @@ public interface WorkplaceService {
   void createWorkplace(WorkplaceDto workplaceDto);
   void updateWorkplace(WorkplaceDto workplaceDto);
   void removeWorkplaces(List<WorkplaceDto> workplaces);
+  void removeWorkplace(Integer workplaceId);
 }

@@ -12,6 +12,7 @@ public interface WorkplaceDataService {
   Integer findFactoryId(Integer id);
   void saveWorkplace(WorkplaceDto workplaceDto);
   void updateWorkplace(WorkplaceDto workplaceDto);
+  void deleteWorkplace(Integer workplaceId);
   void deleteWorkplaces(List<Integer> ids);
   boolean existsById(Integer id);
 }

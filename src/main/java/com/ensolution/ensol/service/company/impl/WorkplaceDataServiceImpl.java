@@ -76,6 +76,9 @@ public class WorkplaceDataServiceImpl implements WorkplaceDataService {
   }
 
   @Override
+  public void deleteWorkplace(Integer workplaceId) { workplaceRepository.deleteById(workplaceId); }
+
+  @Override
   public boolean existsById(Integer id) {
     return workplaceRepository.existsById(id);
   }

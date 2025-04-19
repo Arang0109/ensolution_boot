@@ -14,7 +14,7 @@ import java.util.List;
 public interface StackService {
   StackDto findStackById(Integer stackId);
   List<StackDto> findAllStacks();
-  List<StackTableDto> findStacksByWorkplaceId(Integer id);
+  List<StackDto> findStacksByWorkplaceId(Integer id);
   List<StackTableDto> findStacksOfTable();
   List<StackImageDto> findAllStackImages(Integer stackId);void createStack(StackDto stackDto);
   void updateStack(StackDto stack);

@@ -49,8 +49,8 @@ public class StackServiceImpl implements StackService {
 
   // 특정 사업장의 시설 테이블 목록
   @Override
-  public List<StackTableDto> findStacksByWorkplaceId(Integer workplaceId) {
-    return tableInformationMapper.selectStacksByWorkplaceOfTable(workplaceId);
+  public List<StackDto> findStacksByWorkplaceId(Integer workplaceId) {
+    return stackDataService.findAllStacksByWorkplaceId(workplaceId);
   }
 
   // 전체 시설 테이블 목록

@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface CompanyService {
     Optional<CompanyDto> findCompanyById(Integer id);
     List<CompanyDto> findAllCompanies();
-    void createCompany(CompanyDto companyDto);
+    CompanyDto createCompany(CompanyDto companyDto);
     void updateCompany(CompanyDto companyDto);
     void removeCompanies(List<CompanyDto> companies);
+    void removeCompany(Integer companyId);
 }

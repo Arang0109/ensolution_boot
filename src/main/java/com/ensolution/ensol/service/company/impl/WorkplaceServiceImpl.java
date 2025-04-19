@@ -77,4 +77,9 @@ public class WorkplaceServiceImpl implements WorkplaceService {
       throw new RuntimeException("Database error occurred while deleting workplaces", e);
     }
   }
+
+  @Override
+  public void removeWorkplace(Integer workplaceId) {
+    workplaceDataService.deleteWorkplace(workplaceId);
+  }
 }

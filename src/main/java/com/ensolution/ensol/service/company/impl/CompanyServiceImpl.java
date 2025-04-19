@@ -30,13 +30,14 @@ public class CompanyServiceImpl implements CompanyService {
   }
 
   @Override
-  public void createCompany(CompanyDto companyDto) {
+  public CompanyDto createCompany(CompanyDto companyDto) {
     try {
       companyDto.setRegDate(LocalDate.now());
       companyDataService.saveCompany(companyDto);
     } catch (DuplicateKeyException e) {
       throw new CustomDKException("company", "Name", companyDto.getCompanyName(), e);
     }
+    return companyDto;
   }
 
   @Override
@@ -64,6 +65,15 @@ public class CompanyServiceImpl implements CompanyService {
 
     try {
       companyDataService.deleteCompanies(ids);
+    } catch (DataAccessException e) {
+      throw new RuntimeException("Database error occurred while deleting companies", e);
+    }
+  }
+
+  @Override
+  public void removeCompany(Integer companyId) {
+    try {
+      companyDataService.deleteCompany(companyId);
     } catch (DataAccessException e) {
       throw new RuntimeException("Database error occurred while deleting companies", e);
     }

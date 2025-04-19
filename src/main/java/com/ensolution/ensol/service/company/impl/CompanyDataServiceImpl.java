@@ -65,6 +65,10 @@ public class CompanyDataServiceImpl implements CompanyDataService {
   }
 
   @Override
+  @Transactional
+  public void deleteCompany(Integer companyId) { companyRepository.deleteById(companyId); }
+
+  @Override
   public boolean existsById(Integer id) {
     return companyRepository.existsById(id);
   }

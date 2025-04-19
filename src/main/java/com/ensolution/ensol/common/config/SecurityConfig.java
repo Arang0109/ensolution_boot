@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -24,13 +25,12 @@ public class SecurityConfig {
     http.csrf(AbstractHttpConfigurer::disable);
 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/admin/**").hasRole("ADMIN")
-        .anyRequest().authenticated()
+        .requestMatchers("/api/**").permitAll()
+        .anyRequest().permitAll()
     );
 
-    http.formLogin(Customizer.withDefaults());
 
-    http.httpBasic(Customizer.withDefaults());
+    http.formLogin(Customizer.withDefaults());
 
     return http.build();
   }

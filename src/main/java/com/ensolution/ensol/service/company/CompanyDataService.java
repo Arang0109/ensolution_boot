@@ -11,5 +11,6 @@ public interface CompanyDataService {
   void saveCompany(CompanyDto companyDto);
   void updateCompany(CompanyDto companyDto);
   void deleteCompanies(List<Integer> ids);
+  void deleteCompany(Integer companyId);
   boolean existsById(Integer id);
 }
